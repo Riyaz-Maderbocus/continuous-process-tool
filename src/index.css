@@ -1,0 +1,78 @@
+/* Variables */
+:root {
+  
+
+  --canvas-bg-color: #F8FAFC;
+  --card-bg-color: #FFF;
+  --card-hover-color: #F1F5F9;
+
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* utility classes */
+
+.btn {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid red;
+  background-color: green;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+/* Top section */
+.top-section{
+  padding: 1rem;
+  height: 150px;
+  border: 2px solid black;
+  position:relative;
+}
+
+.top-section h1 {
+  text-align: center;
+}
+
+.top-section .top-controls {
+  position: absolute;
+  padding: 0 1rem;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+/* main area */
+.main-area {
+  padding: 1rem;
+}
+
+.main-stats-container {
+  padding: 1rem;
+}
+
+.card-canvas {
+  padding: 1rem;
+  background-color: var( --canvas-bg-color);
+  overflow-x: scroll;
+  display: flex;
+  height: 200px;
+  width: 100%;
+  
+}
+
+/* cards */
+.card {
+  background-color: var(--card-bg-color);
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+
+}
