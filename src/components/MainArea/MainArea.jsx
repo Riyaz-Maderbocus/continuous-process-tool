@@ -5,7 +5,9 @@ const MainArea = () => {
             <div className="main-stats-container">
                 These are the main stats
             </div>
+            
             <CardCanvas />
+            
         </div>
      );
 }

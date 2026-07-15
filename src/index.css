@@ -65,6 +65,8 @@ body {
   display: flex;
   height: 200px;
   width: 100%;
+  gap: 1rem;
+  
   
 }
 
@@ -72,7 +74,21 @@ body {
 .card {
   background-color: var(--card-bg-color);
   width: 200px;
+  min-width: 200px;
   height: 200px;
   border-radius: 10px;
+}
 
+/* card opacity */
+.card-opacity {
+  opacity: 0.3;
+}
+
+.card-overlay {
+  /* background-color: var(--card-bg-color); */
+  background-color: var(--card-bg-color);
+  width: 200px;
+  min-width: 200px;
+  height: 50px;
+  border-radius: 10px;
 }
