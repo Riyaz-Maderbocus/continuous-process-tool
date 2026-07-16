@@ -1,13 +1,16 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { useState } from "react";
+// import { UnitOperationContext } from "../../context/UnitOperationContext";
+import { useUnitOperations } from "../../context/UnitOperationContext";
 import { isSortable } from "@dnd-kit/react/sortable";
 import SortableCard from "../Sortables/SortableCard";
 import CardOverlay from "../Sortables/CardOverlay";
 
 const CardCanvas = () => {
+    const {unitOperations, setUnitOperations} = useUnitOperations()
 
     const [activeId, setActiveId] = useState(null)
-    const [unitOperations, setUnitOperations] = useState([1,2,3,4])
+    // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     return ( 
         <DragDropProvider
             onDragStart={({operation})=> {
