@@ -4,10 +4,10 @@ const TopSection = () => {
             <h1>Continuous Processing Tool</h1>
 
             <div className="top-controls">
-                <button className="btn">Help</button>
-                <button className="btn">Add Card</button>
-                <button className="btn">Calculate All</button>
-                <button className="btn">Write to Excel</button>
+                <button className="btn btn-primary">Help</button>
+                <button className="btn btn-primary">✚ Add Card</button>
+                <button className="btn btn-primary">󠀫 Calculate All</button>
+                <button className="btn btn-primary">Write to Excel</button>
                
             </div>
         </div>

@@ -5,7 +5,8 @@
   --canvas-bg-color: #F8FAFC;
   --card-bg-color: #FFF;
   --card-hover-color: #F1F5F9;
-
+  --primary-color: #0a0a0a;
+  --secondary-text: #fafafa;
 }
 
 * {
@@ -15,35 +16,45 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: "Open Sans", sans-serif;
 }
 
 /* utility classes */
 
 .btn {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid red;
-  background-color: green;
+  padding: 0.25rem 0.75rem;
+  /* border: 1px solid red; */
+  /* background-color: green; */
+  
   border-radius: 15px;
   cursor: pointer;
 }
 
+.btn-primary {
+  color: var(--secondary-text);
+  background-color: var(--primary-color);
+  font-weight: bold;
+}
+
+
 /* Top section */
 .top-section{
   padding: 1rem;
-  height: 150px;
-  border: 2px solid black;
+  height: 125px;
+  /* border: 2px solid black; */
   position:relative;
 }
 
 .top-section h1 {
   text-align: center;
+  padding: 1rem;
 }
 
 .top-section .top-controls {
   position: absolute;
   padding: 0 1rem;
-  right: 0;
+  right: 25px;
   bottom: 0;
   display: flex;
   gap: 1rem;
