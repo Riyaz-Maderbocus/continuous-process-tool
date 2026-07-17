@@ -31,6 +31,11 @@ body {
   cursor: pointer;
 }
 
+.full-width-btn {
+  display: inline-block;
+  width: 100%;
+}
+
 .btn-primary {
   color: var(--secondary-text);
   background-color: var(--primary-color);
@@ -40,8 +45,8 @@ body {
 
 /* Top section */
 .top-section{
-  padding: 1rem;
-  height: 125px;
+  padding: 1rem 0 2rem;
+  height: 170px;
   /* border: 2px solid black; */
   position:relative;
 }
@@ -60,6 +65,40 @@ body {
   gap: 1rem;
 }
 
+
+/* modals */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--primary-color);
+  /* background-color: red; */
+  /* opacity: 0.9; */
+  /* background: (0,0,0); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: #fafafa;
+  min-width: 600px;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+  
+}
+
+.help-modal-container {
+  width: 100%;
+}
+
+.help-modal-container h2 {
+  text-align: center;
+}
 /* main area */
 .main-area {
   padding: 1rem;
@@ -74,7 +113,7 @@ body {
   background-color: var( --canvas-bg-color);
   overflow-x: scroll;
   display: flex;
-  height: 200px;
+  min-height: 300px;
   width: 100%;
   gap: 1rem;
   
