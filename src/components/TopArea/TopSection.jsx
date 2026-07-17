@@ -5,7 +5,7 @@ import { useState } from "react";
 const TopSection = () => {
 
     const [showHelpModal, setShowHelpModal] = useState(false);
-    
+
     const {addUnitOperation} = useUnitOperations()
 
     const openShowHelpModal = ()=> {
@@ -29,7 +29,7 @@ const TopSection = () => {
                 )}
                 <button className="btn btn-primary" onClick={addUnitOperation}>✚ Add Card</button>
                 <button className="btn btn-primary">󠀫 Calculate All</button>
-                <button className="btn btn-primary">Write to Excel</button>
+                {/* <button className="btn btn-primary">Write to Excel</button> */}
                
             </div>
         </div>

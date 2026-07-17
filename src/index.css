@@ -131,6 +131,7 @@ body {
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
   flex-shrink: 0;
+  /* padding: 1rem; */
 }
 
 
@@ -144,10 +145,20 @@ body {
   background-color: var(--primary-color);
   color: var(--secondary-text);
 }
-/* card opacity */
+
+.card-meta-details {
+  padding: 0.25rem;
+}
+
+.card-type {
+  text-align: center;
+  margin: 0.75rem 0;
+}
+/* card opacity for overlay*/
 .card-opacity {
   opacity: 0.8;
 }
+
 
 .card-lift {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 

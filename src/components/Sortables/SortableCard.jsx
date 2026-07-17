@@ -18,10 +18,13 @@ const SortableCard = ({id, index, unitOperation}) => {
             </div>
 
             <div className="card-meta-details">
-
+             <p className="card-type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
             </div>
             
-            Id: {id}
+            <div className="data-container">
+                
+            </div>
+       
         </div>
      );
 }
