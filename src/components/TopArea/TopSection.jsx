@@ -6,6 +6,8 @@ const TopSection = () => {
 
     const [showHelpModal, setShowHelpModal] = useState(false);
 
+    const [showAddUnitOperationModal, setAddUnitOperationModal] = useState(false);
+
     const {addUnitOperation} = useUnitOperations()
 
     const openShowHelpModal = ()=> {
@@ -15,6 +17,15 @@ const TopSection = () => {
     const closeShowHelpModal = ()=> {
         setShowHelpModal(false)
     }
+
+    const openAddUnitOperationModal = ()=> {
+        setAddUnitOperationModal(true)
+    }
+
+    const closeAddUnitOperationModal = ()=> {
+        setAddUnitOperationModal(false)
+    }
+    
     return ( 
         <div className="top-section">
             <h1>Continuous Processing Tool</h1>
