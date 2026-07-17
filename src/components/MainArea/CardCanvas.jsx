@@ -38,13 +38,13 @@ const CardCanvas = () => {
         <div className="card-canvas">
             {/* <SortableCard /> */}
             {unitOperations.map((unitOperation, index)=> (
-                <SortableCard id={unitOperation} key={unitOperation} index={index}/>
+                <SortableCard id={unitOperation.id} key={unitOperation.id} index={index} unitOperation={unitOperation}/>
             ))}
         </div>
         
-        <DragOverlay>
-            {activeId !== null ? <CardOverlay id={activeId}/>  : null}
-        </DragOverlay>
+        {/* <DragOverlay>
+            {activeId !== null ? <CardOverlay id={activeId} />  : null}
+        </DragOverlay> */}
         </DragDropProvider>
      );
 }
