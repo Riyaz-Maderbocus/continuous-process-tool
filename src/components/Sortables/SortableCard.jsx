@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 
 const SortableCard = ({id, index, unitOperation}) => {
-    const {title} = unitOperation
+    const { title, type, data} = unitOperation
 
     const {ref, isDragSource} = useSortable({
         id,
@@ -9,12 +9,19 @@ const SortableCard = ({id, index, unitOperation}) => {
     })
 
     return ( 
-        <div className={`card ${isDragSource && "card-opacity"}`}
+        <div className={`card ${isDragSource && "card-lift"}`}
         ref={ref}
-        onClick={()=> {
-            alert(`This is card: ${id}`)
-        }}>
-            Card: {title}
+        onClick={()=>alert("clicked")}
+        >
+            <div className="card-header">
+                <h4>{title}</h4>
+            </div>
+
+            <div className="card-meta-details">
+
+            </div>
+            
+            Id: {id}
         </div>
      );
 }

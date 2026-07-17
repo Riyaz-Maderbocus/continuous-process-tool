@@ -4,7 +4,8 @@ import { useState } from "react";
 
 const TopSection = () => {
 
-    const [showHelpModal, setShowHelpModal] = useState(false)
+    const [showHelpModal, setShowHelpModal] = useState(false);
+    
     const {addUnitOperation} = useUnitOperations()
 
     const openShowHelpModal = ()=> {

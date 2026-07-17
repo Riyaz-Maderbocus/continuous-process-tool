@@ -74,10 +74,10 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
   /* background-color: red; */
-  /* opacity: 0.9; */
-  /* background: (0,0,0); */
+  /* opacity: 0.95; */
+  background: rgba(0,0,0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,11 +85,13 @@ body {
 
 .modal {
   background-color: #fafafa;
+  opacity: 1;
   min-width: 600px;
   width: 80%;
   padding: 20px;
   border-radius: 10px;
-  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 
+              0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .help-modal-container {
@@ -123,17 +125,34 @@ body {
 /* cards */
 .card {
   background-color: var(--card-bg-color);
-  width: 200px;
-  min-width: 200px;
-  height: 200px;
+  width: 300px;
+  /* min-width: 200px; */
+  min-height: 200px;
   border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  flex-shrink: 0;
 }
 
+
+/* card internals */
+.card-header {
+  width: 100%;
+  padding: 0.5rem 0;
+  border-top-right-radius :10px;
+  border-top-left-radius: 10px ;
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--secondary-text);
+}
 /* card opacity */
 .card-opacity {
-  opacity: 0.3;
+  opacity: 0.8;
 }
 
+.card-lift {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 
+              0 2px 4px rgba(0, 0, 0, 0.04);
+}
 .card-overlay {
   /* background-color: var(--card-bg-color); */
   background-color: var(--card-bg-color);
