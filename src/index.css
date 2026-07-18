@@ -94,17 +94,17 @@ body {
               0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.help-modal-container {
+.modal-container {
   width: 100%;
 }
 
-.help-modal-container h2 {
+.modal-container h2 {
   text-align: center;
 }
 
 .help-instructions {
   padding: 1rem;
-  
+
 }
 /* main area */
 .main-area {
@@ -176,4 +176,37 @@ body {
   min-width: 200px;
   height: 50px;
   border-radius: 10px;
+}
+
+/* forms */
+
+.form-container {
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid red;
+}
+
+.form-input-container {
+  margin-bottom: 1rem;
+}
+
+.form-input-label-full {
+  display: block;
+  /* font-size: 1.5rem; */
+  font-weight: 600;
+}
+
+.form-text-input-full,
+.form-select-input-full {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+
+
+.form-select-input-full .form-select-option {
+  font-size: 1rem;
+  margin: 1rem 0 ;
 }

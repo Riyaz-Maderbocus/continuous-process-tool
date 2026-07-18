@@ -2,6 +2,7 @@ import { useUnitOperations } from "../../context/UnitOperationContext";
 import HelpModal from "../Modals/HelpModal";
 import { useState } from "react";
 import Button from "../Utilities/Button";
+import AddCardModal from "../Modals/AddCardModal";
 
 const TopSection = () => {
 
@@ -26,6 +27,7 @@ const TopSection = () => {
     const closeAddUnitOperationModal = ()=> {
         setAddUnitOperationModal(false)
     }
+
     
     return ( 
         <div className="top-section">
@@ -42,7 +44,17 @@ const TopSection = () => {
                 )}
                 {/* <button className="btn btn-primary" onClick={addUnitOperation}>✚ Add Card</button> */}
 
-                <Button classes="btn btn-primary" clickFunction={addUnitOperation}>✚ Add Card</Button>
+                {/* Working add card button */}
+                {/* <Button classes="btn btn-primary" clickFunction={addUnitOperation}>✚ Add Card</Button> */}
+
+                {/* Add card modal */}
+                <Button classes="btn btn-primary" clickFunction={openAddUnitOperationModal}>✚ Add Card</Button>
+                {showAddUnitOperationModal && (
+                    <AddCardModal isShown={showAddUnitOperationModal} closeModal={closeAddUnitOperationModal} />
+                )}
+
+
+
                 <button className="btn btn-primary">󠀫 Calculate All</button>
                 {/* <button className="btn btn-primary">Write to Excel</button> */}
                

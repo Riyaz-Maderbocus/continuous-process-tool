@@ -1,11 +1,11 @@
-
+import Button from "../Utilities/Button";
 const HelpModal = ({isShown, closeModal}) => {
     if (!isShown) return 
     return ( 
         <div className="modal-overlay">
             <div className="modal">
 
-                <div className="help-modal-container">
+                <div className="modal-container">
                     <h2>Help and things</h2>
 
                     <div className="help-instructions">
@@ -17,9 +17,10 @@ const HelpModal = ({isShown, closeModal}) => {
                         
                     </div>
 
-                    <button className="btn full-width-btn"
+                    {/* <button className="btn full-width-btn"
                     onClick={closeModal}
-                    > ❌ Close Help</button>
+                    > ❌ Close Help</button> */}
+                    <Button classes="btn full-width-btn" clickFunction={closeModal}>❌ Close Help </Button>
                 </div>
 
 
