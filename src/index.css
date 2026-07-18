@@ -101,6 +101,11 @@ body {
 .help-modal-container h2 {
   text-align: center;
 }
+
+.help-instructions {
+  padding: 1rem;
+  
+}
 /* main area */
 .main-area {
   padding: 1rem;

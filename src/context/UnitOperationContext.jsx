@@ -46,7 +46,7 @@ export function UnitOperationProvider({children}) {
                     content: "I am new"
                 }
             }
-            console.log(newUnitOperation)
+            // console.log(newUnitOperation)
             return [...prev, newUnitOperation]
         })
     }

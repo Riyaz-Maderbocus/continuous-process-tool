@@ -1,6 +1,7 @@
 import { useUnitOperations } from "../../context/UnitOperationContext";
 import HelpModal from "../Modals/HelpModal";
 import { useState } from "react";
+import Button from "../Utilities/Button";
 
 const TopSection = () => {
 
@@ -32,13 +33,16 @@ const TopSection = () => {
 
             <div className="top-controls">
                 {/* <button className="btn btn-primary">Help</button> */}
-                <button className="btn btn-primary"
-                onClick={openShowHelpModal}>Help</button>
+                {/* <button className="btn btn-primary"
+                onClick={openShowHelpModal}>Help</button> */}
 
+                <Button classes="btn btn-primary" clickFunction={openShowHelpModal}>❔ Help</Button>
                 {showHelpModal && (
                     <HelpModal isShown={showHelpModal} closeModal={closeShowHelpModal} />
                 )}
-                <button className="btn btn-primary" onClick={addUnitOperation}>✚ Add Card</button>
+                {/* <button className="btn btn-primary" onClick={addUnitOperation}>✚ Add Card</button> */}
+
+                <Button classes="btn btn-primary" clickFunction={addUnitOperation}>✚ Add Card</Button>
                 <button className="btn btn-primary">󠀫 Calculate All</button>
                 {/* <button className="btn btn-primary">Write to Excel</button> */}
                
