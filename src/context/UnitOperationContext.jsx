@@ -74,8 +74,19 @@ export function UnitOperationProvider({children}) {
         })
     }
 
+    const removeAllUnitOperations = () => {
+        // alert user of their action
+
+        const confirmDeleteAll = window.confirm("Are you sure you want to delete all unit operations?")
+
+        // Delete all
+        if (confirmDeleteAll) {
+            setUnitOperations([])
+        }
+    }
+
     return (
-        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation}}>
+        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, removeAllUnitOperations}}>
             {children}
         </UnitOperationContext.Provider>
     )

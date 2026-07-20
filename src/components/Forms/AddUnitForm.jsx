@@ -9,6 +9,12 @@ const AddUnitForm = ({closeModal}) => {
         type: "chromatography"
     })
 
+    const [titleError, setTitleError] = useState(false)
+
+    // if (addFormData.title.length > 0){
+    //     setTitleError(false)
+    // }
+
     const handleChange = (e)=> {
         setAddFormData({
             ...addFormData,
@@ -20,7 +26,11 @@ const AddUnitForm = ({closeModal}) => {
         e.preventDefault();
         // alert("form submitted")
         // console.log("form submitted", addFormData)
-        if (!addFormData["title"]) return
+        if (!addFormData["title"]) {
+            setTitleError(true)
+            return
+        }
+        
 
         // Create new unit operation
         // Add unit operation from the context
@@ -42,11 +52,14 @@ const AddUnitForm = ({closeModal}) => {
             
             <div className="form-input-container">
                 <label htmlFor="title" className="form-input-label-full">Title</label>
-                <input type="text" className="form-text-input-full" 
+                <input type="text" className={`form-text-input-full ${!titleError ? "" : "form-input-error"}`} 
                 value={addFormData.title}
                 onChange={handleChange}
                 name="title"
                 id="title"/>
+                {(titleError || (addFormData.title.length === 0)) && (
+                    <p className="form-error-text">Title can't be empty</p>
+                )}
             </div>
 
             <div className="form-input-container">

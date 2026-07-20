@@ -6,6 +6,8 @@ import AddCardModal from "../Modals/AddCardModal";
 
 const TopSection = () => {
 
+    const {removeAllUnitOperations} = useUnitOperations();
+    
     const [showHelpModal, setShowHelpModal] = useState(false);
 
     const [showAddUnitOperationModal, setAddUnitOperationModal] = useState(false);
@@ -53,6 +55,8 @@ const TopSection = () => {
                     <AddCardModal isShown={showAddUnitOperationModal} closeModal={closeAddUnitOperationModal} />
                 )}
 
+                {/* Remove all cards function */}
+                <Button classes="btn btn-primary" clickFunction={removeAllUnitOperations}>❌ Delete All Cards</Button>
 
 
                 <button className="btn btn-primary">󠀫 Calculate All</button>

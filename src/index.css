@@ -217,5 +217,12 @@ body {
 
 .form-label-error {
   color: red;
-  
+
+}
+
+.form-error-text {
+  color: red;
+  font-weight: 600;
+  font-size: 1rem;
+
 }
