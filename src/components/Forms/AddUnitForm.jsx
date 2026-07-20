@@ -28,6 +28,10 @@ const AddUnitForm = () => {
 
         // reset original form values
 
+        setAddFormData({
+            title: "",
+            type: "chromatography"
+        })
         // escape modal
     }
     return ( 
