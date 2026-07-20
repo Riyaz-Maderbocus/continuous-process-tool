@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useUnitOperations } from "../../context/UnitOperationContext";
 import FormTextInput from "./FormComponents/FormTextInput";
+import FormSelectInput from "./FormComponents/FormSelectInput";
 
 const AddUnitForm = ({closeModal}) => {
     const {unitOperations, setUnitOperations, addUnitOperation} = useUnitOperations()
@@ -66,7 +67,7 @@ const AddUnitForm = ({closeModal}) => {
             <FormTextInput label="Title" name="title" value={addFormData.title}
             onChange={handleChange} required={true}  />
 
-            <div className="form-input-container">
+            {/* <div className="form-input-container">
                 <label htmlFor="type" className="form-input-label-full">Unit Operation Type</label>
                 <select name="" id="" className="form-select-input-full" value={addFormData.type}
                 onChange={handleChange}
@@ -75,7 +76,14 @@ const AddUnitForm = ({closeModal}) => {
                     <option value="chromatography" className="form-select-option">Chromatography</option>
                     <option value="buffer" className="form-select-option">Buffer Tank</option>
                 </select>
-            </div>
+            </div> */}
+
+            <FormSelectInput name="type" label="Unit Operation Type"
+            value={addFormData.type}
+            onChange={handleChange}
+            options={[{value: "chromatography", label: "Chromatography"},
+                {value: "buffer", label: "Buffer Tank"}
+            ]}/>
 
             <button type="submit" className="btn full-width-btn btn-primary">✚ Add Unit Operation</button>
         </form>
