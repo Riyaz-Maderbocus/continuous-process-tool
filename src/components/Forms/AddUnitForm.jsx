@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUnitOperations } from "../../context/UnitOperationContext";
 import FormTextInput from "./FormComponents/FormTextInput";
 import FormSelectInput from "./FormComponents/FormSelectInput";
+import Button from "../Utilities/Button";
 
 const AddUnitForm = ({closeModal}) => {
     const {unitOperations, setUnitOperations, addUnitOperation} = useUnitOperations()
@@ -85,7 +86,9 @@ const AddUnitForm = ({closeModal}) => {
                 {value: "buffer", label: "Buffer Tank"}
             ]}/>
 
-            <button type="submit" className="btn full-width-btn btn-primary">✚ Add Unit Operation</button>
+            {/* <button type="submit" className="btn full-width-btn btn-primary">✚ Add Unit Operation</button> */}
+            <Button type="submit" classes="btn full-width-btn btn-primary" clickFunction={handleSubmit}>✚ Add Unit Operation</Button>
+
         </form>
      );
 }
