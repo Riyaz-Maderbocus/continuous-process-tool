@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUnitOperations } from "../../context/UnitOperationContext";
 
-const AddUnitForm = () => {
+const AddUnitForm = ({closeModal}) => {
     const {unitOperations, setUnitOperations, addUnitOperation} = useUnitOperations()
 
     const [addFormData, setAddFormData] = useState({
@@ -33,6 +33,7 @@ const AddUnitForm = () => {
             type: "chromatography"
         })
         // escape modal
+        closeModal()
     }
     return ( 
         <form  className="form-container"

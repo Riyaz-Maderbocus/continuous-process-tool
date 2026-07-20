@@ -26,7 +26,7 @@ const AddCardModal = ({isShown, closeModal}) => {
                         
                     </div>
 
-                    <AddUnitForm/>
+                    <AddUnitForm closeModal={closeModal}/>
 
                     <div className="multi-button-container">
                         <Button classes="btn full-width-btn" clickFunction={closeModal}>❌ Cancel </Button>
