@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUnitOperations } from "../../context/UnitOperationContext";
+import FormTextInput from "./FormComponents/FormTextInput";
 
 const AddUnitForm = ({closeModal}) => {
     const {unitOperations, setUnitOperations, addUnitOperation} = useUnitOperations()
@@ -9,7 +10,7 @@ const AddUnitForm = ({closeModal}) => {
         type: "chromatography"
     })
 
-    const [titleError, setTitleError] = useState(false)
+    // const [titleError, setTitleError] = useState(false)
 
     // if (addFormData.title.length > 0){
     //     setTitleError(false)
@@ -27,7 +28,7 @@ const AddUnitForm = ({closeModal}) => {
         // alert("form submitted")
         // console.log("form submitted", addFormData)
         if (!addFormData["title"]) {
-            setTitleError(true)
+            // setTitleError(true)
             return
         }
         
@@ -50,7 +51,7 @@ const AddUnitForm = ({closeModal}) => {
         onSubmit={handleSubmit}
         >
             
-            <div className="form-input-container">
+            {/* <div className="form-input-container">
                 <label htmlFor="title" className="form-input-label-full">Title</label>
                 <input type="text" className={`form-text-input-full ${!titleError ? "" : "form-input-error"}`} 
                 value={addFormData.title}
@@ -60,7 +61,10 @@ const AddUnitForm = ({closeModal}) => {
                 {(titleError || (addFormData.title.length === 0)) && (
                     <p className="form-error-text">Title can't be empty</p>
                 )}
-            </div>
+            </div> */}
+
+            <FormTextInput label="Title" name="title" value={addFormData.title}
+            onChange={handleChange} required={true}  />
 
             <div className="form-input-container">
                 <label htmlFor="type" className="form-input-label-full">Unit Operation Type</label>
