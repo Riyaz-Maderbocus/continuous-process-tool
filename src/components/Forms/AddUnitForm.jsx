@@ -1,21 +1,57 @@
-const AddUnitForm = () => {
+import { useState } from "react";
+import { useUnitOperations } from "../../context/UnitOperationContext";
 
-    const data = "hi"
+const AddUnitForm = () => {
+    const {unitOperations, setUnitOperations, addUnitOperation} = useUnitOperations()
+
+    const [addFormData, setAddFormData] = useState({
+        title: "",
+        type: "chromatography"
+    })
+
+    const handleChange = (e)=> {
+        setAddFormData({
+            ...addFormData,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const handleSubmit = (e)=> {
+        e.preventDefault();
+        // alert("form submitted")
+        // console.log("form submitted", addFormData)
+        if (!addFormData["title"]) return
+
+        // Create new unit operation
+        // Add unit operation from the context
+        addUnitOperation(addFormData["title"], addFormData["type"])
+
+        // reset original form values
+
+        // escape modal
+    }
     return ( 
         <form  className="form-container"
+        onSubmit={handleSubmit}
         >
             
             <div className="form-input-container">
-                <label htmlFor="" className="form-input-label-full">Title</label>
-                <input type="text" className="form-text-input-full"/>
+                <label htmlFor="title" className="form-input-label-full">Title</label>
+                <input type="text" className="form-text-input-full" 
+                value={addFormData.title}
+                onChange={handleChange}
+                name="title"
+                id="title"/>
             </div>
 
             <div className="form-input-container">
-                <label htmlFor="" className="form-input-label-full">Unit Operation Type</label>
-                {/* <input type="text" className="form-text-input-full"/> */}
-                <select name="" id="" className="form-select-input-full">
+                <label htmlFor="type" className="form-input-label-full">Unit Operation Type</label>
+                <select name="" id="" className="form-select-input-full" value={addFormData.type}
+                onChange={handleChange}
+                name="type"
+                id="type">
                     <option value="chromatography" className="form-select-option">Chromatography</option>
-                    <option value="bufferTank" className="form-select-option">Buffer Tank</option>
+                    <option value="buffer" className="form-select-option">Buffer Tank</option>
                 </select>
             </div>
 

@@ -13,12 +13,12 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
-        {id: 1, title: "An operation", type: "chromatography", data: {
+        {id: 1, title: "An operation", type: "chromatography", typeFormatted: "Chromatography", data: {
             column: "big one",
             col_length: 10,
             area: 5
         }},
-        {id: 2, title: "A second operation", type: "buffer", data: {
+        {id: 2, title: "A second operation", type: "buffer", typeFormatted:"Buffer Tank", data: {
             solvent: "Water",
             solute: "NaCl"
         }},
@@ -36,12 +36,35 @@ export function UnitOperationProvider({children}) {
     //         return [...prev, newUnitOperation]
     //     })
     // }
-    const addUnitOperation = () => {
+
+    // Original Add unit operation, still works
+    // const addUnitOperation = () => {
+    //     setUnitOperations((prev)=> {
+    //         const newUnitOperation = {
+    //             id: Date.now(),
+    //             title: "A new item",
+    //             type: "generic",
+    //             data: {
+    //                 content: "I am new"
+    //             }
+    //         }
+    //         // console.log(newUnitOperation)
+    //         return [...prev, newUnitOperation]
+    //     })
+    // }
+    const addUnitOperation = (title, type) => {
         setUnitOperations((prev)=> {
+            let typeFormatted = ""
+            if (type == "chromatography"){
+                typeFormatted = "Chromatography"
+            } else if (type == "buffer"){
+                typeFormatted = "Buffer Tank"
+            }
             const newUnitOperation = {
                 id: Date.now(),
-                title: "A new item",
-                type: "generic",
+                title: title,
+                type: type,
+                typeFormatted,
                 data: {
                     content: "I am new"
                 }

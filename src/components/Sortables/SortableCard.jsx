@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 
 const SortableCard = ({id, index, unitOperation}) => {
-    const { title, type, data} = unitOperation
+    const { title, type, data, typeFormatted} = unitOperation
 
     const {ref, isDragSource} = useSortable({
         id,
@@ -18,7 +18,8 @@ const SortableCard = ({id, index, unitOperation}) => {
             </div>
 
             <div className="card-meta-details">
-             <p className="card-type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
+             {/* <p className="card-type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p> */}
+             <p className="card-type">{typeFormatted}</p>
             </div>
             
             <div className="data-container">
