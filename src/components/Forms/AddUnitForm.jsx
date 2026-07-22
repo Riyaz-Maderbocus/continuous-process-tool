@@ -68,6 +68,10 @@ const AddUnitForm = ({closeModal}) => {
             <FormTextInput label="Title" name="title" value={addFormData.title}
             onChange={handleChange} required={true}  />
 
+            {addFormData.title.length === 0 && (
+                    <p className="form-error-text">Title can't be empty</p>
+                )}
+
             {/* <div className="form-input-container">
                 <label htmlFor="type" className="form-input-label-full">Unit Operation Type</label>
                 <select name="" id="" className="form-select-input-full" value={addFormData.type}

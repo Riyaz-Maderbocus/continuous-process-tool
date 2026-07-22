@@ -1,9 +1,20 @@
 import Button from "../Utilities/Button";
 const HelpModal = ({isShown, closeModal}) => {
     if (!isShown) return 
+
+    const closeModalFromOverlay = (e)=> {
+        e.stopPropagation()
+        closeModal()
+    }
+
+    const preventModalClose = (e)=> {
+        e.stopPropagation()
+    }
     return ( 
-        <div className="modal-overlay">
-            <div className="modal">
+        <div className="modal-overlay"
+        onClick={closeModalFromOverlay}>
+            <div className="modal"
+            onClick={preventModalClose}>
 
                 <div className="modal-container">
                     <h2>Help and things</h2>

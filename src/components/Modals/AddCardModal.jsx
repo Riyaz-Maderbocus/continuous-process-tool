@@ -10,10 +10,21 @@ const AddCardModal = ({isShown, closeModal}) => {
     //     alert("form submitted)")
     // }
 
+    const closeModalFromOverlay = (e)=> {
+        e.stopPropagation()
+        closeModal()
+    }
+
+    const preventModalClose = (e)=> {
+        e.stopPropagation()
+    }
+
     if (!isShown) return
     return (  
-        <div className="modal-overlay">
-            <div className="modal">
+        <div className="modal-overlay"
+        onClick={closeModalFromOverlay}>
+            <div className="modal"
+            onClick={preventModalClose}>
                 <div className="modal-container">
                     <h2>Add Unit Operation</h2>
 

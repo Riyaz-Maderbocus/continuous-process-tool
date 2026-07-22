@@ -14,12 +14,10 @@ const SortableCard = ({id, index, unitOperation}) => {
     const [showCardModal, setShowCardModal] = useState(false)
 
     const openCardModal = () => {
-        alert("opening stuff")
         setShowCardModal(true)
     }
 
     const closeCardModal = ()=> {
-        alert("closing modal")
         setShowCardModal(false)
     }
 

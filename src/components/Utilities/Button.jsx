@@ -1,9 +1,15 @@
-const Button = ({children, disabled=false, classes, clickFunction, type=""}) => {
+const Button = ({children, disabled=false, classes, clickFunction, type="", stopPropagation=false}) => {
+    const handleClick = (e) => {
+        if (stopPropagation ) {
+            e.stopPropagation();
+        }
+        clickFunction?.(event)
+    }
     return ( 
         <button
         type={type}
         className={classes}
-        onClick={clickFunction}>
+        onClick={handleClick}>
             {children}
         </button>
      );
