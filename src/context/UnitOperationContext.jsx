@@ -85,8 +85,16 @@ export function UnitOperationProvider({children}) {
         }
     }
 
+    // Delete card by ID
+    const removeUnitOperation =(id) => {
+         const confirmDelete = window.confirm("Are you sure you want to delete this unit operation?")
+         if (confirmDelete) {
+            setUnitOperations(unitOperations.filter((unitOperation)=> unitOperation.id !== id))
+         }
+    }
+
     return (
-        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, removeAllUnitOperations}}>
+        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, removeAllUnitOperations, removeUnitOperation}}>
             {children}
         </UnitOperationContext.Provider>
     )

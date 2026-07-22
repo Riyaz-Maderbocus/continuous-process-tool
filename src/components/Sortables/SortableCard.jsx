@@ -41,7 +41,7 @@ const SortableCard = ({id, index, unitOperation}) => {
                 
             </div>
        
-            {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal}/>}
+            {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal} unitOperation={unitOperation}/>}
         </div>
      );
 }
