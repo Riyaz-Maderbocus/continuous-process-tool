@@ -1,4 +1,6 @@
 import { useSortable } from "@dnd-kit/react/sortable";
+import { useState } from "react";
+import CardModal from "../Modals/CardModal";
 
 const SortableCard = ({id, index, unitOperation}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -8,15 +10,30 @@ const SortableCard = ({id, index, unitOperation}) => {
         index
     })
 
+        // Card modal state and functions
+    const [showCardModal, setShowCardModal] = useState(false)
+
+    const openCardModal = () => {
+        alert("opening stuff")
+        setShowCardModal(true)
+    }
+
+    const closeCardModal = ()=> {
+        alert("closing modal")
+        setShowCardModal(false)
+    }
+
     return ( 
         <div className={`card ${isDragSource && "card-lift"}`}
         ref={ref}
-        onClick={()=>alert("clicked")}
+        onClick={openCardModal}
         >
             <div className="card-header">
                 <h4>{title}</h4>
             </div>
 
+            {/* <button onClick={closeCardModal}>Close stuff</button> */}
+            {/* <button onClick={openCardModal}>Open stuff</button> */}
             <div className="card-meta-details">
              {/* <p className="card-type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p> */}
              <p className="card-type">{typeFormatted}</p>
@@ -26,6 +43,7 @@ const SortableCard = ({id, index, unitOperation}) => {
                 
             </div>
        
+            {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal}/>}
         </div>
      );
 }

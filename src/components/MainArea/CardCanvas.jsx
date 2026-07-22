@@ -5,11 +5,15 @@ import { isSortable } from "@dnd-kit/react/sortable";
 import SortableCard from "../Sortables/SortableCard";
 import CardOverlay from "../Sortables/CardOverlay";
 
+
 const CardCanvas = () => {
     const {unitOperations, setUnitOperations} = useUnitOperations()
 
     const [activeId, setActiveId] = useState(null)
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
+
+
+
     return ( 
         <DragDropProvider
             onDragStart={({operation})=> {
@@ -40,6 +44,7 @@ const CardCanvas = () => {
             {unitOperations.map((unitOperation, index)=> (
                 <SortableCard id={unitOperation.id} key={unitOperation.id} index={index} unitOperation={unitOperation}/>
             ))}
+           
         </div>
         
         {/* <DragOverlay>
