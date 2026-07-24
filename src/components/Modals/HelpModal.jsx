@@ -1,6 +1,38 @@
+import { useRef } from "react";
+
 import Button from "../Utilities/Button";
 const HelpModal = ({isShown, closeModal}) => {
-    if (!isShown) return 
+    const mouseDownPosition = useRef(null);
+    if (!isShown) return null
+
+    const handleOverlayMouseDown = (e) => {
+        mouseDownPosition.current = {
+            x: e.clientX,
+            y: e.clientY
+        }
+        // console.log(mouseDownPosition)
+    }
+
+    const handleOverlayClick = (e) => {
+        if (!mouseDownPosition.current) return;
+
+        const distanceMoved = Math.sqrt(
+            Math.pow(e.clientX - mouseDownPosition.current.x, 2) +
+            Math.pow(e.clientY - mouseDownPosition.current.y, 2)
+        )
+
+        // Ignore drag movements
+        if(distanceMoved > 5) {
+            mouseDownPosition.current = null;
+            return;
+        }
+
+        if (e.target === e.currentTarget) {
+            closeModal()
+        }
+
+        mouseDownPosition.current = null
+    }
 
     const closeModalFromOverlay = (e)=> {
         e.stopPropagation()
@@ -12,9 +44,14 @@ const HelpModal = ({isShown, closeModal}) => {
     }
     return ( 
         <div className="modal-overlay"
-        onClick={closeModalFromOverlay}>
+        // onClick={closeModalFromOverlay}
+        // onClick={handleOverlayMouseDown}
+        onMouseDown={handleOverlayMouseDown}
+        onClick={handleOverlayClick}
+        >
             <div className="modal"
-            onClick={preventModalClose}>
+            // onClick={preventModalClose}
+            >
 
                 <div className="modal-container">
                     <h2>Help and things</h2>
