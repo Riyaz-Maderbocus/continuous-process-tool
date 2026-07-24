@@ -22,6 +22,8 @@ const SortableCard = ({id, index, unitOperation}) => {
     }
 
     return ( 
+
+        <>
         <div className={`card ${isDragSource && "card-lift"}`}
         ref={ref}
         onClick={openCardModal}
@@ -41,8 +43,10 @@ const SortableCard = ({id, index, unitOperation}) => {
                 
             </div>
        
-            {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal} unitOperation={unitOperation}/>}
+            
         </div>
+        {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal} unitOperation={unitOperation}/>}
+        </>
      );
 }
  

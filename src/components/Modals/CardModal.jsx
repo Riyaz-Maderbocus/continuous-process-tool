@@ -1,6 +1,7 @@
 import { useUnitOperations } from "../../context/UnitOperationContext";
 import { useRef } from "react";
 import Button from "../Utilities/Button";
+import { createPortal } from "react-dom";
 const CardModal = ({unitOperation, isShown, closeModal}) => {
 
     // const mouseDownPosition = useRef(null);
@@ -45,7 +46,7 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
     }
     
     const {removeUnitOperation} = useUnitOperations()
-    return ( 
+    return createPortal( 
         <div className="modal-overlay"
         onClick={closeModalFromOverlay}
         // onMouseDown={handleOverlayMouseDown}
@@ -69,7 +70,8 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
                     >❌ Close Card</Button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
      );
 }
  
