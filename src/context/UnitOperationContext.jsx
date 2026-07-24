@@ -55,26 +55,47 @@ export function UnitOperationProvider({children}) {
     const addUnitOperation = (title, type) => {
         setUnitOperations((prev)=> {
             let typeFormatted = ""
-            // let data = {}
+            let data;
             if (type == "chromatography"){
                 typeFormatted = "Chromatography"
+                data = {
+                    content: "I am new"
+                }
+
             } else if (type == "surgeTank"){
                 typeFormatted = "Surge Tank"
+                data = {
+                    content: "I am new"
+                }
             } else if (type == "bioreactor") {
                 typeFormatted = "Bioreactor"
+                data = {
+                    vesselVolume: 0,
+                    vvd: 0,
+                    flowRatemlmin: 0,
+                    flowRatelh: 0,
+                    titremgml: 0,
+                    titremgmin: 0
+
+                }
+
             } else if (type == "filtration") {
                 typeFormatted = "Filtration"
+                                data = {
+                    content: "I am new"
+                }
             } else if (type == "sptff") {
                 typeFormatted = "SPTFF"
+                                data = {
+                    content: "I am new"
+                }
             }
             const newUnitOperation = {
                 id: Date.now(),
                 title: title,
                 type: type,
                 typeFormatted,
-                data: {
-                    content: "I am new"
-                }
+                data
             }
             // console.log(newUnitOperation)
             return [...prev, newUnitOperation]
