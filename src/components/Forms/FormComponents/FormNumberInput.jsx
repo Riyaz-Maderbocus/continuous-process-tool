@@ -1,8 +1,8 @@
-const FormTextInput = ({name, label="", value, onChange, required=false}) => {
+const FormNumberInput = ({name, label="", value, onChange, required=false}) => {
     return ( 
         <div className="form-input-container">
                 <label htmlFor={name} className="form-input-label-full">{label}</label>
-                <input type="text" className={`form-text-input-full`} 
+                <input type="number" className={`form-text-input-full`} 
                 value={value}
                 onChange={onChange}
                 required={required}
@@ -16,4 +16,4 @@ const FormTextInput = ({name, label="", value, onChange, required=false}) => {
      );
 }
  
-export default FormTextInput;
+export default FormNumberInput;

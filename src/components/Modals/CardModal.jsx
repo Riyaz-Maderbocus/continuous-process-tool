@@ -61,7 +61,7 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
     const {removeUnitOperation} = useUnitOperations()
     return createPortal( 
         <div className="modal-overlay"
-        onClick={closeModalFromOverlay}
+        // onClick={closeModalFromOverlay} Disabled close as it is too risky
         // onMouseDown={handleOverlayMouseDown}
         // onClick={handleOverlayClick}
         >

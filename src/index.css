@@ -214,6 +214,7 @@ body.modal-open {
   padding: 0.5rem 0 1rem;
   width: 100%;
   /* border: 1px solid red; */
+  height: 100%;
 }
 
 .form-input-container {
@@ -222,7 +223,7 @@ body.modal-open {
 
 .form-input-label-full {
   display: block;
-  /* font-size: 1.5rem; */
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -230,6 +231,51 @@ body.modal-open {
 .form-select-input-full {
   width: 100%;
   margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+
+/* Unit operation form classes */
+.form-separator {
+  margin: 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px dashed black;
+}
+
+.form-input-cols {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  align-items: center;
+  gap: 1rem
+}
+
+.form-input-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
+
+.form-input-column-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.form-input-cols label, .form-input-column-text-label{
+  /* width: 150%; */
+  font-size: 1.25rem;
+  font-weight: 600;
+  
+}
+
+.form-input-cols-input {
+  /* margin: 0.5rem 0; */
   padding: 0.5rem;
   border-radius: 10px;
 }
