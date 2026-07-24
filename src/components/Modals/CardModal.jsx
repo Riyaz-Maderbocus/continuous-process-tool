@@ -1,11 +1,24 @@
 import { useUnitOperations } from "../../context/UnitOperationContext";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Button from "../Utilities/Button";
 import { createPortal } from "react-dom";
+import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
+
 const CardModal = ({unitOperation, isShown, closeModal}) => {
 
+    // modal prevent background scroll
+    useEffect(()=> {
+        if(isShown) {
+            document.body.classList.add("modal-open")
+        } else {
+            document.body.classList.remove("modal-open")
+        }
+    }, [isShown])
+    
     // const mouseDownPosition = useRef(null);
     if (!isShown) return null
+
+
 
     // const handleOverlayMouseDown = (e) => {
     //     mouseDownPosition.current = {
@@ -59,6 +72,9 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
                     <h2>{unitOperation.title}</h2>
                     <h3>{unitOperation.id}</h3>
 
+                    {unitOperation.type === "bioreactor" && (
+                        <BioreactorUpdateForm unitOperation={unitOperation}/>
+                    )}
                     <Button classes="btn full-width-btn"
                     stopPropagation={true}
                     clickFunction={()=>removeUnitOperation(unitOperation.id)} 

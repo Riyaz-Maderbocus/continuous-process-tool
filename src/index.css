@@ -20,6 +20,11 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+/* modal body scroll disable */
+body.modal-open {
+  overflow:hidden
+}
+
 /* utility classes */
 
 .btn {
@@ -70,10 +75,12 @@ body {
 
 .modal-overlay {
   position: fixed;
+  inset: 0;
   top: 0;
   left: 0;
+  z-index: 1000;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   /* background-color: var(--primary-color); */
   /* background-color: red; */
   /* opacity: 0.95; */
@@ -81,6 +88,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
 }
 
 .modal {
@@ -88,10 +96,13 @@ body {
   opacity: 1;
   min-width: 600px;
   width: 80%;
+  max-height: calc(100vh - 4rem);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 
               0 2px 4px rgba(0, 0, 0, 0.04);
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .modal-container {
@@ -169,6 +180,14 @@ body {
   margin-bottom: 0.25rem;
   display: flex;
   justify-content: space-between;
+}
+
+/* Modal card forms */
+
+.bioreactor-form {
+  /* height: 100vh; */
+  min-height: 100%;
+
 }
 /* card opacity for overlay*/
 .card-opacity {

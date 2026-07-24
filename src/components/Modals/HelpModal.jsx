@@ -1,7 +1,17 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import Button from "../Utilities/Button";
 const HelpModal = ({isShown, closeModal}) => {
+
+    // modal prevent background scroll
+    useEffect(()=> {
+        if(isShown) {
+            document.body.classList.add("modal-open")
+        } else {
+            document.body.classList.remove("modal-open")
+        }
+    }, [isShown])
+    
     const mouseDownPosition = useRef(null);
     if (!isShown) return null
 

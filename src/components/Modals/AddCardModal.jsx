@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import Button from "../Utilities/Button";
 
 import AddUnitForm from "../Forms/AddUnitForm";
 import { useUnitOperations } from "../../context/UnitOperationContext";
 
 const AddCardModal = ({isShown, closeModal}) => {
+    // modal prevent background scroll
+    useEffect(()=> {
+        if(isShown) {
+            document.body.classList.add("modal-open")
+        } else {
+            document.body.classList.remove("modal-open")
+        }
+    }, [isShown])
 
     // const handleAddSubmit = (e)=> {
     //     e.preventDefault();
