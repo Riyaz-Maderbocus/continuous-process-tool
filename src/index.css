@@ -159,6 +159,17 @@ body {
   text-align: center;
   margin: 0.75rem 0;
 }
+
+.data-container {
+  padding: 1rem;
+}
+
+.data-paragraph {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+}
 /* card opacity for overlay*/
 .card-opacity {
   opacity: 0.8;

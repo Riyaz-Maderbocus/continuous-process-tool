@@ -1,6 +1,7 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 import { useState } from "react";
 import CardModal from "../Modals/CardModal";
+import BioreactorSummary from "../UnitOperationSummaries/BioreactorSummary";
 
 const SortableCard = ({id, index, unitOperation}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -40,7 +41,9 @@ const SortableCard = ({id, index, unitOperation}) => {
             </div>
             
             <div className="data-container">
-                
+                {type === "bioreactor" && (
+                    <BioreactorSummary unitOperation={unitOperation}/>
+                )}
             </div>
        
             

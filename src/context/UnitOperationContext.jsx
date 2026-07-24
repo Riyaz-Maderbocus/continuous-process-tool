@@ -13,6 +13,14 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
+        {id: 3, title:"Bioreactor One", type: "bioreactor", typeFormatted:"Bioreactor", data: {
+            vesselVolume: 1,
+                    vvd: 2,
+                    flowRatemlmin: 3,
+                    flowRatelh: 4,
+                    titremgml: 5,
+                    titremgmin: 6
+        }},
         {id: 1, title: "An operation", type: "chromatography", typeFormatted: "Chromatography", data: {
             column: "big one",
             col_length: 10,
@@ -120,6 +128,7 @@ export function UnitOperationProvider({children}) {
             setUnitOperations(unitOperations.filter((unitOperation)=> unitOperation.id !== id))
          }
     }
+ 
 
     return (
         <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, removeAllUnitOperations, removeUnitOperation}}>
