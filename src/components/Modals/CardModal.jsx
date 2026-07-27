@@ -73,7 +73,7 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
                     <h3>{unitOperation.id}</h3>
 
                     {unitOperation.type === "bioreactor" && (
-                        <BioreactorUpdateForm unitOperation={unitOperation}/>
+                        <BioreactorUpdateForm unitOperation={unitOperation} closeModal={closeModal}/>
                     )}
                     <Button classes="btn full-width-btn"
                     stopPropagation={true}

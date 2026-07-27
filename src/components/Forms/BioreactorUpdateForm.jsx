@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useUnitOperations } from "../../context/UnitOperationContext";
 import FormTextInput from "./FormComponents/FormTextInput";
 import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import Button from "../Utilities/Button";
 const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
 
+    const {updateUnitOperationData} = useUnitOperations()
     const {data, title} = unitOperation
     const {vesselVolume, vvd, flowRatemlmin, flowRatelh, titremgml, titremgmin} = data
         const [bioreactorFormData, setBioreactorFormData] = useState({
@@ -26,10 +28,21 @@ const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
     }
 
     const handleFormChangeNumber = (e) => {
-        setBioreactorFormData({
-            ...bioreactorFormData,
+        setBioreactorFormData(previousData =>({
+            ...previousData,
             [e.target.name]: parseFloat(e.target.value)
-        })
+        }))
+    }
+
+    const handleSave = (e) => {
+        e.preventDefault()
+        const {title, ...data} = bioreactorFormData;
+        updateUnitOperationData(
+            unitOperation.id,
+            title,
+            data
+        )
+        closeModal()
     }
 
     // const oldValueChecker = (nameCheck, checkAgainst, trueValue, fasleValue)=> {
@@ -80,7 +93,7 @@ const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
     }
 
     return ( 
-        <form className="form-container">
+        <form className="form-container" action="#">
             <FormTextInput label="Title" name="title" value={bioreactorFormData.title}
             onChange={handleFormChange}/>
 
@@ -135,7 +148,8 @@ const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
             </div>
             <p className="form-separator"></p>
             
-            <Button classes="btn btn-primary full-width-btn"> 💾 Save Updated Data</Button>
+            <Button  classes="btn btn-primary full-width-btn" 
+            clickFunction={handleSave}> 💾 Save Updated Data</Button>
         </form>
     );
 }

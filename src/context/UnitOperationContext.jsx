@@ -128,10 +128,34 @@ export function UnitOperationProvider({children}) {
             setUnitOperations(unitOperations.filter((unitOperation)=> unitOperation.id !== id))
          }
     }
- 
+
+    // Update unit operation data
+
+    const updateUnitOperationData = (id, title, data) => {
+    const confirmUpdate = window.confirm(
+        "Are you sure you want to update the unit operation?"
+    );
+
+    if (!confirmUpdate) return;
+
+    setUnitOperations(previousUnitOperations =>
+        previousUnitOperations.map(unitOperation => {
+            if (unitOperation.id === id) {
+                return {
+                    ...unitOperation,
+                    title,
+                    data
+                };
+            }
+
+            return unitOperation;
+        })
+    );
+};
 
     return (
-        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, removeAllUnitOperations, removeUnitOperation}}>
+        <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, 
+        removeAllUnitOperations, removeUnitOperation, updateUnitOperationData}}>
             {children}
         </UnitOperationContext.Provider>
     )
