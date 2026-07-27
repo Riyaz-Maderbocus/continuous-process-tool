@@ -14,12 +14,12 @@ export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
         {id: 3, title:"Bioreactor One", type: "bioreactor", typeFormatted:"Bioreactor", data: {
-            vesselVolume: 1,
+            vesselVolume: 2.5,
                     vvd: 2,
-                    flowRatemlmin: 3,
-                    flowRatelh: 4,
-                    titremgml: 5,
-                    titremgmin: 6
+                    flowRatemlmin: 3.47,
+                    flowRatelh: 0.21,
+                    titremgml: 2,
+                    titremgmin: 6.94
         }},
         {id: 1, title: "An operation", type: "chromatography", typeFormatted: "Chromatography", data: {
             column: "big one",

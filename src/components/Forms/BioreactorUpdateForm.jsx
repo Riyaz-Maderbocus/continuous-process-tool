@@ -44,26 +44,39 @@ const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
         if (e.target.name === "vesselVolume"){
             newVesselVolume = parseFloat(e.target.value)
         } else {
-            newVesselVolume = vesselVolume
+            newVesselVolume = bioreactorFormData.vesselVolume
         }
+        // console.log("")
 
         // Updated VVD
         let newVvd = 0
         if (e.target.name === "vvd"){
             newVvd = parseFloat(e.target.value)
         } else {
-            newVvd = vvd
+            newVvd = bioreactorFormData.vvd
         }
 
-        const newFlowRateLh = parseFloat((vvd * (newVesselVolume /24)).toFixed(2))
-        const newFlowRatemlmin = parseFloat((newFlowRateLh * 1000 / 60).toFixed(2))
+        const newFlowRateLh = parseFloat((newVvd * (newVesselVolume /24)).toFixed(3))
+        const newFlowRatemlmin = parseFloat((newFlowRateLh * 1000 / 60).toFixed(3))
+        const newTitremgmin = parseFloat((newFlowRatemlmin * bioreactorFormData.titremgml).toFixed(3))
         setBioreactorFormData({
             ...bioreactorFormData,
             [e.target.name]: parseFloat(e.target.value),
             flowRatemlmin: newFlowRatemlmin,
-            flowRatelh: newFlowRateLh
+            flowRatelh: newFlowRateLh,
+            titremgmin: newTitremgmin
         })
 
+    }
+
+    const handleTitreChange = (e) => {
+        const newTitremgml = parseFloat(e.target.value);
+        const newTitremgmin = parseFloat((newTitremgml * bioreactorFormData.flowRatemlmin).toFixed(3))
+        setBioreactorFormData({
+            ...bioreactorFormData,
+            [e.target.name]: parseFloat(e.target.value),
+            titremgmin: newTitremgmin
+        })
     }
 
     return ( 
@@ -109,12 +122,15 @@ const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
             {/* <p className="form-separator">Titres</p> */}
             <div className="form-input-cols">
                 <div className="form-input-column-center">
-                    <FormNumberInputSmall label="Titre mg/ml" />
+                    <FormNumberInputSmall label="Titre mg/ml"
+                    name="titremgml"
+                    value={bioreactorFormData.titremgml}
+                    onChange={handleTitreChange}/>
                 </div>
 
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Titre mg/min</p>
-                    <p className="form-input-column-text-label">{titremgmin}</p>
+                    <p className="form-input-column-text-label">{bioreactorFormData.titremgmin}</p>
                 </div>
             </div>
             <p className="form-separator"></p>
