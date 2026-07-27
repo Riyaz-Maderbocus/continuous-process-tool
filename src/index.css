@@ -257,6 +257,8 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   margin: 0.5rem 0;
+  justify-content: space-between;
+  
 }
 
 .form-input-column-center {
@@ -266,6 +268,7 @@ body.modal-open {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  margin: 1rem 0;
 }
 .form-input-cols label, .form-input-column-text-label{
   /* width: 150%; */
