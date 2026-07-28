@@ -90,7 +90,12 @@ export function UnitOperationProvider({children}) {
             } else if (type == "filtration") {
                 typeFormatted = "Filtration"
                                 data = {
-                    content: "I am new"
+                    filterType: "",
+                    filterArea: 0,
+                    flowRate: 0,
+                    flux: 0,
+                    filterCapacity: 0,
+                    lifetime: 0
                 }
             } else if (type == "sptff") {
                 typeFormatted = "SPTFF"
