@@ -13,6 +13,15 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
+                {id: 4, title: "Filtration operation", type: "filtration", typeFormatted: "Filtration", data: {
+            filterType: "DoHC",
+            filterArea: 0.1,
+            flowRate: 2.8,
+            flux: 1.68,
+            filterCapacity: 150,
+            lifetime: 89.29
+
+        }},
         {id: 3, title:"Bioreactor One", type: "bioreactor", typeFormatted:"Bioreactor", data: {
             vesselVolume: 2.5,
                     vvd: 2,
@@ -30,15 +39,7 @@ export function UnitOperationProvider({children}) {
             solvent: "Water",
             solute: "NaCl"
         }},
-        {id: 4, title: "Filtration operation", type: "filtration", typeFormatted: "Filtration", data: {
-            filterType: "DoHC",
-            filterArea: 0.1,
-            flowRate: 2.8,
-            flux: 1.68,
-            filterCapacity: 150,
-            lifetime: 89.29
 
-        }}
     
     ])
 

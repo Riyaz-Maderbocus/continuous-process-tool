@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import Button from "../Utilities/Button";
 import { createPortal } from "react-dom";
 import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
+import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
 
 const CardModal = ({unitOperation, isShown, closeModal}) => {
 
@@ -74,6 +75,9 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
 
                     {unitOperation.type === "bioreactor" && (
                         <BioreactorUpdateForm unitOperation={unitOperation} closeModal={closeModal}/>
+                    )}
+                    {unitOperation.type === "filtration" && (
+                        <FiltrationUpdateForm unitOperation={unitOperation} closeModal={closeModal} />
                     )}
                     <Button classes="btn full-width-btn"
                     stopPropagation={true}
