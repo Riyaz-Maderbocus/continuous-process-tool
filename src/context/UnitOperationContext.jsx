@@ -20,7 +20,10 @@ export function UnitOperationProvider({children}) {
             flux: 1.68,
             filterCapacity: 150,
             lifetime: 89.29,
-            noFilters: 13
+            noFilters: 13,
+            inputConc: 2,
+            predictedYield: 99,
+            outputConc: 1.98,
 
         }},
         {id: 3, title:"Bioreactor One", type: "bioreactor", typeFormatted:"Bioreactor", data: {
@@ -95,7 +98,7 @@ export function UnitOperationProvider({children}) {
                     flowRatelh: 0,
                     titremgml: 0,
                     titremgmin: 0,
-                    noFilters: 0
+       
 
                 }
 
@@ -107,7 +110,10 @@ export function UnitOperationProvider({children}) {
                     flowRate: 0,
                     flux: 0,
                     filterCapacity: 0,
-                    lifetime: 0
+                    lifetime: 0,
+                    nofilters: 0,
+                    inputConc: 0,
+                    predictedYield: 0,
                 }
             } else if (type == "sptff") {
                 typeFormatted = "SPTFF"
