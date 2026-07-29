@@ -147,11 +147,11 @@ export function UnitOperationProvider({children}) {
     // Update unit operation data
 
     const updateUnitOperationData = (id, title, data) => {
-    const confirmUpdate = window.confirm(
-        "Are you sure you want to update the unit operation?"
-    );
+    // const confirmUpdate = window.confirm(
+    //     "Are you sure you want to update the unit operation?"
+    // );
 
-    if (!confirmUpdate) return;
+    // if (!confirmUpdate) return;
 
     setUnitOperations(previousUnitOperations =>
         previousUnitOperations.map(unitOperation => {
