@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
 import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
 
-const CardModal = ({unitOperation, isShown, closeModal}) => {
+const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
 
     // modal prevent background scroll
     useEffect(()=> {
@@ -74,10 +74,10 @@ const CardModal = ({unitOperation, isShown, closeModal}) => {
                     <h3>{unitOperation.id}</h3>
 
                     {unitOperation.type === "bioreactor" && (
-                        <BioreactorUpdateForm unitOperation={unitOperation} closeModal={closeModal}/>
+                        <BioreactorUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime}/>
                     )}
                     {unitOperation.type === "filtration" && (
-                        <FiltrationUpdateForm unitOperation={unitOperation} closeModal={closeModal} />
+                        <FiltrationUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime}/>
                     )}
                     <Button classes="btn full-width-btn"
                     stopPropagation={true}

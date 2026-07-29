@@ -5,10 +5,10 @@ import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import Button from "../Utilities/Button";
 
-const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
+const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
     const {data, title} = unitOperation;
-    const {filterType, filterArea, flowRate, flux, filterCapacity, lifetime} = data;
+    const {filterType, filterArea, flowRate, flux, filterCapacity, lifetime, noFilters} = data;
     const [filtrationFormData, setFiltrationFormData] = useState({
         title,
         filterType,
@@ -16,7 +16,8 @@ const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
         flowRate,
         flux,
         filterCapacity,
-        lifetime
+        lifetime,
+        noFilters
     })
 
     const inputNameChecker = (inputName, checkedName, trueValue, falseValue) => {
@@ -41,21 +42,13 @@ const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
         }))
     }
 
+    // @TODO Combine all of these as they all read each other.
     const handleFluxChange = (e) => {
         // Update new filter area
-        let newFilterArea = 0;
-
-        newFilterArea = inputNameChecker(e.target.name, "filterArea", parseFloat(e.target.value), filtrationFormData.filterArea)
-
+        const newFilterArea = inputNameChecker(e.target.name, "filterArea", parseFloat(e.target.value), filtrationFormData.filterArea)   
         // Updated flow rate
-
-        let newFlowRate = inputNameChecker(e.target.name, "flowRate", parseFloat(e.target.value), filtrationFormData.flowRate)
-        // if (e.target.name === "filterArea") {
-
-        // }
-
+        const newFlowRate = inputNameChecker(e.target.name, "flowRate", parseFloat(e.target.value), filtrationFormData.flowRate)
         // Get new flux from the above values
-
         const newFlux = ((newFlowRate / newFilterArea)/1000 * 60).toFixed(3)
 
         setFiltrationFormData((prev)=> ({
@@ -63,6 +56,20 @@ const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
             [e.target.name] : parseFloat(e.target.value),
             flux: newFlux,
 
+        }))
+    }
+
+    const handleLifeNoChange = (e) => {
+        // Update Capacity
+        const newCapacity = e.target.value 
+        const newFilterLifetime = ((newCapacity * filtrationFormData.filterArea)*1000 / (filtrationFormData.flowRate) /60).toFixed(3)
+        const newNoFiltersNeeded = Math.ceil(30* 24 / newFilterLifetime)
+
+        setFiltrationFormData((prev)=> ({
+            ...prev,
+            filterCapacity: newCapacity,
+            lifetime: newFilterLifetime,
+            noFilters: newNoFiltersNeeded
         }))
     }
 
@@ -91,7 +98,8 @@ const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
                 </div>
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Filter Capacity L/m2" name="filterCapacity" 
-                    value={filtrationFormData.filterCapacity} 
+                    value={filtrationFormData.filterCapacity}
+                    onChange={handleLifeNoChange} 
                     />
                 </div>
 
@@ -110,7 +118,12 @@ const FiltrationUpdateForm = ({unitOperation, closeModal}) => {
                 </div>
 
                 <div className="form-input-column-center">
-                    
+                    <p className="form-input-column-text-label">No Filters Needed</p>
+                    <p className="form-input-column-text-label">{filtrationFormData.noFilters}</p>
+                </div>
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Total Time days</p>
+                    <p className="form-input-column-text-label">{totalTime}</p>
                 </div>
             </div>
 

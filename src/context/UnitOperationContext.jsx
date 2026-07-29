@@ -19,7 +19,8 @@ export function UnitOperationProvider({children}) {
             flowRate: 2.8,
             flux: 1.68,
             filterCapacity: 150,
-            lifetime: 89.29
+            lifetime: 89.29,
+            noFilters: 13
 
         }},
         {id: 3, title:"Bioreactor One", type: "bioreactor", typeFormatted:"Bioreactor", data: {
@@ -93,7 +94,8 @@ export function UnitOperationProvider({children}) {
                     flowRatemlmin: 0,
                     flowRatelh: 0,
                     titremgml: 0,
-                    titremgmin: 0
+                    titremgmin: 0,
+                    noFilters: 0
 
                 }
 

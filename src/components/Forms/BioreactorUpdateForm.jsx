@@ -4,7 +4,7 @@ import FormTextInput from "./FormComponents/FormTextInput";
 import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import Button from "../Utilities/Button";
-const BioreactorUpdateForm = ({unitOperation, closeModal}) => {
+const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
 
     const {updateUnitOperationData} = useUnitOperations()
     const {data, title} = unitOperation

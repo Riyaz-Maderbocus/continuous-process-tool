@@ -4,7 +4,7 @@ import CardModal from "../Modals/CardModal";
 import BioreactorSummary from "../UnitOperationSummaries/BioreactorSummary";
 import FiltrationSummary from "../UnitOperationSummaries/FiltrationSummary";
 
-const SortableCard = ({id, index, unitOperation}) => {
+const SortableCard = ({id, index, unitOperation, totalTime}) => {
     const { title, type, data, typeFormatted} = unitOperation
 
     const {ref, isDragSource} = useSortable({
@@ -52,7 +52,9 @@ const SortableCard = ({id, index, unitOperation}) => {
        
             
         </div>
-        {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal} unitOperation={unitOperation}/>}
+        {showCardModal && <CardModal isShown={showCardModal} closeModal={closeCardModal} 
+        unitOperation={unitOperation}
+        totalTime={totalTime}/>}
         </>
      );
 }
