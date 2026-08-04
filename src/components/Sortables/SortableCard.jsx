@@ -5,6 +5,7 @@ import BioreactorSummary from "../UnitOperationSummaries/BioreactorSummary";
 import FiltrationSummary from "../UnitOperationSummaries/FiltrationSummary";
 import ILCSummary from "../UnitOperationSummaries/ILCSummary";
 import ILDFSummary from "../UnitOperationSummaries/ILDFSummary";
+import ViSummary from "../UnitOperationSummaries/ViSummary";
 
 const SortableCard = ({id, index, unitOperation, totalTime}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -55,6 +56,9 @@ const SortableCard = ({id, index, unitOperation, totalTime}) => {
                 )}
                 {type === "ildf" && (
                     <ILDFSummary unitOperation={unitOperation} />
+                )}
+                {type === "vi" && (
+                    <ViSummary unitOperation={unitOperation} />
                 )}
 
             </div>
