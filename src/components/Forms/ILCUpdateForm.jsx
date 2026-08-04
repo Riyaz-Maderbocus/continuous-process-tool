@@ -5,7 +5,7 @@ import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import Button from "../Utilities/Button";
 
-const ILCUpdateForm = ({unitOperation, closeModal , totalTime}) => {
+const ILCUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
     const {data, title} = unitOperation;
     const {singleFilterArea, noFilters, totalFilterArea, feedFlowRate,

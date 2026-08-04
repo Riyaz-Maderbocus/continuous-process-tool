@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
 import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
 import ILCUpdateForm from "../Forms/ILCUpdateForm";
+import ILDFUpdateForm from "../Forms/ILDFUpdateForm";
 
 const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
 
@@ -83,6 +84,9 @@ const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
                     )}
                     {unitOperation.type === "ilc" && (
                         <ILCUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
+                    )}
+                    {unitOperation.type === "ildf" && (
+                        <ILDFUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
                     )}
 
                     <Button classes="btn full-width-btn"

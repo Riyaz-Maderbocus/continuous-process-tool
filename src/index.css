@@ -95,7 +95,7 @@ body.modal-open {
   background-color: #fafafa;
   opacity: 1;
   min-width: 600px;
-  width: 80%;
+  width: 90%;
   max-height: calc(100vh - 4rem);
   padding: 20px;
   border-radius: 10px;
