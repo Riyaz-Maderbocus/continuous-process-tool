@@ -6,6 +6,7 @@ import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
 import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
 import ILCUpdateForm from "../Forms/ILCUpdateForm";
 import ILDFUpdateForm from "../Forms/ILDFUpdateForm";
+import ViUpdateForm from "../Forms/ViUpdateForm";
 
 const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
 
@@ -87,6 +88,9 @@ const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
                     )}
                     {unitOperation.type === "ildf" && (
                         <ILDFUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
+                    )}
+                    {unitOperation.type === "vi" && (
+                        <ViUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
                     )}
 
                     <Button classes="btn full-width-btn"
