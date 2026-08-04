@@ -75,7 +75,7 @@ export function UnitOperationProvider({children}) {
     ])
 
     const time = {
-        totalDays: 35
+        totalDays: 30
     }
 
     // const addUnitOperation = (newUnitOperation) => {

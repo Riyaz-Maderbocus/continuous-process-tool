@@ -55,7 +55,7 @@ const ILDFUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         const newPredictedYield = e.target.name === "predictedYield" ? parseFloat(e.target.value) : ildfFormData.predictedYield;
         const newOutputConc = (newInputConc/100 * newPredictedYield).toFixed(3)
 
-        const newTotalBufferVolume = newBufferFlowRateLh * 24 * totalTime.totalDays
+        const newTotalBufferVolume = (newBufferFlowRateLh * 24 * totalTime.totalDays).toFixed(3)
 
 
         setIldfFormData((prev)=> ( {
