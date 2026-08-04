@@ -13,7 +13,20 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
-                {id: 4, title: "Filtration operation", type: "filtration", typeFormatted: "Filtration", data: {
+        {id: 5, title: "ILC", type: "ilc", typeFormatted: "ILC", data: {
+            singleFilterArea: 88,
+            noFilters: 3,
+            totalFilterArea: 264,
+            feedFlowRate: 0.7,
+            retentateFlowRate: 0.5,
+            permeateFlowRatemlmin: 0.2,
+            permeateFlowRateLh: 0.012,
+            permeateFlux: 0.5,
+            inputConc: 2,
+            predictedYield: 99,
+            outputConc: 2.772
+        }},
+        {id: 4, title: "Filtration operation", type: "filtration", typeFormatted: "Filtration", data: {
             filterType: "DoHC",
             filterArea: 0.1,
             flowRate: 2.8,
@@ -114,6 +127,21 @@ export function UnitOperationProvider({children}) {
                     nofilters: 0,
                     inputConc: 0,
                     predictedYield: 0,
+                }
+            } else if (type == "ilc"){
+                typeFormatted= "ILC", 
+                data= {
+                    singleFilterArea: 0,
+                    noFilters: 0,
+                    totalFilterArea: 0,
+                    feedFlowRate: 0,
+                    retentateFlowRate: 0,
+                    permeateFlowRatemlmin: 0,
+                    permeateFlowRateLh: 0,
+                    permeateFlux: 0,
+                    inputConc: 0,
+                    predictedYield: 0,
+                    outputConc: 0
                 }
             } else if (type == "sptff") {
                 typeFormatted = "SPTFF"

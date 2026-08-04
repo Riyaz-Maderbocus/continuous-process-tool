@@ -86,11 +86,14 @@ const AddUnitForm = ({closeModal}) => {
             <FormSelectInput name="type" label="Unit Operation Type"
             value={addFormData.type}
             onChange={handleChange}
-            options={[{value: "chromatography", label: "Chromatography"},
-                {value: "surgeTank", label: "Surge Tank"},
+            options={[
                 {value: "bioreactor", label: "Bioreactor"},
+                {value: "chromatography", label: "Chromatography"},
                 {value: "filtration", label: "Filtration"},
+                {value: "ilc", label: "ILC - Inline Concentration"},
                 {value: "sptff", label: "SPTFF"},
+                {value: "surgeTank", label: "Surge Tank"},
+                
             ]}/>
 
             {/* <button type="submit" className="btn full-width-btn btn-primary">✚ Add Unit Operation</button> */}
