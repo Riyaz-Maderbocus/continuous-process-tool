@@ -91,6 +91,7 @@ const AddUnitForm = ({closeModal}) => {
                 {value: "chromatography", label: "Chromatography"},
                 {value: "filtration", label: "Filtration"},
                 {value: "ilc", label: "ILC - Inline Concentration"},
+                {value: "ildf", label: "ILDF - Inline Diafiltration"},
                 {value: "sptff", label: "SPTFF"},
                 {value: "surgeTank", label: "Surge Tank"},
                 

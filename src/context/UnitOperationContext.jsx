@@ -13,6 +13,20 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
+        {id: 6, title: "ILDF", type: "ildf", typeFormatted: "ILDF", data: {
+            singleFilterArea: 88,
+            noFilters: 2,
+            totalFilterArea: 176,
+            feedFlowRate: 5,
+            bufferFlowRatemlmin: 2,
+            bufferFlowRateLh: 0.12,
+            bufferFlowRateLday: 2.88,
+            permeateFlux: 6.8,
+            inputConc: 2,
+            predictedYield: 99,
+            outputConc: 1.98,
+            totalBufferVolume: 86.4
+        }},
         {id: 5, title: "ILC", type: "ilc", typeFormatted: "ILC", data: {
             singleFilterArea: 88,
             noFilters: 3,
@@ -95,18 +109,18 @@ export function UnitOperationProvider({children}) {
         setUnitOperations((prev)=> {
             let typeFormatted = ""
             let data;
-            if (type == "chromatography"){
+            if (type === "chromatography"){
                 typeFormatted = "Chromatography"
                 data = {
                     content: "I am new"
                 }
 
-            } else if (type == "surgeTank"){
+            } else if (type === "surgeTank"){
                 typeFormatted = "Surge Tank"
                 data = {
                     content: "I am new"
                 }
-            } else if (type == "bioreactor") {
+            } else if (type === "bioreactor") {
                 typeFormatted = "Bioreactor"
                 data = {
                     vesselVolume: 0,
@@ -119,7 +133,7 @@ export function UnitOperationProvider({children}) {
 
                 }
 
-            } else if (type == "filtration") {
+            } else if (type === "filtration") {
                 typeFormatted = "Filtration"
                                 data = {
                     filterType: "",
@@ -132,7 +146,7 @@ export function UnitOperationProvider({children}) {
                     inputConc: 0,
                     predictedYield: 0,
                 }
-            } else if (type == "ilc"){
+            } else if (type === "ilc"){
                 typeFormatted= "ILC", 
                 data= {
                     singleFilterArea: 0,
@@ -147,7 +161,23 @@ export function UnitOperationProvider({children}) {
                     predictedYield: 0,
                     outputConc: 0
                 }
-            } else if (type == "sptff") {
+            } else if (type === "ildf"){
+                typeFormatted = "ILDF",
+                data= {
+                    singleFilterArea: 0,
+                    noFilters: 0,
+                    totalFilterArea: 0,
+                    feedFlowRate: 0,
+                    bufferFlowRatemlmin: 0,
+                    bufferFlowRateLh: 0,
+                    bufferFlowRateLday: 0,
+                    permeateFlux: 0,
+                    inputConc: 0,
+                    predictedYield: 0,
+                    outputConc: 0,
+                    totalBufferVolume: 0,
+                }
+            } else if (type === "sptff") {
                 typeFormatted = "SPTFF"
                                 data = {
                     content: "I am new"
