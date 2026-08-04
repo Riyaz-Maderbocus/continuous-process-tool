@@ -13,6 +13,33 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
+        {id: 7, title:"Viral Inactivation", type: "vi", typeFormatted: "Viral Inactivation", data:{
+            feedAverageFlowRate: 0.5,
+            feedFlowRateSetpoint: 2,
+            feedVolume: 250,
+            feedTime: 125,
+            acidFlowRate: 20,
+            acidVolume: 37.5,
+            acidTime: 1.875,
+            holdTime: 30,
+            baseFlowRate: 20,
+            baseVolume: 30,
+            baseTime: 1.5,
+            tankFlowRate: 1,
+            tankTime: 317.5,
+            tankFlowRate: 0.7,
+            totalTankVolume: 317.5,
+            totalCycleTime: 475.9,
+            bufferAcidVolPerLoop: 37.5,
+            bufferAcidVolPerDay: 0.11,
+            bufferAcidTotalVol: 3.4,
+            bufferBaseVolPerLoop: 30,
+            bufferBaseVolPerDay: 0.09,
+            bufferBaseTotalVol: 2.72,
+            inputConc: 11.64,
+            predictedYield: 100,
+            outputConc: 9.17
+        }},
         {id: 6, title: "ILDF", type: "ildf", typeFormatted: "ILDF", data: {
             singleFilterArea: 88,
             noFilters: 2,
@@ -60,18 +87,7 @@ export function UnitOperationProvider({children}) {
                     flowRatelh: 0.21,
                     titremgml: 2,
                     titremgmin: 6.94
-        }},
-        {id: 1, title: "An operation", type: "chromatography", typeFormatted: "Chromatography", data: {
-            column: "big one",
-            col_length: 10,
-            area: 5
-        }},
-        {id: 2, title: "A second operation", type: "buffer", typeFormatted:"Buffer Tank", data: {
-            solvent: "Water",
-            solute: "NaCl"
-        }},
-
-    
+        }},    
     ])
 
     const time = {
@@ -177,7 +193,35 @@ export function UnitOperationProvider({children}) {
                     outputConc: 0,
                     totalBufferVolume: 0,
                 }
-            } else if (type === "sptff") {
+            } else if (type === "vi"){
+                typeFormatted = "Viral Inactivation" 
+                data = {
+                    feedAverageFlowRate: 0,
+                    feedFlowRateSetpoint: 0,
+                    feedVolume: 0,
+                    feedTime: 0,
+                    acidFlowRate: 0,
+                    acidVolume: 0,
+                    acidTime: 0,
+                    holdTime: 0,
+                    baseFlowRate: 0,
+                    baseVolume: 0,
+                    baseTime: 0,
+                    tankFlowRate: 0,
+                    tankTime: 0,
+                    tankFlowRate: 0,
+                    totalTankVolume: 0,
+                    totalCycleTime: 0,
+                    bufferAcidVolPerLoop: 0,
+                    bufferAcidVolPerDay: 0,
+                    bufferAcidTotalVol: 0,
+                    bufferBaseVolPerLoop: 0,
+                    bufferBaseVolPerDay: 0,
+                    bufferBaseTotalVol: 0,
+                    inputConc: 0,
+                    predictedYield: 0,
+                    outputConc: 0
+        }} else if (type === "sptff") {
                 typeFormatted = "SPTFF"
                                 data = {
                     content: "I am new"
