@@ -72,7 +72,7 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     }
     return ( 
         <form className="form-container">
-            testheckle
+            test
 
         </form>
      );
