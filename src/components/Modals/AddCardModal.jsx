@@ -31,7 +31,8 @@ const AddCardModal = ({isShown, closeModal}) => {
     if (!isShown) return
     return (  
         <div className="modal-overlay"
-        onClick={closeModalFromOverlay}>
+        // onClick={closeModalFromOverlay} disabled as it is risky
+        >
             <div className="modal"
             onClick={preventModalClose}>
                 <div className="modal-container">

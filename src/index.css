@@ -274,7 +274,14 @@ body.modal-open {
   /* width: 150%; */
   font-size: 1.25rem;
   font-weight: 600;
+  /* padding: 0.25rem; */
   
+}
+
+.form-input-column-text-output {
+    font-size: 1.25rem;
+  font-weight: 600;
+  min-height: 35.333px;
 }
 
 .form-input-cols-input {

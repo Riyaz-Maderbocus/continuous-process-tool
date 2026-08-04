@@ -4,6 +4,7 @@ import Button from "../Utilities/Button";
 import { createPortal } from "react-dom";
 import BioreactorUpdateForm from "../Forms/BioreactorUpdateForm";
 import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
+import ILCUpdateForm from "../Forms/ILCUpdateForm";
 
 const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
 
@@ -73,12 +74,17 @@ const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
                     <h2>{unitOperation.title}</h2>
                     <h3>{unitOperation.id}</h3>
 
+                    {/* ADD UNIT OPERATION FORMS HERE */}
                     {unitOperation.type === "bioreactor" && (
                         <BioreactorUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime}/>
                     )}
                     {unitOperation.type === "filtration" && (
                         <FiltrationUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime}/>
                     )}
+                    {unitOperation.type === "ilc" && (
+                        <ILCUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
+                    )}
+
                     <Button classes="btn full-width-btn"
                     stopPropagation={true}
                     clickFunction={()=>removeUnitOperation(unitOperation.id)} 
