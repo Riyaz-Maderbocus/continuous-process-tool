@@ -3,6 +3,7 @@ import { useState } from "react";
 import CardModal from "../Modals/CardModal";
 import BioreactorSummary from "../UnitOperationSummaries/BioreactorSummary";
 import FiltrationSummary from "../UnitOperationSummaries/FiltrationSummary";
+import ILCSummary from "../UnitOperationSummaries/ILCSummary";
 
 const SortableCard = ({id, index, unitOperation, totalTime}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -47,6 +48,9 @@ const SortableCard = ({id, index, unitOperation, totalTime}) => {
                 )}
                 {type === "filtration" && (
                     <FiltrationSummary unitOperation={unitOperation} />
+                )}
+                {type === "ilc" && (
+                    <ILCSummary unitOperation={unitOperation} />
                 )}
             </div>
        
