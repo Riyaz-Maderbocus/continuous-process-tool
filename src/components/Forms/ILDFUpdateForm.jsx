@@ -32,7 +32,7 @@ const ILDFUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
         // Single form change like title
     const handleFormChange = (e) => {
-    setIlcFormData((prev) => ({
+    setIldfFormData((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
     }))
@@ -73,6 +73,17 @@ const ILDFUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             outputConc: newOutputConc, 
             totalBufferVolume: newTotalBufferVolume
         }))
+    }
+
+    const handleSave = (e) => {
+        e.preventDefault()
+        const {title, ...data} = ildfFormData;
+        updateUnitOperationData(
+            unitOperation.id,
+            title,
+            data
+        )
+        closeModal()
     }
     return ( 
         <form className="form-container">
@@ -169,7 +180,9 @@ const ILDFUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 </div>
             </div>
 
-
+            <p className="form-separator"></p>
+            <Button  classes="btn btn-primary full-width-btn" 
+            clickFunction={handleSave}> 💾 Save Updated Data</Button>
 
         </form>
      );
