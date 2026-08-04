@@ -4,6 +4,7 @@ import CardModal from "../Modals/CardModal";
 import BioreactorSummary from "../UnitOperationSummaries/BioreactorSummary";
 import FiltrationSummary from "../UnitOperationSummaries/FiltrationSummary";
 import ILCSummary from "../UnitOperationSummaries/ILCSummary";
+import ILDFSummary from "../UnitOperationSummaries/ILDFSummary";
 
 const SortableCard = ({id, index, unitOperation, totalTime}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -52,6 +53,10 @@ const SortableCard = ({id, index, unitOperation, totalTime}) => {
                 {type === "ilc" && (
                     <ILCSummary unitOperation={unitOperation} />
                 )}
+                {type === "ildf" && (
+                    <ILDFSummary unitOperation={unitOperation} />
+                )}
+
             </div>
        
             
