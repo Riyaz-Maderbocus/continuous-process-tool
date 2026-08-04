@@ -88,7 +88,7 @@ const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
         // const newCapacity = inputNameChecker(e.target.name, "filterCapacity", paseFloat(e.target.value), filtrationFormData.filterCapacity)
         const newCapacity = e.target.name === "filterCapacity" ? parseFloat(e.target.value) : filtrationFormData.filterCapacity
         const newFilterLifetime = ((newCapacity * newFilterArea)*1000 / (newFlowRate) /60).toFixed(3)
-        const newNoFiltersNeeded = Math.ceil(totalTime* 24 / newFilterLifetime)
+        const newNoFiltersNeeded = Math.ceil(totalTime.totalDays* 24 / newFilterLifetime)
 
         setFiltrationFormData((prev)=> ({
             ...prev,
@@ -178,7 +178,7 @@ const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                 </div>
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Total Time days</p>
-                    <p className="form-input-column-text-label">{totalTime}</p>
+                    <p className="form-input-column-text-label">{totalTime.totalDays}</p>
                 </div>
             </div>
 

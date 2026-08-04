@@ -77,8 +77,19 @@ const ILCUpdateForm = ({unitOperation, closeModal , totalTime}) => {
         }))
         
     }
+
+    const handleSave = (e) => {
+        e.preventDefault()
+        const {title, ...data} = ilcFormData;
+        updateUnitOperationData(
+            unitOperation.id,
+            title,
+            data
+        )
+        closeModal()
+    }
     return ( 
-        <form action="" className="form-container">
+        <form className="form-container">
             <FormTextInput label="Title" name="title" value={ilcFormData.title}
             onChange={handleFormChange}
             />
@@ -111,6 +122,10 @@ const ILCUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                     <FormNumberInputSmall label="Retentate Flow Rate mL/min" name="retentateFlowRate"
                     value={ilcFormData.retentateFlowRate}
                     onChange={handleAllChanges}/>
+                </div>
+
+                <div className="form-input-column-center">
+                    
                 </div>
             </div>
 
@@ -151,6 +166,10 @@ const ILCUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                     <p className="form-input-column-text-output">{ilcFormData.outputConc}</p>
                 </div>
             </div>
+            <p className="form-separator"></p>
+
+            <Button  classes="btn btn-primary full-width-btn" 
+            clickFunction={handleSave}> 💾 Save Updated Data</Button>
         </form>
      );
 }

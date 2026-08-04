@@ -60,6 +60,10 @@ export function UnitOperationProvider({children}) {
     
     ])
 
+    const time = {
+        totalDays: 35
+    }
+
     // const addUnitOperation = (newUnitOperation) => {
 
     // }
@@ -206,7 +210,7 @@ export function UnitOperationProvider({children}) {
 
     return (
         <UnitOperationContext.Provider value={{unitOperations, setUnitOperations, addUnitOperation, 
-        removeAllUnitOperations, removeUnitOperation, updateUnitOperationData}}>
+        removeAllUnitOperations, removeUnitOperation, updateUnitOperationData, time}}>
             {children}
         </UnitOperationContext.Provider>
     )

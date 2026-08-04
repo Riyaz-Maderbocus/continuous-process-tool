@@ -7,8 +7,9 @@ import CardOverlay from "../Sortables/CardOverlay";
 
 
 const CardCanvas = () => {
-    const {unitOperations, setUnitOperations} = useUnitOperations()
-    let timeDays = 30;
+    const {unitOperations, setUnitOperations, time} = useUnitOperations()
+    // let timeDays = 30;
+    // const {totalDays} = time
 
     const [activeId, setActiveId] = useState(null)
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
@@ -43,7 +44,7 @@ const CardCanvas = () => {
         <div className="card-canvas">
             {/* <SortableCard /> */}
             {unitOperations.map((unitOperation, index)=> (
-                <SortableCard id={unitOperation.id} key={unitOperation.id} index={index} unitOperation={unitOperation} totalTime={timeDays}/>
+                <SortableCard id={unitOperation.id} key={unitOperation.id} index={index} unitOperation={unitOperation} totalTime={time}/>
             ))}
            
         </div>
