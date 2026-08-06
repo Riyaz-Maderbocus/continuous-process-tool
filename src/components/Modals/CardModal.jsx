@@ -93,15 +93,17 @@ const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
                         <ViUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
                     )}
 
-                    <Button classes="btn full-width-btn"
-                    stopPropagation={true}
-                    clickFunction={()=>removeUnitOperation(unitOperation.id)} 
-                    >🗑️ Delete Card</Button>
+                    <div className="card-modal-button-container">
+                        <Button classes="btn full-width-btn"
+                        stopPropagation={true}
+                        clickFunction={()=>removeUnitOperation(unitOperation.id)} 
+                        >🗑️ Delete Card</Button>
 
-                    <Button classes="btn full-width-btn" 
-                    clickFunction={closeModal}
-                    stopPropagation={true}
-                    >❌ Close Card</Button>
+                        <Button classes="btn full-width-btn" 
+                        clickFunction={closeModal}
+                        stopPropagation={true}
+                        >❌ Close Card</Button>
+                    </div>
                 </div>
             </div>
         </div>,

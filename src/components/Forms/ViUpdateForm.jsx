@@ -74,17 +74,27 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
     // Handle all UI changes
     const handleAllChanges = (e) => {
+
+        // Feed data
         const newfeedFlowRateSetpoint = e.target.name === "feedFlowRateSetpoint" ? parseFloat(e.target.value) : viFormData.feedFlowRateSetpoint;
         const newFeedVolume = e.target.name === "feedVolume" ? parseFloat(e.target.value) : viFormData.feedVolume;
-        // Come back to this one later
+        // Come back to this one later as it needs to be done last
         // const newFeedAverageFlowRate = 
         const newFeedTime = (newFeedVolume / newfeedFlowRateSetpoint).toFixed(3)
+
+        // Acid data
+        const newAcidFlowRate = e.target.name === "acidFlowRate" ? parseFloat(e.target.value) : viFormData.acidFlowRate;
+        const newAcidVolume = e.target.name === "acidVolume" ? parseFloat(e.target.value) : viFormData.acidVolume;
+        const newAcidTime = (newAcidVolume / newAcidFlowRate).toFixed(3)
 
         setViFormData((prev)=> ({
             ...prev,
             feedFlowRateSetpoint: newfeedFlowRateSetpoint,
             feedVolume: newFeedVolume,
             feedTime: newFeedTime,
+            acidFlowRate: newAcidFlowRate,
+            acidVolume: newAcidVolume,
+            acidTime: newAcidTime,
 
         }))
     }
@@ -118,6 +128,30 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Time min</p>
                     <p className="form-input-column-text-output">{viFormData.feedTime}</p>
+                </div>
+
+                
+            </div>
+
+            <p className="form-separator">Acid addition</p>
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Flow Rate mL/min" name="acidFlowRate"
+                    value={viFormData.acidFlowRate}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Volume mL" name="acidVolume"
+                    value={viFormData.acidVolume}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Time min</p>
+                    <p className="form-input-column-text-output">{viFormData.acidTime}</p>
                 </div>
             </div>
 

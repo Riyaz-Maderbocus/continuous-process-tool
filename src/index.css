@@ -208,6 +208,10 @@ body.modal-open {
   border-radius: 10px;
 }
 
+.card-modal-button-container {
+  display: flex;
+  gap: 2rem;
+}
 /* forms */
 
 .form-container {
@@ -238,7 +242,7 @@ body.modal-open {
 
 /* Unit operation form classes */
 .form-separator {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
   border-bottom: 1px dashed black;
