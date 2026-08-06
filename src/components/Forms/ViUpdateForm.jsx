@@ -87,6 +87,14 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         const newAcidVolume = e.target.name === "acidVolume" ? parseFloat(e.target.value) : viFormData.acidVolume;
         const newAcidTime = (newAcidVolume / newAcidFlowRate).toFixed(3)
 
+        // Hold Time
+         const newHoldTime = e.target.name === "holdTime" ? parseFloat(e.target.value) : viFormData.holdTime;
+
+        // Base addition
+        const newBaseFlowRate = e.target.name === "baseFlowRate" ? parseFloat(e.target.value) : viFormData.baseFlowRate;
+        const newBaseVolume = e.target.name === "baseVolume" ? parseFloat(e.target.value) : viFormData.baseVolume;
+        const newBaseTime = (newBaseVolume / newBaseFlowRate).toFixed(3)
+
         setViFormData((prev)=> ({
             ...prev,
             feedFlowRateSetpoint: newfeedFlowRateSetpoint,
@@ -95,6 +103,10 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             acidFlowRate: newAcidFlowRate,
             acidVolume: newAcidVolume,
             acidTime: newAcidTime,
+            holdTime: newHoldTime,
+            baseFlowRate: newBaseFlowRate,
+            baseVolume: newBaseVolume,
+            baseTime: newBaseTime,
 
         }))
     }
@@ -103,6 +115,8 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <FormTextInput label="Title" name="title" value={viFormData.title}
             onChange={handleFormChange}
             />
+
+            {/* Feed bits */}
             <p className="form-separator">Feed Details</p>
             <div className="form-input-cols">
 
@@ -133,6 +147,7 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 
             </div>
 
+            {/* Acid bits */}
             <p className="form-separator">Acid addition</p>
             <div className="form-input-cols">
                 <div className="form-input-column-center">
@@ -153,6 +168,43 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <p className="form-input-column-text-label">Time min</p>
                     <p className="form-input-column-text-output">{viFormData.acidTime}</p>
                 </div>
+            </div>
+
+            {/* Hold time bit */}
+            <p className="form-separator">Hold Time</p>
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Time min" name="holdTime"
+                    value={viFormData.holdTime}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+                <div className="form-input-column-center"></div>
+                <div className="form-input-column-center"></div>
+            </div>
+
+            {/* Base addition */}
+            <p className="form-separator">Base Addition</p>
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Flow Rate mL/min" name="baseFlowRate"
+                    value={viFormData.baseFlowRate}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Volume mL" name="baseVolume"
+                    value={viFormData.baseVolume}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Time min</p>
+                    <p className="form-input-column-text-output">{viFormData.baseTime}</p>
+                </div>
+
             </div>
 
         </form>
