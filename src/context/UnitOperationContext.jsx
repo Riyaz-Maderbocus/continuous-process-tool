@@ -13,6 +13,110 @@ export const UnitOperationContext = createContext();
 export function UnitOperationProvider({children}) {
     // const [unitOperations, setUnitOperations] = useState([1,2,3,4])
     const [unitOperations, setUnitOperations] = useState([
+        {id: 8, title: "FT Chrom", type: "ftchrom", typeFormatted: "Flowthrough Chromatography", data: {
+            columnSizeRecommendation: {
+                inputFlowRate: 0.7,
+                inputConc: 9.17,
+                loadRate: 6.42,
+                noColumns: 1,
+                residenceTime: 11.43,
+                maxLoadChallenge: 2400,
+                requiredColumnVol: 8,
+                maxLoadVol: 2093.8,
+                maxLoopTimeOneColumn: 2991.1,
+                maxCycleTimeAllColumns: 2991.1,
+            },
+
+            columnDimensionsCalculator: {
+                columnVol: 8,
+                columnDiameter: 7.7,
+                bedHeight: 0.2,
+                linearFlowRate: 0.9,
+                maxLoadVol: 2094,
+            },
+
+            massBalance: {
+                predictedYield: 92,
+                outputConc: 8.44,
+            },
+
+  
+            chromatographyOperation: {
+                columnOne: {
+                    name: "Column 1",
+                    steps: [
+                        {step: "Sample application",
+                            buffer: "Feed",
+                            flowRate: 0.7,
+                            residenceTime: 11.4,
+                            volCV: 250,
+                            volML: 2000,
+                            timeMin: 2857.1
+                        }
+                    ]
+                },
+                columnTwo: {
+                    name: "Column 2",
+                    steps: [
+                        {step: "",
+                            buffer: "",
+                            flowRate: 0,
+                            residenceTime: 0,
+                            volCV: 0,
+                            volML: 0,
+                            timeMin: 0
+                        }
+                    ],
+                    hold: 0,
+                    nextColTotal: 0,
+                    idle: 2857.1 
+                },
+                columnThree: {
+                    name: "Column 3",
+                    steps: [
+                        {step: "",
+                            buffer: "",
+                            flowRate: 0,
+                            residenceTime: 0,
+                            volCV: 0,
+                            volML: 0,
+                            timeMin: 0
+                        }
+                    ],
+                    hold: 0,
+                    nextColTotal: 0,
+                    idle: 2857.1 
+                },
+            },
+            
+            summary: {
+                loopTimeMin: 2857.1,
+                loopTimeH: 47.62,
+                loopTimeLimit: "Column 1",
+                loadChallenge: 2292.50,
+                outputFlowRateMLMin: 0.7,
+                outputFlowRateLH: 0.04,
+            }, 
+
+            bufferVolumes: [
+                {   
+                    buffer: "Feed",
+                    volPerLoopML: 2000,
+                    volPerDayL: 1.01,
+                    totalVolL: 30.2
+                }
+            ],
+
+            columnLifetime: {
+                noCycles: 1,
+                columnLifetimeH: 47.6,
+                columnLifetimeD: 2,
+                noColumnsRequired: 16
+            }
+
+
+        }
+        },
         {id: 7, title:"Viral Inactivation", type: "vi", typeFormatted: "Viral Inactivation", data:{
             feedAverageFlowRate: 0.5,
             feedFlowRateSetpoint: 2,
