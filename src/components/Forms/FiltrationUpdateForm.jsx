@@ -24,14 +24,6 @@ const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
         outputConc
     })
 
-    const inputNameChecker = (inputName, checkedName, trueValue, falseValue) => {
-        if (inputName === checkedName){
-            return trueValue
-        } else {
-            return falseValue
-        }
-    }
-
     const handleFormChange = (e) => {
         setFiltrationFormData((prev) => ({
             ...prev,
@@ -39,79 +31,37 @@ const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
         }))
     }
 
-    const handleFormChangeNumber = (e) => {
-        setFiltrationFormData(previousData =>({
-            ...previousData,
-            [e.target.name]: parseFloat(e.target.value)
-        }))
-    }
-
-    // @TODO Combine all of these as they all read each other.
-    // const handleFluxChange = (e) => {
-    //     // Update new filter area
-    //     const newFilterArea = inputNameChecker(e.target.name, "filterArea", parseFloat(e.target.value), filtrationFormData.filterArea)   
-    //     // Updated flow rate
-    //     const newFlowRate = inputNameChecker(e.target.name, "flowRate", parseFloat(e.target.value), filtrationFormData.flowRate)
-    //     // Get new flux from the above values
-    //     const newFlux = ((newFlowRate / newFilterArea)/1000 * 60).toFixed(3)
-
-    //     setFiltrationFormData((prev)=> ({
-    //         ...prev,
-    //         [e.target.name] : parseFloat(e.target.value),
-    //         flux: newFlux,
-
-    //     }))
-    // }
-
-    // const handleLifeNoChange = (e) => {
-    //     // Update Capacity
-    //     const newCapacity = e.target.value 
-    //     const newFilterLifetime = ((newCapacity * filtrationFormData.filterArea)*1000 / (filtrationFormData.flowRate) /60).toFixed(3)
-    //     const newNoFiltersNeeded = Math.ceil(totalTime* 24 / newFilterLifetime)
-
-    //     setFiltrationFormData((prev)=> ({
-    //         ...prev,
-    //         filterCapacity: newCapacity,
-    //         lifetime: newFilterLifetime,
-    //         noFilters: newNoFiltersNeeded
-    //     }))
-    // }
 
     const handleAllChanges = (e) => {
-         // Update new filter area
-        const newFilterArea = inputNameChecker(e.target.name, "filterArea", parseFloat(e.target.value), filtrationFormData.filterArea)   
-        // Updated flow rate
-        const newFlowRate = inputNameChecker(e.target.name, "flowRate", parseFloat(e.target.value), filtrationFormData.flowRate)
-        // Get new flux from the above values
-        const newFlux = ((newFlowRate / newFilterArea)/1000 * 60).toFixed(3)
-        // Updated capacity
-        // const newCapacity = inputNameChecker(e.target.name, "filterCapacity", paseFloat(e.target.value), filtrationFormData.filterCapacity)
-        const newCapacity = e.target.name === "filterCapacity" ? parseFloat(e.target.value) : filtrationFormData.filterCapacity
-        const newFilterLifetime = ((newCapacity * newFilterArea)*1000 / (newFlowRate) /60).toFixed(3)
-        const newNoFiltersNeeded = Math.ceil(totalTime.totalDays* 24 / newFilterLifetime)
-
-        setFiltrationFormData((prev)=> ({
-            ...prev,
-            filterArea: newFilterArea,
-            flowRate: newFlowRate,
-            flux: newFlux,
-            filterCapacity: newCapacity,
-            lifetime: newFilterLifetime,
-            noFilters: newNoFiltersNeeded
-        }))
+        const next = {...filtrationFormData,
+            [e.target.name] : Number(e.target.value)
+        }
+        setFiltrationFormData(calculateFiltrationProcess(next))
     }
 
-    const handleMassBalance = (e) => {
-        const newInputConc = e.target.name === "inputConc" ? parseFloat(e.target.value) : filtrationFormData.inputConc;
-        const newYield = e.target.name === "predictedYield" ? parseFloat(e.target.value) : filtrationFormData.predictedYield;
-        const newOuptConcentration = (newInputConc * (newYield / 100)).toFixed(3)
+    const calculateFiltrationProcess = (data) => {
+        const next = {...data}
+        // Calculations
+        // flux
+        next.flux = ((next.flowRate / next.filterArea) /1000) * 60
 
-        setFiltrationFormData((prev)=>({
-            ...prev,
-            inputConc: newInputConc,
-            predictedYield: newYield,
-            outputConc: newOuptConcentration
-        }))
+        // filter lifetime
+        next.lifetime = (next.filterCapacity * next.filterArea) * 1000 /next.flowRate/60
+
+        // filters required
+        next.noFilters = Math.ceil(totalTime.totalDays * 24 / next.lifetime)
+
+        // mass balance
+        next.outputConc = next.inputConc / 100 * next.predictedYield
+
+        // Round to 3 dp
+        Object.keys(next).forEach(key => {
+            if (typeof next[key] === "number") {
+                next[key] = Number(next[key].toFixed(3));
+            }
+        });
+
+        return next;
     }
 
     const handleSave = (e) => {
@@ -188,14 +138,14 @@ const FiltrationUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                     <FormNumberInputSmall label="Input concentration mg/ml" name="inputConc" 
                     value={filtrationFormData.inputConc} 
                     // onChange={handleFluxChange}
-                    onChange={handleMassBalance}
+                    onChange={handleAllChanges}
                     />
                 </div>
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Predicted Yield %" name="predictedYield" 
                     value={filtrationFormData.predictedYield} 
                     // onChange={handleFluxChange}
-                    onChange={handleMassBalance}
+                    onChange={handleAllChanges}
                     />
                 </div>
                 <div className="form-input-column-center">
