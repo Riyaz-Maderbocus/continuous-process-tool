@@ -283,6 +283,31 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
             </div>
 
+            {/* buffer volumes */}
+
+            <p className="form-separator">Buffer volumes</p>
+            <table className="vi-buffer-table">
+                <tr>
+                    <th>Buffer</th>
+                    <th>Vol. per loop /mL</th>
+                    <th>Vol. per day /L</th>
+                    <th>Total vol. /L</th>
+                </tr>
+                <tr>
+                    <td>1 M Acetic acid</td>
+                    <td>{viFormData.bufferAcidVolPerLoop}</td>
+                    <td>{viFormData.bufferAcidVolPerDay}</td>
+                    <td>{viFormData.bufferAcidTotalVol}</td>    
+                </tr>
+                <tr>
+                    <td>1 M Tris Base</td>
+                    <td>{viFormData.bufferBaseVolPerLoop}</td>
+                    <td>{viFormData.bufferBaseVolPerDay}</td>
+                    <td>{viFormData.bufferBaseTotalVol}</td>    
+                </tr>
+
+            </table>
+            {/* mass balance */}
             <p className="form-separator">Mass Balance</p>
              <div className="form-input-cols">
                 <div className="form-input-column-center">

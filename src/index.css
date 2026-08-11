@@ -316,3 +316,26 @@ body.modal-open {
   font-size: 1rem;
 
 }
+
+/* Vi buffer table */
+.vi-buffer-table {
+  width: 80%;
+  margin: 1.5rem auto;
+}
+
+.vi-buffer-table th {
+  padding: 0.75rem;
+  font-size: 1.2rem;
+
+}
+.vi-buffer-table tr {
+
+  text-align: center;
+
+}
+
+.vi-buffer-table td {
+  padding: 0.75rem 0;
+  font-size: 1.1rem;
+
+}
