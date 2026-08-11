@@ -51,46 +51,70 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
     //     }
     // }
 
-    const handleFlowRateChange = (e) => {
-        let newVesselVolume = 0
-        // Update new vessel volumes
-        if (e.target.name === "vesselVolume"){
-            newVesselVolume = parseFloat(e.target.value)
-        } else {
-            newVesselVolume = bioreactorFormData.vesselVolume
+    const handleAllChanges = (e) => {
+        const next = {...bioreactorFormData,
+            [e.target.name] : Number(e.target.value)
         }
-        // console.log("")
+        // Calculations
+        // flow rate l/h
+        next.flowRatelh = next.vvd * next.vesselVolume / 24;
 
-        // Updated VVD
-        let newVvd = 0
-        if (e.target.name === "vvd"){
-            newVvd = parseFloat(e.target.value)
-        } else {
-            newVvd = bioreactorFormData.vvd
-        }
+        // flow rate ml/min
+        next.flowRatemlmin = next.flowRatelh * 1000 / 60;
 
-        const newFlowRateLh = parseFloat((newVvd * (newVesselVolume /24)).toFixed(3))
-        const newFlowRatemlmin = parseFloat((newFlowRateLh * 1000 / 60).toFixed(3))
-        const newTitremgmin = parseFloat((newFlowRatemlmin * bioreactorFormData.titremgml).toFixed(3))
-        setBioreactorFormData({
-            ...bioreactorFormData,
-            [e.target.name]: parseFloat(e.target.value),
-            flowRatemlmin: newFlowRatemlmin,
-            flowRatelh: newFlowRateLh,
-            titremgmin: newTitremgmin
-        })
+        // titre mg/min
+        next.titremgmin = next.titremgml * next.flowRatemlmin;
+
+        // Round to 3 dp
+        Object.keys(next).forEach(key => {
+            if (typeof next[key] === "number") {
+                next[key] = Number(next[key].toFixed(3));
+            }
+        });
+
+        setBioreactorFormData(next)
 
     }
+    // const handleFlowRateChange = (e) => {
+    //     let newVesselVolume = 0
+    //     // Update new vessel volumes
+    //     if (e.target.name === "vesselVolume"){
+    //         newVesselVolume = parseFloat(e.target.value)
+    //     } else {
+    //         newVesselVolume = bioreactorFormData.vesselVolume
+    //     }
+    //     // console.log("")
 
-    const handleTitreChange = (e) => {
-        const newTitremgml = parseFloat(e.target.value);
-        const newTitremgmin = parseFloat((newTitremgml * bioreactorFormData.flowRatemlmin).toFixed(3))
-        setBioreactorFormData({
-            ...bioreactorFormData,
-            [e.target.name]: parseFloat(e.target.value),
-            titremgmin: newTitremgmin
-        })
-    }
+    //     // Updated VVD
+    //     let newVvd = 0
+    //     if (e.target.name === "vvd"){
+    //         newVvd = parseFloat(e.target.value)
+    //     } else {
+    //         newVvd = bioreactorFormData.vvd
+    //     }
+
+    //     const newFlowRateLh = parseFloat((newVvd * (newVesselVolume /24)).toFixed(3))
+    //     const newFlowRatemlmin = parseFloat((newFlowRateLh * 1000 / 60).toFixed(3))
+    //     const newTitremgmin = parseFloat((newFlowRatemlmin * bioreactorFormData.titremgml).toFixed(3))
+    //     setBioreactorFormData({
+    //         ...bioreactorFormData,
+    //         [e.target.name]: parseFloat(e.target.value),
+    //         flowRatemlmin: newFlowRatemlmin,
+    //         flowRatelh: newFlowRateLh,
+    //         titremgmin: newTitremgmin
+    //     })
+
+    // }
+
+    // const handleTitreChange = (e) => {
+    //     const newTitremgml = parseFloat(e.target.value);
+    //     const newTitremgmin = parseFloat((newTitremgml * bioreactorFormData.flowRatemlmin).toFixed(3))
+    //     setBioreactorFormData({
+    //         ...bioreactorFormData,
+    //         [e.target.name]: parseFloat(e.target.value),
+    //         titremgmin: newTitremgmin
+    //     })
+    // }
 
     return ( 
         <form className="form-container" action="#">
@@ -104,7 +128,7 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Vessel Volume L" name="vesselVolume" 
                     value={bioreactorFormData.vesselVolume} 
-                    onChange={handleFlowRateChange}/>
+                    onChange={handleAllChanges}/>
                 </div>
   
                   <div className="form-input-column-center">
@@ -122,7 +146,7 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                <div className="form-input-column-center">
                     <FormNumberInputSmall label="VVD" name="vvd" 
                     value={bioreactorFormData.vvd}
-                    onChange={handleFlowRateChange}/>
+                    onChange={handleAllChanges}/>
                 </div>
 
                 <div className="form-input-column-center">
@@ -138,7 +162,7 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
                     <FormNumberInputSmall label="Titre mg/ml"
                     name="titremgml"
                     value={bioreactorFormData.titremgml}
-                    onChange={handleTitreChange}/>
+                    onChange={handleAllChanges}/>
                 </div>
 
                 <div className="form-input-column-center">
