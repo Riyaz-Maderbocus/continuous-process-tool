@@ -80,43 +80,7 @@ const ILDFUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
         return next
     }
-    // handle all changes
-    // const handleAllChanges = (e)=> {
-    //     const newSingleFilterArea = e.target.name === "singleFilterArea" ? parseFloat(e.target.value) : ildfFormData.singleFilterArea;
-    //     const newNoFilters = e.target.name === "noFilters" ? parseFloat(e.target.value) : ildfFormData.noFilters;
-    //     const newTotalFilterArea = (newSingleFilterArea * newNoFilters).toFixed(3)
-
-    //     const newFeedFlowRate = e.target.name === "feedFlowRate" ? parseFloat(e.target.value) : ildfFormData.feedFlowRate;
-    //     const newBufferFlowRatemlmin = e.target.name === "bufferFlowRatemlmin" ? parseFloat(e.target.value) : ildfFormData.bufferFlowRatemlmin;
-
-    //     const newBufferFlowRateLh = (newBufferFlowRatemlmin/1000* 60).toFixed(3)
-    //     const newBufferFlowRateLday = (newBufferFlowRateLh * 24).toFixed(3)
-    //     const newPermeateFlux = (newBufferFlowRateLh/(newTotalFilterArea/10000)).toFixed(3)
-
-    //     const newInputConc = e.target.name === "inputConc" ? parseFloat(e.target.value) : ildfFormData.inputConc;
-    //     const newPredictedYield = e.target.name === "predictedYield" ? parseFloat(e.target.value) : ildfFormData.predictedYield;
-    //     const newOutputConc = (newInputConc/100 * newPredictedYield).toFixed(3)
-
-    //     const newTotalBufferVolume = (newBufferFlowRateLh * 24 * totalTime.totalDays).toFixed(3)
-
-
-    //     setIldfFormData((prev)=> ( {
-    //         ...prev,
-    //         singleFilterArea: newSingleFilterArea, 
-    //         noFilters: newNoFilters, 
-    //         totalFilterArea: newTotalFilterArea, 
-    //         feedFlowRate: newFeedFlowRate,
-    //         bufferFlowRatemlmin : newBufferFlowRatemlmin, 
-    //         bufferFlowRateLh : newBufferFlowRateLh, 
-    //         bufferFlowRateLday : newBufferFlowRateLday,
-    //         permeateFlux: newPermeateFlux, 
-    //         inputConc: newInputConc, 
-    //         predictedYield: newPredictedYield, 
-    //         outputConc: newOutputConc, 
-    //         totalBufferVolume: newTotalBufferVolume
-    //     }))
-    // }
-
+  
     const handleSave = (e) => {
         e.preventDefault()
         const {title, ...data} = ildfFormData;

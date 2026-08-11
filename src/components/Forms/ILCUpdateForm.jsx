@@ -38,46 +38,46 @@ const ILCUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     }))
     }
 
-    // Handle Flow changes
-    const handleAllChanges = (e) => {
-        const newSingleFilterArea = e.target.name === "singleFilterArea" ? parseFloat(e.target.value) : ilcFormData.singleFilterArea;
-        const newNofilters = e.target.name === "noFilters" ? parseFloat(e.target.value) : ilcFormData.noFilters;
-        const newTotalFilterArea = (newSingleFilterArea * newNofilters).toFixed(3)
 
-        const newFeedFlowRate = e.target.name === "feedFlowRate" ? parseFloat(e.target.value) : ilcFormData.feedFlowRate;
-        const newRetentateFlowRate = e.target.name === "retentateFlowRate" ? parseFloat(e.target.value) : ilcFormData.retentateFlowRate;
-
-        const newPermeateFlowRatemlmin = (newFeedFlowRate - newRetentateFlowRate).toFixed(3);
-
-        const newPermeateFlowRateLh = (newPermeateFlowRatemlmin / 1000 * 60).toFixed(3)
-
-        const newPermeateFlux = (newPermeateFlowRateLh/(newTotalFilterArea / 10000)).toFixed(3)
-
-        // mass balance bits
-
-        const newInputConc = e.target.name === "inputConc" ? parseFloat(e.target.value) : ilcFormData.inputConc;
-        const newPredictedYield = e.target.name === "predictedYield" ? parseFloat(e.target.value) : ilcFormData.predictedYield;
-
-        const newOutputConc = (((newInputConc * newFeedFlowRate) / 100 * newPredictedYield) / newRetentateFlowRate).toFixed(3)
+    const handleAllChanges = (e)=> {
+        const next = {
+            ...ilcFormData,
+            [e.target.name]: Number(e.target.value)
+        }
 
 
-        setIlcFormData((prev)=> ({
-            ...prev,
-            singleFilterArea: newSingleFilterArea,
-            noFilters: newNofilters,
-            totalFilterArea: newTotalFilterArea,
-            feedFlowRate: newFeedFlowRate,
-            retentateFlowRate: newRetentateFlowRate,
-            permeateFlowRatemlmin: newPermeateFlowRatemlmin,
-            permeateFlowRateLh: newPermeateFlowRateLh,
-            permeateFlux: newPermeateFlux,
-            inputConc: newInputConc,
-            predictedYield: newPredictedYield,
-            outputConc: newOutputConc
-        }))
-        
+        setIlcFormData(calculateILCProcess(next))
+
     }
 
+    const calculateILCProcess = (data) => {
+        const next = {...data}
+                // Calculations
+        // total filter area
+        next.totalFilterArea = next.singleFilterArea * next.noFilters;
+
+        // permeate flow rate mlmin
+        next.permeateFlowRatemlmin = next.feedFlowRate - next.retentateFlowRate;
+
+        // permeate flow rate lh
+        next.permeateFlowRateLh = next.permeateFlowRatemlmin / 1000 * 60;
+
+        // permeate flow flux
+        next.permeateFlux = next.permeateFlowRateLh / (next.totalFilterArea/10000)
+
+        // mass balance
+        next.outputConc = ((next.inputConc * next.feedFlowRate) /100 * next.predictedYield) / next.retentateFlowRate
+
+        // Round to 3 dp
+        Object.keys(next).forEach(key => {
+            if (typeof next[key] === "number") {
+                next[key] = Number(next[key].toFixed(3));
+            }
+        });
+
+        return next
+    }
+    
     const handleSave = (e) => {
         e.preventDefault()
         const {title, ...data} = ilcFormData;
