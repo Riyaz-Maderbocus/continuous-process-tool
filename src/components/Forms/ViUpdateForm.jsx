@@ -35,6 +35,8 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             outputConc
         } = data
     
+
+
     const [viFormData, setViFormData] = useState({
             title,                    
             feedAverageFlowRate,
@@ -74,18 +76,24 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
     // Handle all UI changes
     const handleAllChanges = (e) => {
+        let newTotalTankVolume = viFormData.totalTankVolume
+        let newTotalCycleTime = viFormData.totalCycleTime
+
+        
 
         // Feed data
         const newfeedFlowRateSetpoint = e.target.name === "feedFlowRateSetpoint" ? parseFloat(e.target.value) : viFormData.feedFlowRateSetpoint;
         const newFeedVolume = e.target.name === "feedVolume" ? parseFloat(e.target.value) : viFormData.feedVolume;
-        // Come back to this one later as it needs to be done last
-        // const newFeedAverageFlowRate = 
-        const newFeedTime = (newFeedVolume / newfeedFlowRateSetpoint).toFixed(3)
+        
 
+        const newFeedTime = (newFeedVolume / newfeedFlowRateSetpoint)
+
+        // Come back to this one later as it needs to be done last
+        const newFeedAverageFlowRate = (newFeedVolume / newTotalCycleTime);
         // Acid data
         const newAcidFlowRate = e.target.name === "acidFlowRate" ? parseFloat(e.target.value) : viFormData.acidFlowRate;
         const newAcidVolume = e.target.name === "acidVolume" ? parseFloat(e.target.value) : viFormData.acidVolume;
-        const newAcidTime = (newAcidVolume / newAcidFlowRate).toFixed(3)
+        const newAcidTime = (newAcidVolume / newAcidFlowRate)
 
         // Hold Time
          const newHoldTime = e.target.name === "holdTime" ? parseFloat(e.target.value) : viFormData.holdTime;
@@ -93,13 +101,29 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         // Base addition
         const newBaseFlowRate = e.target.name === "baseFlowRate" ? parseFloat(e.target.value) : viFormData.baseFlowRate;
         const newBaseVolume = e.target.name === "baseVolume" ? parseFloat(e.target.value) : viFormData.baseVolume;
-        const newBaseTime = (newBaseVolume / newBaseFlowRate).toFixed(3)
+        const newBaseTime = (newBaseVolume / newBaseFlowRate);
+
+        // Tank empty
+        const newTankFlowRate = e.target.name === "tankFlowRate" ? parseFloat(e.target.value) : viFormData.tankFlowRate;
+
+        // Tank time do later as it requires all values
+        const newTankTime = (newTotalTankVolume / newTankFlowRate)
+
+        // Tank average flow rate as well
+        const newTankAverageFlowRate = (newTotalTankVolume / newTotalCycleTime)
+
+         // Totals
+        newTotalTankVolume = parseFloat(newFeedVolume + newAcidVolume + newBaseVolume);
+
+        newTotalCycleTime = parseFloat(newFeedTime + newAcidTime + newHoldTime + newBaseTime + newTankTime);
+       
 
         setViFormData((prev)=> ({
             ...prev,
             feedFlowRateSetpoint: newfeedFlowRateSetpoint,
             feedVolume: newFeedVolume,
             feedTime: newFeedTime,
+            feedAverageFlowRate: newFeedAverageFlowRate,
             acidFlowRate: newAcidFlowRate,
             acidVolume: newAcidVolume,
             acidTime: newAcidTime,
@@ -107,6 +131,10 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             baseFlowRate: newBaseFlowRate,
             baseVolume: newBaseVolume,
             baseTime: newBaseTime,
+            tankFlowRate: newTankFlowRate,
+            tankTime: newTankTime,
+            totalTankVolume: newTotalTankVolume,
+            totalCycleTime: newTotalCycleTime
 
         }))
     }
@@ -116,32 +144,47 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             onChange={handleFormChange}
             />
 
+            {/* Total bits */}
+            <p className="form-separator">Total Values</p>
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Full tank volume mL</p>
+                    <p className="form-input-column-text-output">{viFormData.totalTankVolume.toFixed(3)}</p>
+                </div>
+                
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Cycle time min</p>
+                    <p className="form-input-column-text-output">{viFormData.totalCycleTime.toFixed(3)}</p>
+                </div>
+
+            </div>
+
             {/* Feed bits */}
             <p className="form-separator">Feed Details</p>
             <div className="form-input-cols">
 
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Average flow rate mL/min</p>
-                    <p className="form-input-column-text-output">{viFormData.feedAverageFlowRate}</p>
+                    <p className="form-input-column-text-output">{viFormData.feedAverageFlowRate.toFixed(3)}</p>
                 </div>
 
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Flow rate setpoint mL/min" name="feedFlowRateSetpoint"
-                    value={viFormData.feedFlowRateSetpoint}
+                    value={viFormData.feedFlowRateSetpoint.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
 
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Volume mL" name="feedVolume"
-                    value={viFormData.feedVolume}
+                    value={viFormData.feedVolume.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
                 
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Time min</p>
-                    <p className="form-input-column-text-output">{viFormData.feedTime}</p>
+                    <p className="form-input-column-text-output">{viFormData.feedTime.toFixed(3)}</p>
                 </div>
 
                 
@@ -152,21 +195,21 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <div className="form-input-cols">
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Flow Rate mL/min" name="acidFlowRate"
-                    value={viFormData.acidFlowRate}
+                    value={viFormData.acidFlowRate.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
 
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Volume mL" name="acidVolume"
-                    value={viFormData.acidVolume}
+                    value={viFormData.acidVolume.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
 
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Time min</p>
-                    <p className="form-input-column-text-output">{viFormData.acidTime}</p>
+                    <p className="form-input-column-text-output">{viFormData.acidTime.toFixed(3)}</p>
                 </div>
             </div>
 
@@ -175,7 +218,7 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <div className="form-input-cols">
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Time min" name="holdTime"
-                    value={viFormData.holdTime}
+                    value={viFormData.holdTime.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
@@ -188,21 +231,45 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <div className="form-input-cols">
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Flow Rate mL/min" name="baseFlowRate"
-                    value={viFormData.baseFlowRate}
+                    value={viFormData.baseFlowRate.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
 
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Volume mL" name="baseVolume"
-                    value={viFormData.baseVolume}
+                    value={viFormData.baseVolume.toFixed(3)}
                     onChange={handleAllChanges}
                     />
                 </div>
 
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Time min</p>
-                    <p className="form-input-column-text-output">{viFormData.baseTime}</p>
+                    <p className="form-input-column-text-output">{viFormData.baseTime.toFixed(3)}</p>
+                </div>
+
+            </div>
+
+            {/* Tank empty */}
+            <p className="form-separator">Tank Empty</p>
+
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Flow Rate mL/min" name="tankFlowRate"
+                    value={viFormData.tankFlowRate.toFixed(3)}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Time min</p>
+                    <p className="form-input-column-text-output">{viFormData.tankTime.toFixed(3)}</p>
+                </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Average Flow Rate mL/min</p>
+                    <p className="form-input-column-text-output">{viFormData.tankAverageFlowRate}</p>
                 </div>
 
             </div>
