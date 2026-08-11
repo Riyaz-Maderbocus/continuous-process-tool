@@ -65,6 +65,8 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             predictedYield,
             outputConc
         })
+    
+
 
     // Single form change like title
     const handleFormChange = (e) => {
@@ -119,6 +121,10 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             next.totalTankVolume /
             next.totalCycleTime;
 
+        // Mass balance bits
+
+        next.outputConc = ((next.inputConc * next.feedVolume)/100 * next.predictedYield)/next.totalTankVolume;
+        
         // Round to 3 dp
         Object.keys(next).forEach(key => {
             if (typeof next[key] === "number") {
@@ -129,67 +135,17 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         // End using NEXT
 
 
-        // let newTotalTankVolume = viFormData.totalTankVolume
-        // let newTotalCycleTime = viFormData.totalCycleTime
+    }
 
-        
-
-        // Feed data
-        // const newfeedFlowRateSetpoint = e.target.name === "feedFlowRateSetpoint" ? parseFloat(e.target.value) : viFormData.feedFlowRateSetpoint;
-        // const newFeedVolume = e.target.name === "feedVolume" ? parseFloat(e.target.value) : viFormData.feedVolume;
-        
-
-        // const newFeedTime = (newFeedVolume / newfeedFlowRateSetpoint)
-
-        // Come back to this one later as it needs to be done last
-        // const newFeedAverageFlowRate = (newFeedVolume / newTotalCycleTime);
-        // Acid data
-        // const newAcidFlowRate = e.target.name === "acidFlowRate" ? parseFloat(e.target.value) : viFormData.acidFlowRate;
-        // const newAcidVolume = e.target.name === "acidVolume" ? parseFloat(e.target.value) : viFormData.acidVolume;
-        // const newAcidTime = (newAcidVolume / newAcidFlowRate)
-
-        // Hold Time
-        //  const newHoldTime = e.target.name === "holdTime" ? parseFloat(e.target.value) : viFormData.holdTime;
-
-        // Base addition
-        // const newBaseFlowRate = e.target.name === "baseFlowRate" ? parseFloat(e.target.value) : viFormData.baseFlowRate;
-        // const newBaseVolume = e.target.name === "baseVolume" ? parseFloat(e.target.value) : viFormData.baseVolume;
-        // const newBaseTime = (newBaseVolume / newBaseFlowRate);
-
-        // Tank empty
-        // const newTankFlowRate = e.target.name === "tankFlowRate" ? parseFloat(e.target.value) : viFormData.tankFlowRate;
-
-        // Tank time do later as it requires all values
-        // const newTankTime = (newTotalTankVolume / newTankFlowRate)
-
-        // Tank average flow rate as well
-        // const newTankAverageFlowRate = (newTotalTankVolume / newTotalCycleTime)
-
-         // Totals
-        // newTotalTankVolume = parseFloat(newFeedVolume + newAcidVolume + newBaseVolume);
-
-        // newTotalCycleTime = parseFloat(newFeedTime + newAcidTime + newHoldTime + newBaseTime + newTankTime);
-       
-
-        // setViFormData((prev)=> ({
-        //     ...prev,
-        //     feedFlowRateSetpoint: newfeedFlowRateSetpoint,
-        //     feedVolume: newFeedVolume,
-        //     feedTime: newFeedTime,
-        //     feedAverageFlowRate: newFeedAverageFlowRate,
-        //     acidFlowRate: newAcidFlowRate,
-        //     acidVolume: newAcidVolume,
-        //     acidTime: newAcidTime,
-        //     holdTime: newHoldTime,
-        //     baseFlowRate: newBaseFlowRate,
-        //     baseVolume: newBaseVolume,
-        //     baseTime: newBaseTime,
-        //     tankFlowRate: newTankFlowRate,
-        //     tankTime: newTankTime,
-        //     totalTankVolume: newTotalTankVolume,
-        //     totalCycleTime: newTotalCycleTime
-
-        // }))
+    const handleSave = (e) => {
+        e.preventDefault()
+        const {title, ...data} = viFormData;
+        updateUnitOperationData(
+            unitOperation.id,
+            title,
+            data
+        )
+        closeModal()
     }
     return ( 
         <form className="form-container">
@@ -326,6 +282,30 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 </div>
 
             </div>
+
+            <p className="form-separator">Mass Balance</p>
+             <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Input Concentration mg/mL" name="inputConc"
+                    value={viFormData.inputConc}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Predicted Yield %" name="predictedYield"
+                    value={viFormData.predictedYield}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Output Concentration mg/mL</p>
+                    <p className="form-input-column-text-output">{viFormData.outputConc}</p>
+                </div>
+            </div>
+
+            <p className="form-separator"></p>
+            <Button  classes="btn btn-primary full-width-btn" 
+            clickFunction={handleSave}> 💾 Save Updated Data</Button>
 
         </form>
      );
