@@ -86,6 +86,16 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             [e.target.name]: Number(e.target.value)
         };
 
+
+        setViFormData(calculateViProcess(next));
+        // End using NEXT
+
+
+    }
+
+    // Using a calculate function
+    const calculateViProcess = (data)=> {
+        const next = {...data}
         // Start calculating things from here
 
         // Calculate tank volume
@@ -131,10 +141,7 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 next[key] = Number(next[key].toFixed(3));
             }
         });
-        setViFormData(next);
-        // End using NEXT
-
-
+        return next
     }
 
     const handleSave = (e) => {
@@ -287,24 +294,28 @@ const ViUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
             <p className="form-separator">Buffer volumes</p>
             <table className="vi-buffer-table">
-                <tr>
-                    <th>Buffer</th>
-                    <th>Vol. per loop /mL</th>
-                    <th>Vol. per day /L</th>
-                    <th>Total vol. /L</th>
-                </tr>
-                <tr>
-                    <td>1 M Acetic acid</td>
-                    <td>{viFormData.bufferAcidVolPerLoop}</td>
-                    <td>{viFormData.bufferAcidVolPerDay}</td>
-                    <td>{viFormData.bufferAcidTotalVol}</td>    
-                </tr>
-                <tr>
-                    <td>1 M Tris Base</td>
-                    <td>{viFormData.bufferBaseVolPerLoop}</td>
-                    <td>{viFormData.bufferBaseVolPerDay}</td>
-                    <td>{viFormData.bufferBaseTotalVol}</td>    
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Buffer</th>
+                        <th>Vol. per loop /mL</th>
+                        <th>Vol. per day /L</th>
+                        <th>Total vol. /L</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 M Acetic acid</td>
+                        <td>{viFormData.bufferAcidVolPerLoop}</td>
+                        <td>{viFormData.bufferAcidVolPerDay}</td>
+                        <td>{viFormData.bufferAcidTotalVol}</td>    
+                    </tr>
+                    <tr>
+                        <td>1 M Tris Base</td>
+                        <td>{viFormData.bufferBaseVolPerLoop}</td>
+                        <td>{viFormData.bufferBaseVolPerDay}</td>
+                        <td>{viFormData.bufferBaseTotalVol}</td>    
+                    </tr>
+                </tbody>
 
             </table>
             {/* mass balance */}
