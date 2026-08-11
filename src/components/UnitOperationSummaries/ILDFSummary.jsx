@@ -10,6 +10,7 @@ const ILDFSummary = ({unitOperation}) => {
             <p className="data-paragraph"><span>Buffer Flow Rate: </span><span>{data.bufferFlowRateLh} L/h</span></p>
             <p className="data-paragraph"><span>Buffer Flow Rate: </span><span>{data.bufferFlowRateLday} L/day</span></p>
             <p className="data-paragraph"><span>Peremeate Flux: </span><span>{data.permeateFlux} L/m2/h</span></p>
+            <p className="data-paragraph"><span>Total Buffer Volume: </span><span>{data.totalBufferVolume} L</span></p>
         </div>
     );
 }
