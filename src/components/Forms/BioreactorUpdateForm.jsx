@@ -45,16 +45,8 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
         closeModal()
     }
 
-    // const oldValueChecker = (nameCheck, checkAgainst, trueValue, fasleValue)=> {
-    //     if (nameCheck === checkAgainst){
-
-    //     }
-    // }
-
-    const handleAllChanges = (e) => {
-        const next = {...bioreactorFormData,
-            [e.target.name] : Number(e.target.value)
-        }
+    const calculateBioreactorProcess = (data) => {
+        const next = {...data};
         // Calculations
         // flow rate l/h
         next.flowRatelh = next.vvd * next.vesselVolume / 24;
@@ -72,49 +64,18 @@ const BioreactorUpdateForm = ({unitOperation, closeModal , totalTime}) => {
             }
         });
 
-        setBioreactorFormData(next)
+        return next
+    }
+
+    const handleAllChanges = (e) => {
+        const next = {...bioreactorFormData,
+            [e.target.name] : Number(e.target.value)
+        }
+        
+
+        setBioreactorFormData(calculateBioreactorProcess(next))
 
     }
-    // const handleFlowRateChange = (e) => {
-    //     let newVesselVolume = 0
-    //     // Update new vessel volumes
-    //     if (e.target.name === "vesselVolume"){
-    //         newVesselVolume = parseFloat(e.target.value)
-    //     } else {
-    //         newVesselVolume = bioreactorFormData.vesselVolume
-    //     }
-    //     // console.log("")
-
-    //     // Updated VVD
-    //     let newVvd = 0
-    //     if (e.target.name === "vvd"){
-    //         newVvd = parseFloat(e.target.value)
-    //     } else {
-    //         newVvd = bioreactorFormData.vvd
-    //     }
-
-    //     const newFlowRateLh = parseFloat((newVvd * (newVesselVolume /24)).toFixed(3))
-    //     const newFlowRatemlmin = parseFloat((newFlowRateLh * 1000 / 60).toFixed(3))
-    //     const newTitremgmin = parseFloat((newFlowRatemlmin * bioreactorFormData.titremgml).toFixed(3))
-    //     setBioreactorFormData({
-    //         ...bioreactorFormData,
-    //         [e.target.name]: parseFloat(e.target.value),
-    //         flowRatemlmin: newFlowRatemlmin,
-    //         flowRatelh: newFlowRateLh,
-    //         titremgmin: newTitremgmin
-    //     })
-
-    // }
-
-    // const handleTitreChange = (e) => {
-    //     const newTitremgml = parseFloat(e.target.value);
-    //     const newTitremgmin = parseFloat((newTitremgml * bioreactorFormData.flowRatemlmin).toFixed(3))
-    //     setBioreactorFormData({
-    //         ...bioreactorFormData,
-    //         [e.target.name]: parseFloat(e.target.value),
-    //         titremgmin: newTitremgmin
-    //     })
-    // }
 
     return ( 
         <form className="form-container" action="#">
