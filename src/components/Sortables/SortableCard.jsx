@@ -6,6 +6,7 @@ import FiltrationSummary from "../UnitOperationSummaries/FiltrationSummary";
 import ILCSummary from "../UnitOperationSummaries/ILCSummary";
 import ILDFSummary from "../UnitOperationSummaries/ILDFSummary";
 import ViSummary from "../UnitOperationSummaries/ViSummary";
+import FTChromSummary from "../UnitOperationSummaries/FTChromSummary";
 
 const SortableCard = ({id, index, unitOperation, totalTime}) => {
     const { title, type, data, typeFormatted} = unitOperation
@@ -59,6 +60,9 @@ const SortableCard = ({id, index, unitOperation, totalTime}) => {
                 )}
                 {type === "vi" && (
                     <ViSummary unitOperation={unitOperation} />
+                )}
+                {type === "ftchrom" && (
+                    <FTChromSummary unitOperation={unitOperation} />
                 )}
 
             </div>
