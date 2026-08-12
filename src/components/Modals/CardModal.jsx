@@ -7,6 +7,7 @@ import FiltrationUpdateForm from "../Forms/FiltrationUpdateForm";
 import ILCUpdateForm from "../Forms/ILCUpdateForm";
 import ILDFUpdateForm from "../Forms/ILDFUpdateForm";
 import ViUpdateForm from "../Forms/ViUpdateForm";
+import FTChromUpdateForm from "../Forms/FTChromUpdateForm";
 
 const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
 
@@ -91,6 +92,9 @@ const CardModal = ({unitOperation, isShown, closeModal, totalTime}) => {
                     )}
                     {unitOperation.type === "vi" && (
                         <ViUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
+                    )}
+                    {unitOperation.type === "ftchrom" && (
+                        <FTChromUpdateForm unitOperation={unitOperation} closeModal={closeModal} totalTime={totalTime} />
                     )}
 
                     <div className="card-modal-button-container">
