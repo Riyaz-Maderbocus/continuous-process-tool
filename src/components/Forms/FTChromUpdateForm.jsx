@@ -84,12 +84,17 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         // col rec load rate
         next.columnSizeRecommendation.loadRate = next.columnSizeRecommendation.inputFlowRate * next.columnSizeRecommendation.inputConc;
 
-        // Round to 3 dp
-        // Object.keys(next).forEach(key => {
-        //     if (typeof next[key] === "number") {
-        //         next[key] = Number(next[key].toFixed(3));
-        //     }
-        // });
+        // residence time
+        next.columnSizeRecommendation.residenceTime = next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputFlowRate;
+
+        // max load volume
+        next.columnSizeRecommendation.maxLoadVol = next.columnSizeRecommendation.maxLoadChallenge * next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputConc;
+
+        // max loop time one column
+        next.columnSizeRecommendation.maxLoopTimeOneColumn = next.columnSizeRecommendation.maxLoadVol / next.columnSizeRecommendation.inputFlowRate;
+
+        // max cycle time all cols
+        next.columnSizeRecommendation.maxCycleTimeAllColumns = next.columnSizeRecommendation.maxLoopTimeOneColumn * next.columnSizeRecommendation.noColumns;
         return roundNumbers(next, 3)
     }
 
@@ -137,6 +142,58 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.loadRate}</p>
                 </div>
                 
+            </div>
+
+            <div className="form-input-cols">
+                {/* Number of columns */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Number of columns" name="columnSizeRecommendation.noColumns"
+                    value={ftcFormData.columnSizeRecommendation.noColumns}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+                {/* Residence time */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Residence Time min" name="columnSizeRecommendation.residenceTime"
+                    value={ftcFormData.columnSizeRecommendation.residenceTime}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                {/* Max Load Challenge */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Max Load Challenge mg/mL" name="columnSizeRecommendation.maxLoadChallenge"
+                    value={ftcFormData.columnSizeRecommendation.maxLoadChallenge}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                {/* Required Column vol */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Required Col Volume mL" name="columnSizeRecommendation.requiredColumnVol"
+                    value={ftcFormData.columnSizeRecommendation.requiredColumnVol}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+            </div>
+
+            {/* Column recommendations final calcs */}
+            <div className="form-input-cols">
+                {/* max load vol */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Max Load Volume</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.maxLoadVol}</p>
+                </div>
+                {/* max loop time 1 col */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Max loop time (1 col)</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.maxLoopTimeOneColumn}</p>
+                </div>
+                {/* max cycle time all columns */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Max cycle time (all cols)</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.maxCycleTimeAllColumns}</p>
+                </div>
             </div>
 
 
