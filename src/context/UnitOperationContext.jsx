@@ -42,10 +42,13 @@ export function UnitOperationProvider({children}) {
 
   
             chromatographyOperation: {
-                columnOne: {
+                columns: [
+                {
+                    id: "column-1",
                     name: "Column 1",
                     steps: [
-                        {step: "Sample application",
+                        {   id: "c1-s1",
+                            step: "Sample application",
                             buffer: "Feed",
                             flowRate: 0.7,
                             residenceTime: 11.4,
@@ -53,12 +56,19 @@ export function UnitOperationProvider({children}) {
                             volML: 2000,
                             timeMin: 2857.1
                         }
-                    ]
+                    ],
+                    hold: 0,
+                    nextColTotal: 0,
+                    idle: 2857.1 
                 },
-                columnTwo: {
+
+                {
+                    id: "column-2",
                     name: "Column 2",
                     steps: [
-                        {step: "",
+                        {
+                            id: "c2-s1",
+                            step: "",
                             buffer: "",
                             flowRate: 0,
                             residenceTime: 0,
@@ -71,10 +81,14 @@ export function UnitOperationProvider({children}) {
                     nextColTotal: 0,
                     idle: 2857.1 
                 },
-                columnThree: {
+
+                {
+                    id: "column-3",
                     name: "Column 3",
                     steps: [
-                        {step: "",
+                        {
+                            id: "c3-s1",
+                            step: "",
                             buffer: "",
                             flowRate: 0,
                             residenceTime: 0,
@@ -87,6 +101,7 @@ export function UnitOperationProvider({children}) {
                     nextColTotal: 0,
                     idle: 2857.1 
                 },
+                ],
             },
             
             summary: {
@@ -325,7 +340,127 @@ export function UnitOperationProvider({children}) {
                     inputConc: 0,
                     predictedYield: 0,
                     outputConc: 0
-        }} else if (type === "sptff") {
+            }} else if (type=== "ftchrom") {
+                typeFormatted = "Flowthrough Chromatography";
+                data = {
+                columnSizeRecommendation: {
+                    inputFlowRate: 0,
+                    inputConc: 0,
+                    loadRate: 0,
+                    noColumns: 0,
+                    residenceTime: 0,
+                    maxLoadChallenge: 0,
+                    requiredColumnVol: 0,
+                    maxLoadVol: 0,
+                    maxLoopTimeOneColumn: 0,
+                    maxCycleTimeAllColumns: 0,
+                },
+
+                columnDimensionsCalculator: {
+                    columnVol: 0,
+                    columnDiameter: 0,
+                    bedHeight: 0,
+                    linearFlowRate: 0,
+                    maxLoadVol: 0,
+                },
+
+                massBalance: {
+                    predictedYield: 0,
+                    outputConc: 0,
+                },
+
+  
+                chromatographyOperation: {
+                    columns: [
+                    {
+                        id: "column-1",
+                        name: "Column 1",
+                        steps: [
+                            {   id: "c1-s1",
+                                step: "Sample application",
+                                buffer: "Feed",
+                                flowRate: 0,
+                                residenceTime: 0,
+                                volCV: 0,
+                                volML: 0,
+                                timeMin: 0
+                            }
+                        ],
+                        hold: 0,
+                        nextColTotal: 0,
+                        idle: 0 
+                    },
+
+                    {
+                        id: "column-2",
+                        name: "Column 2",
+                        steps: [
+                            {
+                                id: "c2-s1",
+                                step: "",
+                                buffer: "",
+                                flowRate: 0,
+                                residenceTime: 0,
+                                volCV: 0,
+                                volML: 0,
+                                timeMin: 0
+                            }
+                        ],
+                        hold: 0,
+                        nextColTotal: 0,
+                        idle: 0 
+                    },
+
+                    {
+                        id: "column-3",
+                        name: "Column 3",
+                        steps: [
+                            {
+                                id: "c3-s1",
+                                step: "",
+                                buffer: "",
+                                flowRate: 0,
+                                residenceTime: 0,
+                                volCV: 0,
+                                volML: 0,
+                                timeMin: 0
+                            }
+                        ],
+                        hold: 0,
+                        nextColTotal: 0,
+                        idle: 0 
+                    },
+                    ],
+                },
+                
+                summary: {
+                    loopTimeMin: 0,
+                    loopTimeH: 0,
+                    loopTimeLimit: "Column 1",
+                    loadChallenge: 0,
+                    outputFlowRateMLMin: 0,
+                    outputFlowRateLH: 0,
+                }, 
+
+                bufferVolumes: [
+                    {   
+                        buffer: "Feed",
+                        volPerLoopML: 0,
+                        volPerDayL: 0,
+                        totalVolL: 0
+                    }
+                ],
+
+                columnLifetime: {
+                    noCycles: 0,
+                    columnLifetimeH: 0,
+                    columnLifetimeD: 0,
+                    noColumnsRequired: 0
+                }
+
+
+        }
+        }else if (type === "sptff") {
                 typeFormatted = "SPTFF"
                                 data = {
                     content: "I am new"

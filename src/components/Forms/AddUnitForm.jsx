@@ -88,7 +88,7 @@ const AddUnitForm = ({closeModal}) => {
             onChange={handleChange}
             options={[
                 {value: "bioreactor", label: "Bioreactor"},
-                {value: "chromatography", label: "Chromatography"},
+                {value: "ftchrom", label: "Flowthrough Chromatography"},
                 {value: "filtration", label: "Filtration"},
                 {value: "ilc", label: "ILC - Inline Concentration"},
                 {value: "ildf", label: "ILDF - Inline Diafiltration"},
