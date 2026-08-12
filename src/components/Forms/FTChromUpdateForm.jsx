@@ -20,25 +20,77 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     })) 
     }
 
-        // Handle all UI changes
+
+    // Handle nested values
+    const updateNestedValue = (object, path, value) => {
+    const keys = path.split(".");
+
+    const result = { ...object };
+    let current = result;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+        current[keys[i]] = { ...current[keys[i]] };
+        current = current[keys[i]];
+    }
+
+    current[keys[keys.length - 1]] = value;
+
+    return result;
+    };
+
+    // Handle all UI changes
     const handleAllChanges = (e) => {
 
         // Start using NEXT
         // make next object which is a copy of ftc
-            const next = {
-                ...ftcFormData,
-                [e.target.name]: Number(e.target.value)
-            };
+        const next = updateNestedValue(
+            ftcFormData,
+            e.target.name,
+            Number(e.target.value)
+        );
 
-            setFtcFormData(calculateFTChromProcessProcess(next));
+        setFtcFormData(calculateFTChromProcess(next));
         // End using NEXT
     }
+
+    // helper function to round numbers
+    const roundNumbers = (value, decimals = 3) => {
+    if (typeof value === "number") {
+        return Number(value.toFixed(decimals));
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(item => roundNumbers(item, decimals));
+    }
+
+    if (value !== null && typeof value === "object") {
+        return Object.fromEntries(
+            Object.entries(value).map(([key, val]) => [
+                key,
+                roundNumbers(val, decimals)
+            ])
+        );
+    }
+
+    return value;
+    };
     
     
     const calculateFTChromProcess = (data) => {
         const next = {...data}
     
         // Start calculating things here
+
+        // col rec load rate
+        next.columnSizeRecommendation.loadRate = next.columnSizeRecommendation.inputFlowRate * next.columnSizeRecommendation.inputConc;
+
+        // Round to 3 dp
+        // Object.keys(next).forEach(key => {
+        //     if (typeof next[key] === "number") {
+        //         next[key] = Number(next[key].toFixed(3));
+        //     }
+        // });
+        return roundNumbers(next, 3)
     }
 
     const handleSave = (e) => {
@@ -59,6 +111,33 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <FormTextInput label="Title" name="title" value={ftcFormData.title}
             onChange={handleFormChange}
             />
+
+            {/* Column size recommendations */}
+            <p className="form-separator">Column Size Recommendations</p>
+            <div className="form-input-cols">
+                {/* input flow rate */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Input Flow Rate mL/min" name="columnSizeRecommendation.inputFlowRate"
+                    value={ftcFormData.columnSizeRecommendation.inputFlowRate}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                {/* input concentration */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Input Concentration mg/mL" name="columnSizeRecommendation.inputConc"
+                    value={ftcFormData.columnSizeRecommendation.inputConc}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+                {/* load rate */}
+                
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Load rate mg/min</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.loadRate}</p>
+                </div>
+                
+            </div>
 
 
             
