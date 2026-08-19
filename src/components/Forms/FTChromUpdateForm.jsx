@@ -186,12 +186,15 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
         // Column dimensions cacluator
 
-        if (colTypeMode === "fixedDiameter") {
+        // @Todo Work on this function now
+        // if (colTypeMode === "fixedDiameter") {
 
-            // Bed Height = Col vol / Pi * (col diameter/ 2) **2
-            // colDimensions.bedHeight =
-            // rec.inputFlowRate * rec.residenceTime;
-        }
+
+        //     // Bed Height = Col vol / Pi * (col diameter/ 2) **2
+        //     colDimensions.bedHeight =
+        //     colDimensions.
+        //     // rec.inputFlowRate * rec.residenceTime;
+        // }
 
         return roundNumbers(next, 3)
     }
