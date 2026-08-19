@@ -3,21 +3,31 @@ import { useUnitOperations } from "../../context/UnitOperationContext";
 import FormTextInput from "./FormComponents/FormTextInput";
 import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
+import FormSelectInput from "./FormComponents/FormSelectInput";
 import Button from "../Utilities/Button";
 const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
     const {data, title} = unitOperation;
     const [ftcFormData, setFtcFormData] = useState({
         title,
-        ...data
+        ...data,
+        // calculationMode: "columnVolume"
     });
+    const [calculationMode, setCalculationMode] = useState("columnVolume")
 
     // Single form change like title
     const handleFormChange = (e) => {
-    setFtcFormData((prev) => ({
-        ...prev,
+        // old code
+    // setFtcFormData((prev) => ({
+    //     ...prev,
+    //     [e.target.name]: e.target.value
+    // })) 
+    const next = {
+        ...ftcFormData,
         [e.target.name]: e.target.value
-    })) 
+    };
+
+    setFtcFormData(calculateFTChromProcess(next));
     }
 
 
@@ -49,7 +59,10 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             Number(e.target.value)
         );
 
-        setFtcFormData(calculateFTChromProcess(next));
+        setFtcFormData(
+            calculateFTChromProcess(next, calculationMode)
+        );
+        // setFtcFormData(calculateFTChromProcess(next));
         // End using NEXT
     }
 
@@ -75,26 +88,96 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     return value;
     };
     
-    
-    const calculateFTChromProcess = (data) => {
-        const next = {...data}
+    // mode select function
+    const handleCalculationModeChange = (e) => {
+
+        const next = {
+            ...ftcFormData,
+            calculationMode: e.target.value
+        };
+
+        setFtcFormData(calculateFTChromProcess(next));
+    };
+
+    const calculateFTChromProcess = (data, mode) => {
+        const next = {
+            ...data,
+            columnSizeRecommendation: {
+                ...data.columnSizeRecommendation
+            }
+        };
+
+        const rec = next.columnSizeRecommendation;
     
         // Start calculating things here
 
+          // --------------------------------
+        // Calculate the selected variable
+        // --------------------------------
+
+        if (mode === "columnVolume") {
+
+            // Column Volume = Flow Rate × Residence Time
+            rec.requiredColumnVol =
+                rec.inputFlowRate * rec.residenceTime;
+
+        } else if (mode === "flowRate") {
+
+            // Flow Rate = Column Volume / Residence Time
+            rec.inputFlowRate =
+                rec.requiredColumnVol / rec.residenceTime;
+
+        } else if (mode === "residenceTime") {
+
+            // Residence Time = Column Volume / Flow Rate
+            rec.residenceTime =
+                rec.requiredColumnVol / rec.inputFlowRate;
+        }
+
+        // --------------------------------
+        // Other calculations
+        // --------------------------------
+
+        // Load rate
+        rec.loadRate =
+            rec.inputFlowRate *
+            rec.inputConc;
+
+
+        // Maximum load volume
+        rec.maxLoadVol =
+            rec.maxLoadChallenge *
+            rec.requiredColumnVol /
+            rec.inputConc;
+
+
+        // Maximum loop time for one column
+        rec.maxLoopTimeOneColumn =
+            rec.maxLoadVol /
+            rec.inputFlowRate;
+
+
+        // Maximum cycle time for all columns
+        rec.maxCycleTimeAllColumns =
+            rec.maxLoopTimeOneColumn *
+            rec.noColumns;
+
+
+        // Old set of next calculations
         // col rec load rate
-        next.columnSizeRecommendation.loadRate = next.columnSizeRecommendation.inputFlowRate * next.columnSizeRecommendation.inputConc;
+        // next.columnSizeRecommendation.loadRate = next.columnSizeRecommendation.inputFlowRate * next.columnSizeRecommendation.inputConc;
 
         // residence time
-        next.columnSizeRecommendation.residenceTime = next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputFlowRate;
+        // next.columnSizeRecommendation.residenceTime = next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputFlowRate;
 
         // max load volume
-        next.columnSizeRecommendation.maxLoadVol = next.columnSizeRecommendation.maxLoadChallenge * next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputConc;
+        // next.columnSizeRecommendation.maxLoadVol = next.columnSizeRecommendation.maxLoadChallenge * next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputConc;
 
         // max loop time one column
-        next.columnSizeRecommendation.maxLoopTimeOneColumn = next.columnSizeRecommendation.maxLoadVol / next.columnSizeRecommendation.inputFlowRate;
+        // next.columnSizeRecommendation.maxLoopTimeOneColumn = next.columnSizeRecommendation.maxLoadVol / next.columnSizeRecommendation.inputFlowRate;
 
         // max cycle time all cols
-        next.columnSizeRecommendation.maxCycleTimeAllColumns = next.columnSizeRecommendation.maxLoopTimeOneColumn * next.columnSizeRecommendation.noColumns;
+        // next.columnSizeRecommendation.maxCycleTimeAllColumns = next.columnSizeRecommendation.maxLoopTimeOneColumn * next.columnSizeRecommendation.noColumns;
         return roundNumbers(next, 3)
     }
 
@@ -119,12 +202,43 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
             {/* Column size recommendations */}
             <p className="form-separator">Column Size Recommendations</p>
+            {/* <div className="form-input-cols">
+
+                
+            </div> */}
+
             <div className="form-input-cols">
+
+                {/* Choose mode */}
+                <div className="form-input-column-center">
+                    <FormSelectInput label="Choose calculation mode" name="calculationMode"
+                    value={ftcFormData.calculationMode}
+                    // onChange={handleCalculationModeChange}
+                    onChange={(e) => {
+                        const newMode = e.target.value;
+
+                        setCalculationMode(newMode);
+
+                        setFtcFormData(
+                            calculateFTChromProcess(
+                                ftcFormData,
+                                newMode
+                            )
+                        );
+                    }}
+                    options={[
+                        {value: "columnVolume", label: "Column Volume"},
+                        {value: "flowRate", label: "Flow Rate"},
+                        {value: "residenceTime", label: "Residence Time"},
+                        ]}/>
+                </div>
+
                 {/* input flow rate */}
                 <div className="form-input-column-center">
                     <FormNumberInputSmall label="Input Flow Rate mL/min" name="columnSizeRecommendation.inputFlowRate"
                     value={ftcFormData.columnSizeRecommendation.inputFlowRate}
                     onChange={handleAllChanges}
+                    disabled={calculationMode === "flowRate"}
                     />
                 </div>
 
@@ -135,8 +249,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     onChange={handleAllChanges}
                     />
                 </div>
+
                 {/* load rate */}
-                
                 <div className="form-input-column-center">
                     <p className="form-input-column-text-label">Load rate mg/min</p>
                     <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.loadRate}</p>
@@ -157,6 +271,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <FormNumberInputSmall label="Residence Time min" name="columnSizeRecommendation.residenceTime"
                     value={ftcFormData.columnSizeRecommendation.residenceTime}
                     onChange={handleAllChanges}
+                    disabled={calculationMode === "residenceTime"}
                     />
                 </div>
 
@@ -173,6 +288,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <FormNumberInputSmall label="Required Col Volume mL" name="columnSizeRecommendation.requiredColumnVol"
                     value={ftcFormData.columnSizeRecommendation.requiredColumnVol}
                     onChange={handleAllChanges}
+                    disabled={calculationMode === "columnVolume"}
                     />
                 </div>
             </div>

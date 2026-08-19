@@ -1,4 +1,4 @@
-const FormNumberInputSmall = ({name, label="", value, onChange, required=false}) => {
+const FormNumberInputSmall = ({name, label="", value, onChange, required=false, disabled=false}) => {
     return ( 
             <>
                 <label htmlFor={name} className="">{label}</label>
@@ -7,7 +7,8 @@ const FormNumberInputSmall = ({name, label="", value, onChange, required=false})
                 onChange={onChange}
                 required={required}
                 name={name}
-                id={name}/>
+                id={name}
+                disabled={disabled}/>
             </>
 
 
