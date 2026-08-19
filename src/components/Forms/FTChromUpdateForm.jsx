@@ -205,6 +205,9 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         colDimensions.linearFlowRate = rec.inputFlowRate/(Math.PI * (colDimensions.columnDiameter/2)**2)*60
 
         colDimensions.maxLoadVol = rec.maxLoadChallenge * colDimensions.columnVol / rec.inputConc
+
+        // mass balance calculation
+        next.massBalance.outputConc = rec.inputConc / 100 * next.massBalance.predictedYield;
         return roundNumbers(next, 3)
     }
 
@@ -408,7 +411,23 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 </div>
             </div>
 
+            <p className="form-separator">Mass Balance</p>
+            <div className="form-input-cols">
 
+                {/* Predicted yield */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Predicted Yield %" name="massBalance.predictedYield"
+                    value={ftcFormData.massBalance.predictedYield}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                {/* Output concentration */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Output Concentration mg/mL</p>
+                    <p className="form-input-column-text-output">{ftcFormData.massBalance.outputConc}</p>
+                </div>
+            </div>
 
             
             <p className="form-separator"></p>
