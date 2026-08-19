@@ -23,16 +23,16 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     // Single form change like title
     const handleFormChange = (e) => {
         // old code
-    // setFtcFormData((prev) => ({
-    //     ...prev,
-    //     [e.target.name]: e.target.value
-    // })) 
-    const next = {
-        ...ftcFormData,
+    setFtcFormData((prev) => ({
+        ...prev,
         [e.target.name]: e.target.value
-    };
+    })) 
+    // const next = {
+    //     ...ftcFormData,
+    //     [e.target.name]: e.target.value
+    // };
 
-    setFtcFormData(calculateFTChromProcess(next));
+    // setFtcFormData(calculateFTChromProcess(next));
     }
 
 
@@ -64,9 +64,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             Number(e.target.value)
         );
 
-        setFtcFormData(
-            calculateFTChromProcess(next, colSizeCalculationMode)
-        );
+        const calculated = calculateFTChromProcess(next, colSizeCalculationMode, columnnTypeMode)
+        setFtcFormData(calculated);
         // setFtcFormData(calculateFTChromProcess(next));
         // End using NEXT
     }
@@ -94,25 +93,25 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     };
     
     // mode select function
-    const handleCalculationModeChange = (e) => {
+    // const handleCalculationModeChange = (e) => {
 
-        const next = {
-            ...ftcFormData,
-            calculationMode: e.target.value
-        };
+    //     const next = {
+    //         ...ftcFormData,
+    //         calculationMode: e.target.value
+    //     };
 
-        setFtcFormData(calculateFTChromProcess(next));
-    };
+    //     setFtcFormData(calculateFTChromProcess(next));
+    // };
 
     // second mode selection function
-    const handleColumnTypeModeChange = (e) => {
-        const next = {
-            ...ftcFormData,
-            columnTypeMode: e.target.value
-        };
+    // const handleColumnTypeModeChange = (e) => {
+    //     const next = {
+    //         ...ftcFormData,
+    //         columnTypeMode: e.target.value
+    //     };
 
-        setFtcFormData(calculateFTChromProcess(next));
-    }
+    //     setFtcFormData(calculateFTChromProcess(next));
+    // }
 
     // Calculate chrom process
     const calculateFTChromProcess = (data, mode, colTypeMode) => {
@@ -128,7 +127,6 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
         const rec = next.columnSizeRecommendation;
 
-        // @todo start making UI from here
         const colDimensions = next.columnDimensionsCalculator;
     
         // Start calculating things here
@@ -186,16 +184,27 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
         // Column dimensions cacluator
 
-        // @Todo Work on this function now
-        // if (colTypeMode === "fixedDiameter") {
+        
+        if (colTypeMode === "fixedDiameter") {
 
 
-        //     // Bed Height = Col vol / Pi * (col diameter/ 2) **2
-        //     colDimensions.bedHeight =
-        //     colDimensions.
-        //     // rec.inputFlowRate * rec.residenceTime;
-        // }
+            // Bed Height = Col vol / Pi * (col diameter/ 2) **2
+            colDimensions.bedHeight =
+                colDimensions.columnVol /
+                (Math.PI * (colDimensions.columnDiameter / 2) ** 2)
+            // rec.inputFlowRate * rec.residenceTime;
+        } else if (colTypeMode === "fixedBedHeight") {
+            colDimensions.columnDiameter =
+                2 * Math.sqrt(
+                    colDimensions.columnVol /
+                    (Math.PI * colDimensions.bedHeight)
+                );
+        }
 
+        // Other column dimension calculations 
+        colDimensions.linearFlowRate = rec.inputFlowRate/(Math.PI * (colDimensions.columnDiameter/2)**2)*60
+
+        colDimensions.maxLoadVol = rec.maxLoadChallenge * colDimensions.columnVol / rec.inputConc
         return roundNumbers(next, 3)
     }
 
@@ -230,7 +239,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 {/* Choose mode */}
                 <div className="form-input-column-center">
                     <FormSelectInput label="Choose calculation mode" name="calculationMode"
-                    value={ftcFormData.colSizeCalculationMode}
+                    value={colSizeCalculationMode}
                     // onChange={handleCalculationModeChange}
                     onChange={(e) => {
                         const newMode = e.target.value;
@@ -336,7 +345,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 {/* mode selector */}
                 <div className="form-input-column-center">
                     <FormSelectInput label="Choose column type" name="columnType"
-                    value={ftcFormData.colSizeCalculationMode}
+                    value={colSizeCalculationMode}
                     // onChange={handleCalculationModeChange}
                     onChange={(e) => {
                         const newMode = e.target.value;
