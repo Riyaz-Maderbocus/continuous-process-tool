@@ -13,7 +13,12 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         ...data,
         // calculationMode: "columnVolume"
     });
-    const [colSizeCalculationMode, setColSizeCalculationMode] = useState("columnVolume")
+
+    // state for first select box
+    const [colSizeCalculationMode, setColSizeCalculationMode] = useState("columnVolume");
+
+    // state for second select box
+    const [columnnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
 
     // Single form change like title
     const handleFormChange = (e) => {
@@ -99,15 +104,32 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         setFtcFormData(calculateFTChromProcess(next));
     };
 
-    const calculateFTChromProcess = (data, mode) => {
+    // second mode selection function
+    const handleColumnTypeModeChange = (e) => {
+        const next = {
+            ...ftcFormData,
+            columnTypeMode: e.target.value
+        };
+
+        setFtcFormData(calculateFTChromProcess(next));
+    }
+
+    // Calculate chrom process
+    const calculateFTChromProcess = (data, mode, colTypeMode) => {
         const next = {
             ...data,
             columnSizeRecommendation: {
                 ...data.columnSizeRecommendation
+            },
+            columnDimensionsCalculator: {
+                ...data.columnDimensionsCalculator
             }
         };
 
         const rec = next.columnSizeRecommendation;
+
+        // @todo start making UI from here
+        const colDimensions = next.columnDimensionsCalculator;
     
         // Start calculating things here
 
@@ -162,22 +184,15 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             rec.maxLoopTimeOneColumn *
             rec.noColumns;
 
+        // Column dimensions cacluator
 
-        // Old set of next calculations
-        // col rec load rate
-        // next.columnSizeRecommendation.loadRate = next.columnSizeRecommendation.inputFlowRate * next.columnSizeRecommendation.inputConc;
+        if (colTypeMode === "fixedDiameter") {
 
-        // residence time
-        // next.columnSizeRecommendation.residenceTime = next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputFlowRate;
+            // Bed Height = Col vol / Pi * (col diameter/ 2) **2
+            // colDimensions.bedHeight =
+            // rec.inputFlowRate * rec.residenceTime;
+        }
 
-        // max load volume
-        // next.columnSizeRecommendation.maxLoadVol = next.columnSizeRecommendation.maxLoadChallenge * next.columnSizeRecommendation.requiredColumnVol / next.columnSizeRecommendation.inputConc;
-
-        // max loop time one column
-        // next.columnSizeRecommendation.maxLoopTimeOneColumn = next.columnSizeRecommendation.maxLoadVol / next.columnSizeRecommendation.inputFlowRate;
-
-        // max cycle time all cols
-        // next.columnSizeRecommendation.maxCycleTimeAllColumns = next.columnSizeRecommendation.maxLoopTimeOneColumn * next.columnSizeRecommendation.noColumns;
         return roundNumbers(next, 3)
     }
 
@@ -222,7 +237,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                         setFtcFormData(
                             calculateFTChromProcess(
                                 ftcFormData,
-                                newMode
+                                newMode, 
+                                columnnTypeMode
                             )
                         );
                     }}
@@ -311,6 +327,75 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <p className="form-input-column-text-output">{ftcFormData.columnSizeRecommendation.maxCycleTimeAllColumns}</p>
                 </div>
             </div>
+
+            <p className="form-separator">Column Dimensions Calculator</p>
+            <div className="form-input-cols">
+                {/* mode selector */}
+                <div className="form-input-column-center">
+                    <FormSelectInput label="Choose column type" name="columnType"
+                    value={ftcFormData.colSizeCalculationMode}
+                    // onChange={handleCalculationModeChange}
+                    onChange={(e) => {
+                        const newMode = e.target.value;
+
+                        // setColSizeCalculationMode(newMode);
+                        setColumnTypeMode(newMode);
+
+                        setFtcFormData(
+                            calculateFTChromProcess(
+                                ftcFormData,
+                                colSizeCalculationMode,
+                                newMode
+                            )
+                        );
+                    }}
+                    options={[
+                        {value: "fixedDiameter", label: "Fixed Diameter"},
+                        {value: "fixedBedHeight", label: "Fixed Bed Height"},
+                        ]}/>
+                </div>
+
+                {/* Column volume */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Column volume mL" name="columnDimensionsCalculator.columnVol"
+                    value={ftcFormData.columnDimensionsCalculator.columnVol}
+                    onChange={handleAllChanges}
+                    />
+                </div>
+
+                {/* Column diameter */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Column diameter cm" name="columnDimensionsCalculator.columnDiameter"
+                    value={ftcFormData.columnDimensionsCalculator.columnDiameter}
+                    onChange={handleAllChanges}
+                    disabled={columnnTypeMode === "fixedBedHeight"}
+                    />
+                </div>
+            </div>
+
+            <div className="form-input-cols">
+                {/* Bed height */}
+                <div className="form-input-column-center">
+                    <FormNumberInputSmall label="Bed height cm" name="columnDimensionsCalculator.bedHeight"
+                    value={ftcFormData.columnDimensionsCalculator.bedHeight}
+                    onChange={handleAllChanges}
+                    disabled={columnnTypeMode === "fixedDiameter"}
+                    />
+                </div>
+
+                {/* linear flow rate */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Linear Flow Rate cm/h</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnDimensionsCalculator.linearFlowRate}</p>
+                </div>
+
+                {/* max load */}
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Max Load Vol mL</p>
+                    <p className="form-input-column-text-output">{ftcFormData.columnDimensionsCalculator.maxLoadVol}</p>
+                </div>
+            </div>
+
 
 
             
