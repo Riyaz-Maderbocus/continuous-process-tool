@@ -5,6 +5,7 @@ import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import FormSelectInput from "./FormComponents/FormSelectInput";
 import Button from "../Utilities/Button";
+import ChromatographyColumn from "./ChromatographyComponents/ChromatographyColumn";
 const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
     const {data, title} = unitOperation;
@@ -411,6 +412,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 </div>
             </div>
 
+            {/* Mass balance */}
             <p className="form-separator">Mass Balance</p>
             <div className="form-input-cols">
 
@@ -428,6 +430,21 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <p className="form-input-column-text-output">{ftcFormData.massBalance.outputConc}</p>
                 </div>
             </div>
+
+            {/* Chromatography */}
+            <p className="form-separator">Chromatography</p>
+            
+            <div className="chromatography-columns">
+
+                {ftcFormData.chromatographyOperation.columns.map((column) => (
+                    <ChromatographyColumn
+                        key={column.id}
+                        column={column}
+                    />
+                ))}
+
+            </div>
+
 
             
             <p className="form-separator"></p>
