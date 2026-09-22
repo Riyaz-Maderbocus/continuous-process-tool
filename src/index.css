@@ -350,3 +350,7 @@ body.modal-open {
 .chromatography-column {
   padding: 1rem 0;
 }
+
+.chromatography-column-header h3{
+  text-align: center;
+}
