@@ -68,14 +68,24 @@ export function UnitOperationProvider({children}) {
                     steps: [
                         {
                             id: "c2-s1",
-                            step: "",
-                            buffer: "",
-                            flowRate: 0,
-                            residenceTime: 0,
-                            volCV: 0,
-                            volML: 0,
-                            timeMin: 0
-                        }
+                            step: "Column conditioning",
+                            buffer: "50 mM Sodium phosphate, 20 mM NaCl pH 7",
+                            flowRate: 0.7,
+                            residenceTime: 1,
+                            volCV: 2,
+                            volML: 3,
+                            timeMin: 4
+                        },
+                        {
+                            id: "c2-s2",
+                            step: "Buffer wash",
+                            buffer: "50 mM Magnesium chloride, 1M NaCl pH 11",
+                            flowRate: 2,
+                            residenceTime: 20,
+                            volCV: 25,
+                            volML: 30,
+                            timeMin: 35
+                        },
                     ],
                     hold: 0,
                     nextColTotal: 0,
@@ -88,14 +98,34 @@ export function UnitOperationProvider({children}) {
                     steps: [
                         {
                             id: "c3-s1",
-                            step: "",
-                            buffer: "",
-                            flowRate: 0,
-                            residenceTime: 0,
-                            volCV: 0,
-                            volML: 0,
-                            timeMin: 0
-                        }
+                            step: "Sample application two",
+                            buffer: "Feed",
+                            flowRate: 30,
+                            residenceTime: 40,
+                            volCV: 50,
+                            volML: 60,
+                            timeMin: 70
+                        },
+                        {
+                            id: "c3-s2",
+                            step: "Column wash",
+                            buffer: "2x wash buffer ph 8",
+                            flowRate: 30,
+                            residenceTime: 40,
+                            volCV: 50,
+                            volML: 60,
+                            timeMin: 70
+                        },
+                        {
+                            id: "c3-s3",
+                            step: "Column elution",
+                            buffer: "5x Elution buffer ph 11",
+                            flowRate: 70,
+                            residenceTime: 80,
+                            volCV: 60,
+                            volML: 25,
+                            timeMin: 35
+                        },
                     ],
                     hold: 0,
                     nextColTotal: 0,
