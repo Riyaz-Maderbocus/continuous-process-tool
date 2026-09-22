@@ -18,7 +18,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const [colSizeCalculationMode, setColSizeCalculationMode] = useState("columnVolume");
 
     // state for second select box
-    const [columnnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
+    const [columnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
 
     // Single form change like title
     const handleFormChange = (e) => {
@@ -64,7 +64,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             Number(e.target.value)
         );
 
-        const calculated = calculateFTChromProcess(next, colSizeCalculationMode, columnnTypeMode)
+        const calculated = calculateFTChromProcess(next, colSizeCalculationMode, columnTypeMode)
         setFtcFormData(calculated);
         // setFtcFormData(calculateFTChromProcess(next));
         // End using NEXT
@@ -253,7 +253,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                             calculateFTChromProcess(
                                 ftcFormData,
                                 newMode, 
-                                columnnTypeMode
+                                columnTypeMode
                             )
                         );
                     }}
@@ -348,7 +348,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 {/* mode selector */}
                 <div className="form-input-column-center">
                     <FormSelectInput label="Choose column type" name="columnType"
-                    value={colSizeCalculationMode}
+                    value={columnTypeMode}
                     // onChange={handleCalculationModeChange}
                     onChange={(e) => {
                         const newMode = e.target.value;
@@ -383,7 +383,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <FormNumberInputSmall label="Column diameter cm" name="columnDimensionsCalculator.columnDiameter"
                     value={ftcFormData.columnDimensionsCalculator.columnDiameter}
                     onChange={handleAllChanges}
-                    disabled={columnnTypeMode === "fixedBedHeight"}
+                    disabled={columnTypeMode === "fixedBedHeight"}
                     />
                 </div>
             </div>
@@ -394,7 +394,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     <FormNumberInputSmall label="Bed height cm" name="columnDimensionsCalculator.bedHeight"
                     value={ftcFormData.columnDimensionsCalculator.bedHeight}
                     onChange={handleAllChanges}
-                    disabled={columnnTypeMode === "fixedDiameter"}
+                    disabled={columnTypeMode === "fixedDiameter"}
                     />
                 </div>
 
