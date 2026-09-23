@@ -22,6 +22,39 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     // state for second select box
     const [columnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
 
+    // update chrom steps form function
+    const updateChromatographyStep = (
+    columnId,
+    stepId,
+    field,
+    value
+    ) => {
+        setFtcFormData(prev => ({
+            ...prev,
+
+            chromatographyOperation: {
+                ...prev.chromatographyOperation,
+
+                columns: prev.chromatographyOperation.columns.map(column =>
+                    column.id === columnId
+                        ? {
+                            ...column,
+
+                            steps: column.steps.map(step =>
+                                step.id === stepId
+                                    ? {
+                                        ...step,
+                                        [field]: value
+                                    }
+                                    : step
+                            )
+                        }
+                        : column
+                )
+            }
+        }));
+    };
+
     // Single form change like title
     const handleFormChange = (e) => {
         // old code
@@ -446,6 +479,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
                 <ChromatographyOperation 
                     columns={ftcFormData.chromatographyOperation.columns}
+                    onStepsChange = {updateChromatographyStep}
                 />
 
             </div>

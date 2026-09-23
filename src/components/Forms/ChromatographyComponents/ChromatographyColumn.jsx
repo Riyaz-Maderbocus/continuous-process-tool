@@ -15,14 +15,24 @@ const ChromatographyColumn = ({
 
             <div className="chromatography-column-steps">
 
-                {column.steps.map((step, index) => (
+                {/* {column.steps.map((step, index) => (
                     <ChromatographyStep
                         key={step.id}
                         step={step}
                         index={index}
                         columnId={column.id}
                     />
-                ))}
+                ))} */}
+
+            {column.steps.map((step, index) => (
+                <ChromatographyStep
+                    key={step.id}
+                    step={step}
+                    index={index}
+                    columnId={column.id}
+                    onStepChange={onStepsChange}
+                />
+            ))}
 
             </div>
 
