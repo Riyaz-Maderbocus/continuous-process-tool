@@ -16,14 +16,21 @@ const SortableColumn = ({ column, removeColumn }) => {
                 isDragSource ? "column-dragging" : ""
             }`}
         >
+            <div className="sortable-column-drag-handle-container">
+                <button type="button"
+                className="sortable-column-drag-handle">
+                    {/* ⋮⋮ */}
+                    
+                    <img src="./src/assets/ellipsis-h-icon.svg" alt="" 
+                    className="sortable-column-drag-handle-image"/>
+                </button>
+            </div>
 
             <div className="chromatography-column-header">
 
                 <h3>{column.name}</h3>
 
-                {/* <button type="button">
-                    ⋮⋮
-                </button> */}
+
 
             </div>
 

@@ -348,7 +348,7 @@ body.modal-open {
 }
 
 .chromatography-column {
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   margin: 1rem 0;
   border: 1px dashed black;
   
@@ -380,4 +380,48 @@ body.modal-open {
   font-size: 2rem;
   margin-right: 0.5rem;
 
+}
+
+/* sortable columns */
+
+.sortable-column-drag-handle-container {
+  width: 100%;
+  text-align: center;
+}
+
+.sortable-column-drag-handle {
+  /* width: 500px */
+  width: 100%;
+  display: flex;
+  /* width: 12px; */
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  touch-action: none;
+  cursor: grab;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  appearance: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  font-size: 2rem;
+  letter-spacing: 1rem;
+}
+
+.sortable-column-drag-handle-image {
+  height: 5px;
+
+}
+
+.sortable-column-drag-handle:hover, .sortable-column-drag-handle:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sortable-column-drag-handle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0), inset 0 0 0 2.5px #4c9ffe;
 }
