@@ -23,36 +23,102 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const [columnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
 
     // update chrom steps form function
-    const updateChromatographyStep = (
-    columnId,
-    stepId,
-    field,
-    value
-    ) => {
+
+    // OLD FUNCTION FOR STPES
+    // const updateChromatographyStep = (
+    // columnId,
+    // stepId,
+    // field,
+    // value
+    // ) => {
+    //     setFtcFormData(prev => ({
+    //         ...prev,
+
+    //         chromatographyOperation: {
+    //             ...prev.chromatographyOperation,
+
+    //             columns: prev.chromatographyOperation.columns.map(column =>
+    //                 column.id === columnId
+    //                     ? {
+    //                         ...column,
+
+    //                         steps: column.steps.map(step =>
+    //                             step.id === stepId
+    //                                 ? {
+    //                                     ...step,
+    //                                     [field]: value
+    //                                 }
+    //                                 : step
+    //                         )
+    //                     }
+    //                     : column
+    //             )
+    //         }
+    //     }));
+    // };
+
+    // NEW FUNCTION FOR SORTABLE COLUMNS 290926
+    const updateChromatographyColumns = (columns) => {
+
         setFtcFormData(prev => ({
             ...prev,
-
             chromatographyOperation: {
                 ...prev.chromatographyOperation,
-
-                columns: prev.chromatographyOperation.columns.map(column =>
-                    column.id === columnId
-                        ? {
-                            ...column,
-
-                            steps: column.steps.map(step =>
-                                step.id === stepId
-                                    ? {
-                                        ...step,
-                                        [field]: value
-                                    }
-                                    : step
-                            )
-                        }
-                        : column
-                )
+                columns
             }
         }));
+
+    };
+
+    // NEW FUNCTION TO ADD A COLUMN 290926
+    const addColumn = () => {
+
+        setFtcFormData(prev => {
+
+            const columns =
+                prev.chromatographyOperation.columns;
+
+            const newColumnNumber = columns.length + 1;
+
+            const newColumn = {
+                id: `column-${Date.now()}`,
+                name: `Column ${newColumnNumber}`,
+                steps: []
+            };
+
+            return {
+                ...prev,
+                chromatographyOperation: {
+                    ...prev.chromatographyOperation,
+                    columns: [
+                        ...columns,
+                        newColumn
+                    ]
+                }
+            };
+
+        });
+    };
+
+    // NEW FUNCTION TO REMOVE A COLUMN 290926
+    const removeColumn = (columnId) => {
+
+    setFtcFormData(prev => {
+
+        const columns =
+            prev.chromatographyOperation.columns;
+
+        return {
+            ...prev,
+            chromatographyOperation: {
+                ...prev.chromatographyOperation,
+                columns: columns.filter(
+                    column => column.id !== columnId
+                )
+            }
+        };
+
+    });
     };
 
     // Single form change like title
@@ -470,18 +536,29 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             
             <div className="chromatography-columns">
 
+
+
                 {/* {ftcFormData.chromatographyOperation.columns.map((column) => (
                     <ChromatographyColumn
                         key={column.id}
                         column={column}
                     />
                 ))} */}
-
+{/* 
                 <ChromatographyOperation 
                     columns={ftcFormData.chromatographyOperation.columns}
                     onStepsChange = {updateChromatographyStep}
-                />
+                /> */}
 
+            <ChromatographyOperation
+                columns={ftcFormData.chromatographyOperation.columns}
+                updateColumns={updateChromatographyColumns}
+                removeColumn={removeColumn}
+            />  
+
+            <button
+            type="button"
+            onClick={()=> addColumn()}>Add column</button>
             </div>
 
 

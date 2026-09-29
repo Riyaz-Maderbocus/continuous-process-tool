@@ -1,28 +1,34 @@
 import { DragDropProvider } from "@dnd-kit/react";
+import { useSortable } from "@dnd-kit/react/sortable";
 
-import ChromatographyColumn from "./ChromatographyColumn";
+import SortableColumn from "./SortableColumn";
 
 const ChromatographyOperation = ({
     columns,
-    onStepsChange
+    updateColumns,
+    removeColumn
 }) => {
 
     const handleDragEnd = (event) => {
-        console.log(event);
+        const { source } = event;
+
+        if (!source) return;
+
+        console.log("Dragged column:", source.id);
+
+        // We'll implement reordering here
     };
 
     return (
-        <DragDropProvider
-            onDragEnd={handleDragEnd}
-        >
+        <DragDropProvider onDragEnd={handleDragEnd}>
 
             <div className="chromatography-columns">
 
                 {columns.map((column) => (
-                    <ChromatographyColumn
+                    <SortableColumn
                         key={column.id}
                         column={column}
-                        onStepsChange={onStepsChange}
+                        removeColumn={removeColumn}
                     />
                 ))}
 
