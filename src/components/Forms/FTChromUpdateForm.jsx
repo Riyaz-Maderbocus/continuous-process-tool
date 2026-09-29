@@ -5,7 +5,7 @@ import FormNumberInput from "./FormComponents/FormNumberInput";
 import FormNumberInputSmall from "./FormComponents/FormNumberInputSmall";
 import FormSelectInput from "./FormComponents/FormSelectInput";
 import Button from "../Utilities/Button";
-import ChromatographyColumn from "./ChromatographyComponents/ChromatographyColumn";
+// import ChromatographyColumn from "./ChromatographyComponents/ChromatographyColumn";
 import ChromatographyOperation from "./ChromatographyComponents/ChromatographyOperation";
 const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
@@ -557,8 +557,11 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             />  
 
             <button
+            className="chromatography-add-column-button"
             type="button"
-            onClick={()=> addColumn()}>Add column</button>
+            onClick={()=> addColumn()}><span className="add-column-plus">+</span> 󠀫 Add column</button>
+
+            {/* <Button></Button> */}
             </div>
 
 

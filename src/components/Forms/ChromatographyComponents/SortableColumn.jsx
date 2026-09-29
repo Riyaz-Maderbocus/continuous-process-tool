@@ -21,9 +21,9 @@ const SortableColumn = ({ column, removeColumn }) => {
 
                 <h3>{column.name}</h3>
 
-                <button type="button">
+                {/* <button type="button">
                     ⋮⋮
-                </button>
+                </button> */}
 
             </div>
 

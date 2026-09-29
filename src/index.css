@@ -344,13 +344,40 @@ body.modal-open {
 /* Chromatography steps */
 
 .chromatography-columns {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .chromatography-column {
   padding: 1rem 0;
+  margin: 1rem 0;
+  border: 1px dashed black;
+  
 }
 
-/* .chromatography-column-header h3{
+.chromatography-column:hover {
+  cursor: grab;
+}
+
+.chromatography-column-header h3{
   text-align: center;
-} */
+}
+
+.chromatography-add-column-button {
+  width: 300px;
+  margin: 0 auto;
+  /* display: block; */
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+}
+
+.add-column-plus {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+
+}
