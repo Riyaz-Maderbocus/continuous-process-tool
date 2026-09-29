@@ -556,12 +556,17 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 removeColumn={removeColumn}
             />  
 
-            <button
+            {/* <button
             className="chromatography-add-column-button"
             type="button"
-            onClick={()=> addColumn()}><span className="add-column-plus">+</span> 󠀫 Add column</button>
+            onClick={()=> addColumn()}><span className="add-column-plus">+</span>Add column</button> */}
 
-            {/* <Button></Button> */}
+            {/* Add column button */}
+            <Button
+            classes="chromatography-add-column-button"
+            type="button" 
+            clickFunction={addColumn}
+            ><span className="add-column-plus">+</span>Add column</Button>
             </div>
 
 
