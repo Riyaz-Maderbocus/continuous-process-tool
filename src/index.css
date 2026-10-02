@@ -354,9 +354,9 @@ body.modal-open {
   
 }
 
-.chromatography-column:hover {
+/* .chromatography-column:hover {
   cursor: grab;
-}
+} */
 
 .chromatography-column-header h3{
   text-align: center;
