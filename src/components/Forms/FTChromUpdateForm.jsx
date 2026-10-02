@@ -68,6 +68,12 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             }
         }));
 
+        console.log(
+            "FORM COLUMN ORDER:",
+            ftcFormData.chromatographyOperation.columns.map(
+                column => column.id
+            )
+        );
     };
 
     // NEW FUNCTION TO ADD A COLUMN 290926
@@ -78,11 +84,13 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             const columns =
                 prev.chromatographyOperation.columns;
 
-            const newColumnNumber = columns.length + 1;
+            // const newColumnNumber = columns.length + 1;
 
             const newColumn = {
-                id: `column-${Date.now()}`,
-                name: `Column ${newColumnNumber}`,
+                // id: `column-${Date.now()}`,
+                // name: `Column ${newColumnNumber}`,
+                id: `column-${crypto.randomUUID()}`,
+                name: "New Column",
                 steps: []
             };
 

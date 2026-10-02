@@ -1,9 +1,10 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 
-const SortableColumn = ({ column, removeColumn }) => {
+const SortableColumn = ({ column, removeColumn, index }) => {
 
     const {ref, isDragSource, handleRef} = useSortable({
-        id: column.id
+        id: column.id, 
+        index
     });
 
     return (

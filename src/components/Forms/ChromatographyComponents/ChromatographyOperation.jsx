@@ -65,6 +65,9 @@ const ChromatographyOperation = ({
 
         // Give the new array back to FTChromUpdateForm
         updateColumns(newColumns);
+        console.log("NEW COLUMN ORDER",
+            newColumns.map(column => column.id)
+        )
     };
 
     return (
@@ -72,10 +75,11 @@ const ChromatographyOperation = ({
 
             <div className="chromatography-columns">
 
-                {columns.map((column) => (
+                {columns.map((column, index) => (
                     <SortableColumn
                         key={column.id}
                         column={column}
+                        index={index}
                         removeColumn={removeColumn}
                     />
                 ))}
