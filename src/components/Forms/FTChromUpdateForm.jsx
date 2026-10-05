@@ -57,6 +57,25 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     //     }));
     // };
 
+
+    // New function to update individual column (like name) 291005
+    const updateChromatographyColumn = (columnId, field, value) => {
+    setFtcFormData(prev => ({
+        ...prev,
+        chromatographyOperation: {
+            ...prev.chromatographyOperation,
+            columns: prev.chromatographyOperation.columns.map(column =>
+                column.id === columnId
+                    ? {
+                        ...column,
+                        [field]: value
+                    }
+                    : column
+                )
+            }
+        }));
+    };
+
     // NEW FUNCTION FOR SORTABLE COLUMNS 290926
     const updateChromatographyColumns = (columns) => {
 
@@ -562,6 +581,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 columns={ftcFormData.chromatographyOperation.columns}
                 updateColumns={updateChromatographyColumns}
                 removeColumn={removeColumn}
+                updateColumn={updateChromatographyColumn}
             />  
 
             {/* <button

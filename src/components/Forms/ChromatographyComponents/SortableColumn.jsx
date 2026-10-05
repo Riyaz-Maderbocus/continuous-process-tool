@@ -1,6 +1,11 @@
 import { useSortable } from "@dnd-kit/react/sortable";
+import FormTextInput from "../FormComponents/FormTextInput";
 
-const SortableColumn = ({ column, removeColumn, index }) => {
+const SortableColumn = ({ 
+    column, 
+    removeColumn, 
+    index, 
+    updateColumn }) => {
 
     const {ref, isDragSource, handleRef} = useSortable({
         id: column.id, 
@@ -29,6 +34,17 @@ const SortableColumn = ({ column, removeColumn, index }) => {
 
                 <h3>{column.name}</h3>
 
+            <FormTextInput 
+                name="column-name-change"
+                value={column.name}
+                onChange={(e) =>
+                    updateColumn(
+                        column.id,
+                        "name",
+                        e.target.value
+                    )
+                }
+            />
 
 
             </div>

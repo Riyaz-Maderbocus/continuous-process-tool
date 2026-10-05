@@ -6,7 +6,8 @@ import SortableColumn from "./SortableColumn";
 const ChromatographyOperation = ({
     columns,
     updateColumns,
-    removeColumn
+    removeColumn,
+    updateColumn
 }) => {
 
     const handleDragEnd = (event) => {
@@ -81,6 +82,7 @@ const ChromatographyOperation = ({
                         column={column}
                         index={index}
                         removeColumn={removeColumn}
+                        updateColumn={updateColumn}
                     />
                 ))}
 
