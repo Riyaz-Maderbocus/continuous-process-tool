@@ -2,6 +2,7 @@ import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable, isSortable } from "@dnd-kit/react/sortable";
 import FormTextInput from "../FormComponents/FormTextInput";
 import SortableStep from "./SortableStep";
+import StepTableHeaders from "./ChromatographFormComponents/StepTableHeaders";
 
 const SortableColumn = ({ 
     column, 
@@ -75,7 +76,7 @@ const SortableColumn = ({
 
             <DragDropProvider onDragEnd={handleStepDragEnd}>
                 <div className="chromatography-steps">
-
+                    <StepTableHeaders />
                     {column.steps.map((step, stepIndex) => (
                         <SortableStep
                             key={step.id}
