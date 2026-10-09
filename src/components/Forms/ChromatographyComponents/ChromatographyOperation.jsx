@@ -7,7 +7,8 @@ const ChromatographyOperation = ({
     columns,
     updateColumns,
     removeColumn,
-    updateColumn
+    updateColumn,
+    updateColumnSteps
 }) => {
 
     const handleDragEnd = (event) => {
@@ -83,6 +84,7 @@ const ChromatographyOperation = ({
                         index={index}
                         removeColumn={removeColumn}
                         updateColumn={updateColumn}
+                        updateColumnSteps={updateColumnSteps}
                     />
                 ))}
 

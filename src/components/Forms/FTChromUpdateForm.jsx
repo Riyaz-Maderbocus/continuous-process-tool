@@ -95,6 +95,24 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         );
     };
 
+    // NEW FUNCTION TO UPDATE THE COLUMN STEPS 091026
+    const updateColumnSteps = (columnId, newSteps) => {
+        setFtcFormData(prev => ({
+            ...prev,
+            chromatographyOperation: {
+                ...prev.chromatographyOperation,
+                columns: prev.chromatographyOperation.columns.map(column =>
+                    column.id === columnId
+                        ? {
+                            ...column,
+                            steps: newSteps
+                        }
+                        : column
+                )
+            }
+        }));
+    };
+
     // NEW FUNCTION TO ADD A COLUMN 290926
     const addColumn = () => {
 
@@ -582,6 +600,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 updateColumns={updateChromatographyColumns}
                 removeColumn={removeColumn}
                 updateColumn={updateChromatographyColumn}
+                updateColumnSteps={updateColumnSteps}
             />  
 
             {/* <button
