@@ -425,3 +425,18 @@ body.modal-open {
   outline: none;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0), inset 0 0 0 2.5px #4c9ffe;
 }
+
+
+/* step table header */
+
+.step-table-header-container {
+  display: flex;
+  text-align: center;
+}
+
+.step-table-header {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid red;
+}
