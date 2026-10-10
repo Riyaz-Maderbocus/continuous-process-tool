@@ -11,6 +11,8 @@ const SortableColumn = ({
     updateColumn,
     updateColumnSteps,
     updateStep,
+    addStep,
+    removeStep
  }) => {
 
     const {ref, isDragSource, handleRef} = useSortable({
@@ -86,21 +88,33 @@ const SortableColumn = ({
                             index={stepIndex}
                             columnId={column.id}
                             updateStep={updateStep}
+                            removeStep={removeStep}
                         />
-                        // <div key={step.id}>
-                        //     {step.step}
-                        // </div>
                     ))}
 
                 </div>
             </DragDropProvider> 
 
-            <button
-                type="button"
-                onClick={() => removeColumn(column.id)}
-            >
-                ×
-            </button>
+            {/* Add step button */}
+            <div>
+                <button
+                    type="button"
+                    onClick={() => addStep(column.id)}
+                >
+                    + Add step
+                </button>
+            </div>
+
+            {/* Remove column button */}
+            <div>
+                <button
+                    type="button"
+                    onClick={() => removeColumn(column.id)}
+                >
+                    🗑️ Remove this column
+                </button>
+            </div>
+
 
         </div>
     );

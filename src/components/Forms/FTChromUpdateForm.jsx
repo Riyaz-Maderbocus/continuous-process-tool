@@ -135,26 +135,85 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     };
 
     // NEW FUNCTION TO REMOVE A COLUMN 290926
+
+
+
     const removeColumn = (columnId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this column?")
+        if (confirmDelete) {
+        setFtcFormData(prev => {
 
-    setFtcFormData(prev => {
+            const columns =
+                prev.chromatographyOperation.columns;
 
-        const columns =
-            prev.chromatographyOperation.columns;
+            return {
+                ...prev,
+                chromatographyOperation: {
+                    ...prev.chromatographyOperation,
+                    columns: columns.filter(
+                        column => column.id !== columnId
+                    )
+                }
+            };
 
-        return {
+        });
+        };
+    }
+
+    // FUNCTION TO ADD A STEP 101026
+    const addStep = (columnId) => {
+        setFtcFormData(prev => ({
             ...prev,
             chromatographyOperation: {
                 ...prev.chromatographyOperation,
-                columns: columns.filter(
-                    column => column.id !== columnId
-                )
-            }
+                columns: prev.chromatographyOperation.columns.map(column =>
+                    column.id === columnId
+                        ? {
+                            ...column,
+                            steps: [
+                                ...column.steps,
+                                {
+                                    id: crypto.randomUUID(),
+                                    step: "New step",
+                                    buffer: "",
+                                    flowRate: 0,
+                                    residenceTime: 0,
+                                    volCV: 0,
+                                    volML: 0,
+                                    timeMin: 0
+                                }
+                            ]
+                        }
+                        : column
+                    )
+                }
+            }));
         };
 
-    });
-    };
+    // FUNCTION TO REMOVE A STEP 101026
+   const removeStep = (columnId, stepId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this step?")
+    if (confirmDelete){
 
+    
+    setFtcFormData(prev => ({
+        ...prev,
+        chromatographyOperation: {
+            ...prev.chromatographyOperation,
+            columns: prev.chromatographyOperation.columns.map(column =>
+                column.id === columnId
+                    ? {
+                        ...column,
+                        steps: column.steps.filter(
+                            step => step.id !== stepId
+                        )
+                    }
+                    : column
+                )
+            }
+            }));
+        }; 
+   }
     // Single form change like title
     const handleFormChange = (e) => {
         // old code
@@ -578,6 +637,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 updateColumn={updateChromatographyColumn}
                 updateColumnSteps={updateColumnSteps}
                 updateStep={updateStep}
+                addStep={addStep}
+                removeStep={removeStep}
             />  
 
 

@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import ChromatographyStepNumberInput from "./ChromatographyFormComponents/ChromatographyStepNumberInput";
 import ChromatographyStepTextInput from "./ChromatographyFormComponents/ChromatographyStepTextInput";
 
-const SortableStep = ({ step, index, updateStep, columnId }) => {
+const SortableStep = ({ step, index, updateStep, columnId, removeStep }) => {
     const {
         ref,
         isDragSource,
@@ -74,6 +74,15 @@ const SortableStep = ({ step, index, updateStep, columnId }) => {
             <ChromatographyStepNumberInput name={step.timeMin} value={step.timeMin} 
             onChange={(value)=> handleChange("timeMin", value)} 
             width={6.9}/>
+
+            {/* Remove step */}
+            <button
+                type="button"
+                onClick={() => removeStep(columnId, step.id)}
+                aria-label={`Remove ${step.step}`}
+            >
+                ×
+            </button>
         </div>
     );
 };
