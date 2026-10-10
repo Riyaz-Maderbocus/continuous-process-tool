@@ -444,5 +444,18 @@ body.modal-open {
 /* Sortable chromatagraphy steps */
 .chromatography-step {
   display:flex;
+  gap: 2px;
   border: 1px solid green;
+  height: 50px;
+  margin: 10px 0;
+  /* padding: 0.5rem 0; */
+  align-items: center;
+}
+
+.step-drag-handle {
+  height: 100%;
+}
+
+.chromatography-step-input {
+  height: 35px;
 }

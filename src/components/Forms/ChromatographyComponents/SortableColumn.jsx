@@ -2,7 +2,7 @@ import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable, isSortable } from "@dnd-kit/react/sortable";
 import FormTextInput from "../FormComponents/FormTextInput";
 import SortableStep from "./SortableStep";
-import StepTableHeaders from "./ChromatographFormComponents/StepTableHeaders";
+import StepTableHeaders from "./ChromatographyFormComponents/StepTableHeaders";
 
 const SortableColumn = ({ 
     column, 
