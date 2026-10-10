@@ -9,7 +9,7 @@ const AddUnitForm = ({closeModal}) => {
 
     const [addFormData, setAddFormData] = useState({
         title: "",
-        type: "chromatography"
+        type: "bioreactor"
     })
 
     // const [titleError, setTitleError] = useState(false)
@@ -43,7 +43,7 @@ const AddUnitForm = ({closeModal}) => {
 
         setAddFormData({
             title: "",
-            type: "chromatography"
+            type: "bioreactor"
         })
         // escape modal
         closeModal()
