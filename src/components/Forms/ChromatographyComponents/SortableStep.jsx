@@ -22,6 +22,7 @@ const SortableStep = ({ step, index }) => {
                 isDragSource ? "step-dragging" : ""
             }`}
         >
+            {/* Button width set to 1% by css */}
             <button
                 type="button"
                 ref={handleRef}
@@ -35,26 +36,26 @@ const SortableStep = ({ step, index }) => {
 
             {/* Input fields for all parts of the step*/}
 
-            {/* Step name 300px */}
-            <ChromatographyStepTextInput name={step.id} value={step.step} onChange={doSomething} width={288}/>
+            {/* Step name 300px or 20%*/}
+            <ChromatographyStepTextInput name={step.id} value={step.step} onChange={doSomething} width={19.8}/>
 
-            {/* Buffer name 500px */}
-            <ChromatographyStepTextInput name={step.id} value={step.buffer} onChange={doSomething} width={485}/>
+            {/* Buffer name 500px or 30%*/}
+            <ChromatographyStepTextInput name={step.id} value={step.buffer} onChange={doSomething} width={29.9}/>
 
-            {/* Flow rate mL/min 200px */}
-            <ChromatographyStepNumberInput name={step.id} value={step.flowRate} onChange={doSomething} width={192}/>
+            {/* Flow rate mL/min 200px or 10%*/}
+            <ChromatographyStepNumberInput name={step.id} value={step.flowRate} onChange={doSomething} width={9.9}/>
             
-            {/* Residence time min 200px */}
-            <ChromatographyStepNumberInput name={step.id} value={step.residenceTime} onChange={doSomething} width={192}/>
+            {/* Residence time min 200px or 10% */}
+            <ChromatographyStepNumberInput name={step.id} value={step.residenceTime} onChange={doSomething} width={9.9}/>
             
-            {/* Vol CV 200px */}
-            <ChromatographyStepNumberInput name={step.volCV} value={step.residenceTime} onChange={doSomething} width={192}/>
+            {/* Vol CV 200px or 10% */}
+            <ChromatographyStepNumberInput name={step.volCV} value={step.residenceTime} onChange={doSomething} width={9.9}/>
             
-            {/* Vol ml 200px */}
-            <ChromatographyStepNumberInput name={step.volML} value={step.residenceTime} onChange={doSomething} width={192}/>
+            {/* Vol ml 200px or 10% */}
+            <ChromatographyStepNumberInput name={step.volML} value={step.residenceTime} onChange={doSomething} width={9.9}/>
             
-            {/* Time Min 200px */}
-            <ChromatographyStepNumberInput name={step.volML} value={step.timeMin} onChange={doSomething} width={192}/>
+            {/* Time Min 200px or 7%*/}
+            <ChromatographyStepNumberInput name={step.volML} value={step.timeMin} onChange={doSomething} width={6.9}/>
         </div>
     );
 };

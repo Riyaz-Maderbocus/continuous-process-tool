@@ -2,7 +2,7 @@ const ChromatographyStepTextInput = ({name, value, onChange, width, required=fal
     return (                 
         <input type="text" className="chromatography-step-input" 
         style={{
-            width: `${width}px`
+            width: `${width}%`
         }}
         value={value}
         onChange={onChange}

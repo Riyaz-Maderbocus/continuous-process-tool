@@ -1,8 +1,8 @@
-const StepTableHeaderItem = ({children, width=100}) => {
+const StepTableHeaderItem = ({children, width=10}) => {
     return ( 
         <p className="step-table-header"
             style={{
-                width: `${width}px`
+                width: `${width}%`
             }}
         >{children}</p>
      );

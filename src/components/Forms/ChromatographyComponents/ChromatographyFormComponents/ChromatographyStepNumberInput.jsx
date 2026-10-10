@@ -2,7 +2,7 @@ const ChromatographyStepNumberInput = ({name, value, onChange, width, required=f
     return (                  
         <input type="number" className="chromatography-step-input" 
         style={{
-            width: `${width}px`
+            width: `${width}%`
         }}
         value={value}
         onChange={onChange}
