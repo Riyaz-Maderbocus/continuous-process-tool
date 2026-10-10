@@ -24,39 +24,6 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
     // update chrom steps form function
 
-    // OLD FUNCTION FOR STPES
-    // const updateChromatographyStep = (
-    // columnId,
-    // stepId,
-    // field,
-    // value
-    // ) => {
-    //     setFtcFormData(prev => ({
-    //         ...prev,
-
-    //         chromatographyOperation: {
-    //             ...prev.chromatographyOperation,
-
-    //             columns: prev.chromatographyOperation.columns.map(column =>
-    //                 column.id === columnId
-    //                     ? {
-    //                         ...column,
-
-    //                         steps: column.steps.map(step =>
-    //                             step.id === stepId
-    //                                 ? {
-    //                                     ...step,
-    //                                     [field]: value
-    //                                 }
-    //                                 : step
-    //                         )
-    //                     }
-    //                     : column
-    //             )
-    //         }
-    //     }));
-    // };
-
 
     // New function to update individual column (like name) 291005
     const updateChromatographyColumn = (columnId, field, value) => {
@@ -112,6 +79,28 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             }
         }));
     };
+
+    // NEW FUNCTION TO UPDATE VALUES IN STEPS 101026
+   const updateStep = (columnId, stepId, field, value) => {
+        setFtcFormData(prev => ({
+            ...prev,
+            chromatographyOperation: {
+                ...prev.chromatographyOperation,
+                columns: prev.chromatographyOperation.columns.map(column =>
+                    column.id === columnId
+                        ? {
+                            ...column,
+                            steps: column.steps.map(step =>
+                                step.id === stepId
+                                    ? { ...step, [field]: value }
+                                    : step
+                            )
+                        }
+                        : column
+                    )
+                }
+            }));
+        }; 
 
     // NEW FUNCTION TO ADD A COLUMN 290926
     const addColumn = () => {
@@ -582,31 +571,16 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             <div className="chromatography-columns">
 
 
-
-                {/* {ftcFormData.chromatographyOperation.columns.map((column) => (
-                    <ChromatographyColumn
-                        key={column.id}
-                        column={column}
-                    />
-                ))} */}
-{/* 
-                <ChromatographyOperation 
-                    columns={ftcFormData.chromatographyOperation.columns}
-                    onStepsChange = {updateChromatographyStep}
-                /> */}
-
             <ChromatographyOperation
                 columns={ftcFormData.chromatographyOperation.columns}
                 updateColumns={updateChromatographyColumns}
                 removeColumn={removeColumn}
                 updateColumn={updateChromatographyColumn}
                 updateColumnSteps={updateColumnSteps}
+                updateStep={updateStep}
             />  
 
-            {/* <button
-            className="chromatography-add-column-button"
-            type="button"
-            onClick={()=> addColumn()}><span className="add-column-plus">+</span>Add column</button> */}
+
 
             {/* Add column button */}
             <Button

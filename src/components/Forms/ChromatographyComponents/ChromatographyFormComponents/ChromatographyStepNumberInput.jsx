@@ -4,8 +4,10 @@ const ChromatographyStepNumberInput = ({name, value, onChange, width, required=f
         style={{
             width: `${width}%`
         }}
-        value={value}
-        onChange={onChange}
+        value={value ?? ""}
+        onChange={(e) => onChange(
+        e.target.value === "" ? "" : Number(e.target.value)
+        )}
         required={required}
         name={name}
         id={name}/>

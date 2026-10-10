@@ -9,7 +9,9 @@ const SortableColumn = ({
     removeColumn, 
     index, 
     updateColumn,
-    updateColumnSteps }) => {
+    updateColumnSteps,
+    updateStep,
+ }) => {
 
     const {ref, isDragSource, handleRef} = useSortable({
         id: column.id, 
@@ -82,6 +84,8 @@ const SortableColumn = ({
                             key={step.id}
                             step={step}
                             index={stepIndex}
+                            columnId={column.id}
+                            updateStep={updateStep}
                         />
                         // <div key={step.id}>
                         //     {step.step}

@@ -4,8 +4,8 @@ const ChromatographyStepTextInput = ({name, value, onChange, width, required=fal
         style={{
             width: `${width}%`
         }}
-        value={value}
-        onChange={onChange}
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
         required={required}
         name={name}
         id={name}/>
