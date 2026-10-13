@@ -8,7 +8,7 @@ const SortableStep = ({
     updateStep, 
     columnId, 
     removeStep,
-    recommendedVol }) => {
+    baseColVol }) => {
     const {
         ref,
         isDragSource,
@@ -22,9 +22,85 @@ const SortableStep = ({
         console.log("something done")
     }
 
-    const handleChange = (field, value) => {
-        updateStep(columnId, step.id, field, value);
+    // Old handle change (this works)
+    // const handleChange = (field, value) => {
+    //     updateStep(columnId, step.id, field, value);
+    // };
+
+    // NEW HANDLE CHANGE FOR CALCS 13/10/26
+    const handleChange = (field, rawValue) => {
+
+    // Text fields: update directly, without doing calculations
+    if (field === "step" || field === "buffer") {
+        updateStep(columnId, step.id, field, rawValue);
+        return;
+    }
+    
+    const value = rawValue === "" ? "" : Number(rawValue);
+
+    // Start with the field the user edited
+    const updates = {
+        [field]: value
     };
+
+    const baseVol = Number(baseColVol);
+
+    // Work out the values after the user's change
+    let flowRate = Number(step.flowRate);
+    let volCV = Number(step.volCV);
+    let volML = Number(step.volML);
+
+    if (field === "flowRate") {
+        flowRate = value === "" ? NaN : value;
+    }
+
+    if (field === "volCV") {
+        volCV = value === "" ? NaN : value;
+
+        if (Number.isFinite(volCV) && Number.isFinite(baseVol) && baseVol > 0) {
+            volML = baseVol * volCV;
+            updates.volML = Number(volML.toFixed(3));
+        } else {
+            volML = NaN;
+            updates.volML = "";
+        }
+    }
+
+    if (field === "volML") {
+        volML = value === "" ? NaN : value;
+
+        if (Number.isFinite(volML) && Number.isFinite(baseVol) && baseVol > 0) {
+            volCV = volML / baseVol;
+            updates.volCV = Number(volCV.toFixed(3));
+        } else {
+            volCV = NaN;
+            updates.volCV = "";
+        }
+    }
+
+    // Residence time = column volume / flow rate
+    if (field === "flowRate") {
+        updates.residenceTime =
+            Number.isFinite(flowRate) && flowRate > 0 &&
+            Number.isFinite(baseVol) && baseVol > 0
+                ? Number((baseVol / flowRate).toFixed(3))
+                : "";
+    }
+
+    // Processing time = volume / flow rate
+    if (["flowRate", "volCV", "volML"].includes(field)) {
+        updates.timeMin =
+            Number.isFinite(volML) && volML >= 0 &&
+            Number.isFinite(flowRate) && flowRate > 0
+                ? Number((volML / flowRate).toFixed(3))
+                : "";
+    }
+
+    // Update every affected field in the main React state
+    Object.entries(updates).forEach(([updatedField, updatedValue]) => {
+        updateStep(columnId, step.id, updatedField, updatedValue);
+    });
+};
     return (
         <div
             ref={ref}

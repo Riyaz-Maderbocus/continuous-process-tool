@@ -55,6 +55,55 @@ const SortableColumn = ({
             e.target.value === "" ? "" : Number(e.target.value)
         );
     }
+
+    // NEW FUNCTION TO HANDLE BASECOLVOL CHANGE 131026
+    const handleBaseColVolChange = (rawValue) => {
+            const newBaseVol = rawValue === "" ? "" : Number(rawValue);
+
+            // Update the column volume input
+            setBaseColVol(newBaseVol);
+
+            // Only calculate with a valid, positive column volume
+            if (newBaseVol === "" || !Number.isFinite(newBaseVol) || newBaseVol <= 0) {
+                return;
+            }
+
+            // Recalculate all steps in this column
+            const updatedSteps = column.steps.map(step => {
+                const flowRate = Number(step.flowRate);
+                const volCV = Number(step.volCV);
+
+                const volML =
+                    Number.isFinite(volCV) && volCV >= 0
+                        ? newBaseVol * volCV
+                        : NaN;
+
+                const residenceTime =
+                    Number.isFinite(flowRate) && flowRate > 0
+                        ? newBaseVol / flowRate
+                        : NaN;
+
+                const timeMin =
+                    Number.isFinite(volML) &&
+                    Number.isFinite(flowRate) &&
+                    flowRate > 0
+                        ? volML / flowRate
+                        : NaN;
+
+                return {
+                    ...step,
+                    volML: Number.isFinite(volML) ? Number(volML.toFixed(3)) : "",
+                    residenceTime: Number.isFinite(residenceTime)
+                        ? Number(residenceTime.toFixed(3))
+                        : "",
+                    timeMin: Number.isFinite(timeMin)
+                        ? Number(timeMin.toFixed(3))
+                        : ""
+                };
+            });
+
+            updateColumnSteps(column.id, updatedSteps);
+        };
     return (
         <div
             ref={ref}
@@ -98,15 +147,13 @@ const SortableColumn = ({
                     // onChange={(e)=> {
                     //     console.log("changed")
                     // }}
-                    onChange={updatebaseColVol}
+                    onChange={(e) => handleBaseColVolChange(e.target.value)}
                 />
 
                 {/* Copy value button */}
                 <button
                 type="button"
-                onClick={()=> {
-                    setBaseColVol(recommendedVol ?? 1)
-                }}
+                onClick={()=> handleBaseColVolChange(recommendedVol ?? 1)}
                 >Set As Calculated Value</button>
             </div>
             </div>
