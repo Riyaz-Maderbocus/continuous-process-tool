@@ -110,13 +110,13 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
             const columns =
                 prev.chromatographyOperation.columns;
 
-            // const newColumnNumber = columns.length + 1;
 
             const newColumn = {
                 // id: `column-${Date.now()}`,
                 // name: `Column ${newColumnNumber}`,
                 id: `column-${crypto.randomUUID()}`,
                 name: "New Column",
+                baseColVol: prev.columnDimensionsCalculator.columnVol ?? 1,
                 steps: []
             };
 

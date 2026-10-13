@@ -47,21 +47,23 @@ const SortableColumn = ({
 
     // 131026 base col vol for calculations
     // let baseColVol = 1;
-    const [baseColVol, setBaseColVol] = useState(recommendedVol ?? 1)
+    // const [baseColVol, setBaseColVol] = useState(recommendedVol ?? 1)
+    const baseColVol = column.baseColVol ?? recommendedVol ?? 1;
 
     // 131026 base col vol setter by input box update
-    const updatebaseColVol = (e) => {
-        setBaseColVol(
-            e.target.value === "" ? "" : Number(e.target.value)
-        );
-    }
+    // const updatebaseColVol = (e) => {
+    //     setBaseColVol(
+    //         e.target.value === "" ? "" : Number(e.target.value)
+    //     );
+    // }
 
     // NEW FUNCTION TO HANDLE BASECOLVOL CHANGE 131026
     const handleBaseColVolChange = (rawValue) => {
             const newBaseVol = rawValue === "" ? "" : Number(rawValue);
 
+            updateColumn(column.id, "baseColVol", newBaseVol);
             // Update the column volume input
-            setBaseColVol(newBaseVol);
+            // setBaseColVol(newBaseVol);
 
             // Only calculate with a valid, positive column volume
             if (newBaseVol === "" || !Number.isFinite(newBaseVol) || newBaseVol <= 0) {

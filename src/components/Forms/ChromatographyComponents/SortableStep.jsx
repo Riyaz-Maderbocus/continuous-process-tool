@@ -137,20 +137,22 @@ const SortableStep = ({
             onChange={(value)=> handleChange("flowRate", value)} 
             width={9.9}/>
             
-            {/* Residence time min 200px or 10% */}
+            {/* Residence time min 200px or 10% disabled*/}
             <ChromatographyStepNumberInput name={step.id} value={step.residenceTime} 
             onChange={(value)=> handleChange("residenceTime", value)} 
-            width={9.9}/>
+            width={9.9}
+            disabled={true}/>
             
             {/* Vol CV 200px or 10% */}
             <ChromatographyStepNumberInput name={step.volCV} value={step.volCV} 
             onChange={(value)=> handleChange("volCV", value)} 
             width={9.9}/>
             
-            {/* Vol ml 200px or 10% */}
+            {/* Vol ml 200px or 10% disabled*/}
             <ChromatographyStepNumberInput name={step.volML} value={step.volML} 
             onChange={(value)=> handleChange("volML", value)}  
-            width={9.9}/>
+            width={9.9}
+            disabled={true}/>
             
             {/* Time Min 200px or 7%*/}
             <ChromatographyStepNumberInput name={step.timeMin} value={step.timeMin} 
