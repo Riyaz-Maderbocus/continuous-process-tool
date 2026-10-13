@@ -411,24 +411,12 @@ body.modal-open {
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
-  /* font-size: 2rem; */
+  font-size: 2.5rem;
   /* letter-spacing: 1rem; */
   text-align: center;
 }
 
-.sortable-column-drag-handle-dots {
-  /* text-align: center; */
-  display: flex;
-  align-items: center;
-  /* color: red; */
-  letter-spacing: 0.5rem;
-  /* gap: 0 0.5rem; */
-  font-size: 3rem;
-}
-.sortable-column-drag-handle-image {
-  height: 5px;
 
-}
 
 .sortable-column-drag-handle:hover, .sortable-column-drag-handle:active {
   background-color: rgba(0, 0, 0, 0.05);
