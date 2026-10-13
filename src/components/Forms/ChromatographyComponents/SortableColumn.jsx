@@ -118,9 +118,9 @@ const SortableColumn = ({
                 ref={handleRef}
                 className="sortable-column-drag-handle">
                     {/* ⋮⋮ */}
-                    
-                    <img src="./src/assets/ellipsis-h-icon.svg" alt="" 
-                    className="sortable-column-drag-handle-image"/>
+                    <div className="sortable-column-drag-handle-dots">&#8230;</div>
+                    {/* <img src="./src/assets/ellipsis-h-icon.svg" alt="" 
+                    className="sortable-column-drag-handle-image"/> */}
                 </button>
             </div>
 
