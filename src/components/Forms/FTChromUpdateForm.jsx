@@ -632,6 +632,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
 
             <ChromatographyOperation
                 columns={ftcFormData.chromatographyOperation.columns}
+                recommendedVol = {ftcFormData.columnDimensionsCalculator.columnVol}
                 updateColumns={updateChromatographyColumns}
                 removeColumn={removeColumn}
                 updateColumn={updateChromatographyColumn}

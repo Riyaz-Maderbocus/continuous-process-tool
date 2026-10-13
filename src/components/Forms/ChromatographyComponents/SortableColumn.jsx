@@ -1,11 +1,14 @@
 import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable, isSortable } from "@dnd-kit/react/sortable";
+import { useState } from "react";
 import FormTextInput from "../FormComponents/FormTextInput";
+import FormNumberInputSmall from "../FormComponents/FormNumberInputSmall";
 import SortableStep from "./SortableStep";
 import StepTableHeaders from "./ChromatographyFormComponents/StepTableHeaders";
 
 const SortableColumn = ({ 
-    column, 
+    column,
+    recommendedVol, 
     removeColumn, 
     index, 
     updateColumn,
@@ -41,6 +44,17 @@ const SortableColumn = ({
 
         updateColumnSteps(column.id, newSteps);
     };
+
+    // 131026 base col vol for calculations
+    // let baseColVol = 1;
+    const [baseColVol, setBaseColVol] = useState(recommendedVol ?? 1)
+
+    // 131026 base col vol setter by input box update
+    const updatebaseColVol = (e) => {
+        setBaseColVol(
+            e.target.value === "" ? "" : Number(e.target.value)
+        );
+    }
     return (
         <div
             ref={ref}
@@ -75,7 +89,26 @@ const SortableColumn = ({
                 }
             />
 
+            {/* Column volume change calculator */}
+            <div className="">
+                <FormNumberInputSmall
+                    label="Calculated Column Volume"
+                    name="base-column-vol"
+                    value={baseColVol}
+                    // onChange={(e)=> {
+                    //     console.log("changed")
+                    // }}
+                    onChange={updatebaseColVol}
+                />
 
+                {/* Copy value button */}
+                <button
+                type="button"
+                onClick={()=> {
+                    setBaseColVol(recommendedVol ?? 1)
+                }}
+                >Set As Calculated Value</button>
+            </div>
             </div>
 
             <DragDropProvider onDragEnd={handleStepDragEnd}>
@@ -89,6 +122,7 @@ const SortableColumn = ({
                             columnId={column.id}
                             updateStep={updateStep}
                             removeStep={removeStep}
+                            baseColVol={baseColVol}
                         />
                     ))}
 

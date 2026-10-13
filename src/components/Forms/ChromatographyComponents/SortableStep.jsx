@@ -2,7 +2,13 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import ChromatographyStepNumberInput from "./ChromatographyFormComponents/ChromatographyStepNumberInput";
 import ChromatographyStepTextInput from "./ChromatographyFormComponents/ChromatographyStepTextInput";
 
-const SortableStep = ({ step, index, updateStep, columnId, removeStep }) => {
+const SortableStep = ({ 
+    step, 
+    index, 
+    updateStep, 
+    columnId, 
+    removeStep,
+    recommendedVol }) => {
     const {
         ref,
         isDragSource,

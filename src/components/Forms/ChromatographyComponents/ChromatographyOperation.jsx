@@ -5,6 +5,7 @@ import SortableColumn from "./SortableColumn";
 
 const ChromatographyOperation = ({
     columns,
+    recommendedVol,
     updateColumns,
     removeColumn,
     updateColumn,
@@ -91,6 +92,7 @@ const ChromatographyOperation = ({
                         updateStep={updateStep}
                         addStep={addStep}
                         removeStep={removeStep}
+                        recommendedVol={recommendedVol}
                     />
                 ))}
 
