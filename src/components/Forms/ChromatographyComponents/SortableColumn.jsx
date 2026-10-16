@@ -15,6 +15,7 @@ const SortableColumn = ({
     updateColumn,
     updateColumnSteps,
     updateStep,
+    updateStepFields,
     addStep,
     removeStep
  }) => {
@@ -174,6 +175,7 @@ const SortableColumn = ({
                             index={stepIndex}
                             columnId={column.id}
                             updateStep={updateStep}
+                            updateStepFields={updateStepFields}
                             removeStep={removeStep}
                             baseColVol={baseColVol}
                         />

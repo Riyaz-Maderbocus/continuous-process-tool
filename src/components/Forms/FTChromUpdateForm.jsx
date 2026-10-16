@@ -125,12 +125,68 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                                     ? { ...step, [field]: value }
                                     : step
                             )
+                        
                         }
                         : column
                     )
+                    
                 }
             }));
         }; 
+
+        // UPDATE STEP FIELDS 161026
+        // const updateStepFields = (columnId, stepId, updates) => {
+        //         setFtcFormData(prev => ({
+        //             ...prev,
+        //             chromatographyOperation: {
+        //                 ...prev.chromatographyOperation,
+        //                 columns: prev.chromatographyOperation.columns.map(column => {
+        //                     if (column.id !== columnId) {
+        //                         return column;
+        //                     }
+
+        //                     const updatedSteps = column.steps.map(step =>
+        //                         step.id === stepId
+        //                             ? { ...step, ...updates }
+        //                             : step
+        //                     );
+
+        //                     const totalCV = calculateTotalCV(updatedSteps);
+
+        //                     return {
+        //                         ...column,
+        //                         steps: updatedSteps,
+        //                         totalCV: Number(totalCV.toFixed(3))
+        //                     };
+        //                 })
+        //             }
+        //         }));
+        //     };
+        const updateStepFields = (columnId, stepId, updates) => {
+            setFtcFormData(prev => ({
+                ...prev,
+                chromatographyOperation: {
+                    ...prev.chromatographyOperation,
+                    columns: prev.chromatographyOperation.columns.map(column => {
+                        if (column.id !== columnId) return column;
+
+                        const updatedSteps = column.steps.map(step =>
+                            step.id === stepId
+                                ? { ...step, ...updates }
+                                : step
+                        );
+
+                        return {
+                            ...column,
+                            steps: updatedSteps,
+                            colTotalCV: Number(
+                                calculateTotalCV(updatedSteps).toFixed(3)
+                            )
+                        };
+                    })
+                }
+            }));
+        };
 
     // NEW FUNCTION TO ADD A COLUMN 290926
     const addColumn = () => {
@@ -189,64 +245,139 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 }
             };
 
+            
+
         });
         };
     }
 
     // FUNCTION TO ADD A STEP 101026
+    // const addStep = (columnId) => {
+    //     setFtcFormData(prev => ({
+    //         ...prev,
+    //         chromatographyOperation: {
+    //             ...prev.chromatographyOperation,
+    //             columns: prev.chromatographyOperation.columns.map(column =>
+    //                 column.id === columnId
+    //                     ? {
+    //                         ...column,
+    //                         steps: [
+    //                             ...column.steps,
+    //                             {
+    //                                 id: crypto.randomUUID(),
+    //                                 step: "New step",
+    //                                 buffer: "",
+    //                                 flowRate: 0,
+    //                                 residenceTime: 0,
+    //                                 volCV: 0,
+    //                                 volML: 0,
+    //                                 timeMin: 0
+    //                             }
+    //                         ]
+    //                     }
+    //                     : column
+    //                 )
+    //             }
+    //         }));
+    //     };
+
+    // UPDATED FUNCTION TO ADD A STEP 161026
     const addStep = (columnId) => {
-        setFtcFormData(prev => ({
-            ...prev,
-            chromatographyOperation: {
-                ...prev.chromatographyOperation,
-                columns: prev.chromatographyOperation.columns.map(column =>
-                    column.id === columnId
-                        ? {
+            setFtcFormData(prev => ({
+                ...prev,
+                chromatographyOperation: {
+                    ...prev.chromatographyOperation,
+                    columns: prev.chromatographyOperation.columns.map(column => {
+                        if (column.id !== columnId) return column;
+
+                        const updatedSteps = [
+                            ...column.steps,
+                            {
+                                id: crypto.randomUUID(),
+                                step: "New step",
+                                buffer: "",
+                                flowRate: 0,
+                                residenceTime: 0,
+                                volCV: 0,
+                                volML: 0,
+                                timeMin: 0
+                            }
+                        ];
+
+                        return {
                             ...column,
-                            steps: [
-                                ...column.steps,
-                                {
-                                    id: crypto.randomUUID(),
-                                    step: "New step",
-                                    buffer: "",
-                                    flowRate: 0,
-                                    residenceTime: 0,
-                                    volCV: 0,
-                                    volML: 0,
-                                    timeMin: 0
-                                }
-                            ]
-                        }
-                        : column
-                    )
+                            steps: updatedSteps,
+                            colTotalCV: Number(
+                                calculateTotalCV(updatedSteps).toFixed(3)
+                            )
+                        };
+                    })
                 }
             }));
         };
 
     // FUNCTION TO REMOVE A STEP 101026
-   const removeStep = (columnId, stepId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this step?")
-    if (confirmDelete){
+//    const removeStep = (columnId, stepId) => {
+//     const confirmDelete = window.confirm("Are you sure you want to delete this step?")
+//     if (confirmDelete){
 
     
-    setFtcFormData(prev => ({
-        ...prev,
-        chromatographyOperation: {
-            ...prev.chromatographyOperation,
-            columns: prev.chromatographyOperation.columns.map(column =>
-                column.id === columnId
-                    ? {
+//     setFtcFormData(prev => ({
+//         ...prev,
+//         chromatographyOperation: {
+//             ...prev.chromatographyOperation,
+//             columns: prev.chromatographyOperation.columns.map(column =>
+//                 column.id === columnId
+//                     ? {
+//                         ...column,
+//                         steps: column.steps.filter(
+//                             step => step.id !== stepId
+//                         ),
+
+//                     }
+//                     : column
+//                 )
+//             }
+//             }));
+//         }; 
+//    }
+
+
+ // Updated FUNCTION TO REMOVE A STEP 161026
+
+ const removeStep = (columnId, stepId) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this step?"
+        );
+
+        if (!confirmDelete) return;
+
+        setFtcFormData(prev => ({
+            ...prev,
+            chromatographyOperation: {
+                ...prev.chromatographyOperation,
+                columns: prev.chromatographyOperation.columns.map(column => {
+                    if (column.id !== columnId) return column;
+
+                    // Remove the selected step
+                    const updatedSteps = column.steps.filter(
+                        step => step.id !== stepId
+                    );
+
+                    // Recalculate the total CV for this column
+                    const colTotalCV = Number(
+                        calculateTotalCV(updatedSteps).toFixed(2)
+                    );
+
+                    return {
                         ...column,
-                        steps: column.steps.filter(
-                            step => step.id !== stepId
-                        )
-                    }
-                    : column
-                )
+                        steps: updatedSteps,
+                        colTotalCV
+                    };
+                })
             }
-            }));
-        }; 
-   }
+        }));
+    };
     // Single form change like title
     const handleFormChange = (e) => {
         // old code
@@ -671,6 +802,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 updateColumn={updateChromatographyColumn}
                 updateColumnSteps={updateColumnSteps}
                 updateStep={updateStep}
+                updateStepFields={updateStepFields}
                 addStep={addStep}
                 removeStep={removeStep}
             />  

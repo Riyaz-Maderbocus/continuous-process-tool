@@ -11,6 +11,7 @@ const ChromatographyOperation = ({
     updateColumn,
     updateColumnSteps,
     updateStep,
+    updateStepFields,
     addStep,
     removeStep
 }) => {
@@ -90,6 +91,7 @@ const ChromatographyOperation = ({
                         updateColumn={updateColumn}
                         updateColumnSteps={updateColumnSteps}
                         updateStep={updateStep}
+                        updateStepFields={updateStepFields}
                         addStep={addStep}
                         removeStep={removeStep}
                         recommendedVol={recommendedVol}

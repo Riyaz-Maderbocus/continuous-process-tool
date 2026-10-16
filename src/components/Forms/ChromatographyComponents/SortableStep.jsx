@@ -5,7 +5,8 @@ import ChromatographyStepTextInput from "./ChromatographyFormComponents/Chromato
 const SortableStep = ({ 
     step, 
     index, 
-    updateStep, 
+    updateStep,
+    updateStepFields, 
     columnId, 
     removeStep,
     baseColVol }) => {
@@ -97,9 +98,12 @@ const SortableStep = ({
     }
 
     // Update every affected field in the main React state
-    Object.entries(updates).forEach(([updatedField, updatedValue]) => {
-        updateStep(columnId, step.id, updatedField, updatedValue);
-    });
+    // Object.entries(updates).forEach(([updatedField, updatedValue]) => {
+    //     updateStep(columnId, step.id, updatedField, updatedValue);
+    // });
+
+    // Update fields for step calculations
+    updateStepFields(columnId, step.id, updates);
 };
     return (
         <div
