@@ -461,3 +461,27 @@ body.modal-open {
 .chromatography-step-input {
   height: 35px;
 }
+
+.column-hold-totals {
+  padding: 1rem 0;
+}
+
+.hold-time-container  {
+  display: flex;
+  align-items: center;
+  /* min-width: 400px; */
+  /* width: 55%; */
+
+  gap: 0 1.5rem;
+  /* justify-content: space-between; */
+}
+
+.hold-time-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hold-time-input {
+    padding: 0.5rem;
+  border-radius: 10px;
+}

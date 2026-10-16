@@ -3,6 +3,7 @@ import { useSortable, isSortable } from "@dnd-kit/react/sortable";
 import { useState } from "react";
 import FormTextInput from "../FormComponents/FormTextInput";
 import FormNumberInputSmall from "../FormComponents/FormNumberInputSmall";
+import CustomFormNumberInput from "../FormComponents/CustomFormNumberInput";
 import SortableStep from "./SortableStep";
 import StepTableHeaders from "./ChromatographyFormComponents/StepTableHeaders";
 
@@ -189,6 +190,19 @@ const SortableColumn = ({
                 </button>
             </div>
 
+            <div className="column-hold-totals">
+                
+                    <CustomFormNumberInput 
+                        containerClasses="hold-time-container"
+                        name="col-hold-time"
+                        label="Column Hold Time"
+                        labelClasses="hold-time-label"
+                        classes="hold-time-input"
+                        onChange={e=>console.log("Getting changed")}
+                        value={0}
+                        />
+                
+            </div>
             {/* Remove column button */}
             <div>
                 <button
