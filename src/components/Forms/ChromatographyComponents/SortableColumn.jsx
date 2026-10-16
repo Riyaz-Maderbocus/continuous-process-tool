@@ -107,6 +107,12 @@ const SortableColumn = ({
 
             updateColumnSteps(column.id, updatedSteps);
         };
+    
+    // 161026 Function to handle column hold time
+    // const handleColumnHoldTime = (rawValue) => {
+    //     const newHoldTime = rawValue === "" ? "" : Number(rawValue);
+    //     updateColumn(column.id, "addedHoldTime", newHoldTime);
+    // }
     return (
         <div
             ref={ref}
@@ -198,8 +204,15 @@ const SortableColumn = ({
                         label="Column Hold Time"
                         labelClasses="hold-time-label"
                         classes="hold-time-input"
-                        onChange={e=>console.log("Getting changed")}
-                        value={0}
+                        // onChange={(e) => handleColumnHoldTime(e.target.value)}
+                        onChange={(e) =>
+                                updateColumn(
+                                    column.id,
+                                    "hold",
+                                    Number(e.target.value)
+                                )
+                            }
+                        value={column.hold ?? 0}
                         />
                 
             </div>

@@ -117,7 +117,10 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 id: `column-${crypto.randomUUID()}`,
                 name: "New Column",
                 baseColVol: prev.columnDimensionsCalculator.columnVol ?? 1,
-                steps: []
+                steps: [], 
+                hold: 0,
+                thisColTotal: 0,
+                idle: 0,
             };
 
             return {

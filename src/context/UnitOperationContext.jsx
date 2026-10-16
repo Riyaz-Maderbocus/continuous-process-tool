@@ -58,7 +58,7 @@ export function UnitOperationProvider({children}) {
                         }
                     ],
                     hold: 0,
-                    nextColTotal: 0,
+                    thisColTotal: 0,
                     idle: 2857.1 
                 },
 
@@ -88,7 +88,7 @@ export function UnitOperationProvider({children}) {
                         },
                     ],
                     hold: 0,
-                    nextColTotal: 0,
+                    thisColTotal: 0,
                     idle: 2857.1 
                 },
 
@@ -128,7 +128,7 @@ export function UnitOperationProvider({children}) {
                         },
                     ],
                     hold: 0,
-                    nextColTotal: 0,
+                    thisColTotal: 0,
                     idle: 2857.1 
                 },
                 ],
@@ -417,7 +417,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        nextColTotal: 0,
+                        thisColTotal: 0,
                         idle: 0 
                     },
 
@@ -437,7 +437,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        nextColTotal: 0,
+                        thisColTotal: 0,
                         idle: 0 
                     },
 
@@ -457,7 +457,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        nextColTotal: 0,
+                        thisColTotal: 0,
                         idle: 0 
                     },
                     ],
