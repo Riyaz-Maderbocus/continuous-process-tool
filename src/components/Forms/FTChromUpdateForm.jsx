@@ -10,11 +10,40 @@ import ChromatographyOperation from "./ChromatographyComponents/ChromatographyOp
 const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     const {updateUnitOperationData} = useUnitOperations();
     const {data, title} = unitOperation;
-    const [ftcFormData, setFtcFormData] = useState({
-        title,
-        ...data,
-        // calculationMode: "columnVolume"
-    });
+
+    
+    // FUNCTION to total the CVs for a column 161026
+    const calculateTotalCV = (steps) => {
+        return steps.reduce((total, step) => {
+            const volCV = Number(step.volCV);
+
+            return total + (
+                Number.isFinite(volCV) && volCV >= 0
+                    ? volCV
+                    : 0
+            );
+        }, 0);
+    };
+
+    // const [ftcFormData, setFtcFormData] = useState({
+    //     title,
+    //     ...data,
+    //     // calculationMode: "columnVolume"
+    // });
+
+    const [ftcFormData, setFtcFormData] = useState(() => ({
+            title,
+            ...data,
+            chromatographyOperation: {
+                ...data.chromatographyOperation,
+                columns: data.chromatographyOperation.columns.map(column => ({
+                    ...column,
+                    colTotalCV: Number(
+                        calculateTotalCV(column.steps ?? []).toFixed(3)
+                    )
+                }))
+            }
+        }));
 
     // state for first select box
     const [colSizeCalculationMode, setColSizeCalculationMode] = useState("columnVolume");
@@ -22,7 +51,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
     // state for second select box
     const [columnTypeMode, setColumnTypeMode] = useState("fixedDiameter");
 
-    // update chrom steps form function
+
 
 
     // New function to update individual column (like name) 291005
@@ -72,7 +101,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     column.id === columnId
                         ? {
                             ...column,
-                            steps: newSteps
+                            steps: newSteps,
+                            colTotalCV: Number(calculateTotalCV(newSteps).toFixed(2))
                         }
                         : column
                 )
@@ -119,7 +149,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 baseColVol: prev.columnDimensionsCalculator.columnVol ?? 1,
                 steps: [], 
                 hold: 0,
-                thisColTotal: 0,
+                colTotalCV: 0,
                 idle: 0,
             };
 

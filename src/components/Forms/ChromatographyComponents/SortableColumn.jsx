@@ -108,11 +108,7 @@ const SortableColumn = ({
             updateColumnSteps(column.id, updatedSteps);
         };
     
-    // 161026 Function to handle column hold time
-    // const handleColumnHoldTime = (rawValue) => {
-    //     const newHoldTime = rawValue === "" ? "" : Number(rawValue);
-    //     updateColumn(column.id, "addedHoldTime", newHoldTime);
-    // }
+
     return (
         <div
             ref={ref}
@@ -215,6 +211,13 @@ const SortableColumn = ({
                         value={column.hold ?? 0}
                         />
                 
+            </div>
+
+            <div className="form-input-cols">
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Total Vol (CV)</p>
+                    <p className="form-input-column-text-output">{column.colTotalCV}</p>
+                </div>
             </div>
             {/* Remove column button */}
             <div>

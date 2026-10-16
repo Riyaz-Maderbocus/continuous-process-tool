@@ -417,7 +417,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        thisColTotal: 0,
+                        colTotalCV: 0,
                         idle: 0 
                     },
 
@@ -437,7 +437,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        thisColTotal: 0,
+                        colTotalCV: 0,
                         idle: 0 
                     },
 
@@ -457,7 +457,7 @@ export function UnitOperationProvider({children}) {
                             }
                         ],
                         hold: 0,
-                        thisColTotal: 0,
+                        colTotalCV: 0,
                         idle: 0 
                     },
                     ],
