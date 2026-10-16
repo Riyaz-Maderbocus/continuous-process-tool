@@ -220,6 +220,21 @@ const SortableColumn = ({
                     <p className="form-input-column-text-label">Total Vol (CV)</p>
                     <p className="form-input-column-text-output">{column.colTotalCV}</p>
                 </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Total Vol (mL)</p>
+                    <p className="form-input-column-text-output">{Number(Number(column.colTotalCV ?? 0) * Number(baseColVol)).toFixed(3)}</p>
+                </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Total Time (min)</p>
+                    <p className="form-input-column-text-output">{column.colTotalTimeMin}</p>
+                </div>
+
+                <div className="form-input-column-center">
+                    <p className="form-input-column-text-label">Idle Time (min)</p>
+                    <p className="form-input-column-text-output">{column.colTotalTimeMin}</p>
+                </div>
             </div>
             {/* Remove column button */}
             <div>

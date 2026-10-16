@@ -25,6 +25,19 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
         }, 0);
     };
 
+    // Function to total the mins for a column 161026
+    const calculateTotalTime = (steps) => {
+    return steps.reduce((total, step) => {
+        const timeMin = Number(step.timeMin);
+
+        return total + (
+            Number.isFinite(timeMin) && timeMin >= 0
+                ? timeMin
+                : 0
+            );
+        }, 0);
+    };
+
     // const [ftcFormData, setFtcFormData] = useState({
     //     title,
     //     ...data,
@@ -40,7 +53,10 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                     ...column,
                     colTotalCV: Number(
                         calculateTotalCV(column.steps ?? []).toFixed(3)
-                    )
+                    ),
+                    colTotalTimeMin: Number(
+                        calculateTotalTime(column.steps ?? []).toFixed(3)
+                    ),
                 }))
             }
         }));
@@ -102,7 +118,8 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                         ? {
                             ...column,
                             steps: newSteps,
-                            colTotalCV: Number(calculateTotalCV(newSteps).toFixed(2))
+                            colTotalCV: Number(calculateTotalCV(newSteps).toFixed(2)),
+                            colTotalTimeMin: Number(calculateTotalTime(newSteps).toFixed(3))
                         }
                         : column
                 )
@@ -181,6 +198,9 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                             steps: updatedSteps,
                             colTotalCV: Number(
                                 calculateTotalCV(updatedSteps).toFixed(3)
+                            ),
+                            colTotalTimeMin: Number(
+                                calculateTotalTime(updatedSteps).toFixed(3)
                             )
                         };
                     })
@@ -206,6 +226,7 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                 steps: [], 
                 hold: 0,
                 colTotalCV: 0,
+                colTotalTimeMin: 0,
                 idle: 0,
             };
 
@@ -309,6 +330,9 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                             steps: updatedSteps,
                             colTotalCV: Number(
                                 calculateTotalCV(updatedSteps).toFixed(3)
+                            ),
+                            colTotalTimeMin: Number(
+                                calculateTotalTime(updatedSteps).toFixed(3)
                             )
                         };
                     })
@@ -369,10 +393,16 @@ const FTChromUpdateForm = ({unitOperation, closeModal, totalTime}) => {
                         calculateTotalCV(updatedSteps).toFixed(2)
                     );
 
+                    // Recalculate the total time min for this column
+                    const colTotalTimeMin = Number(
+                        calculateTotalTime(updatedSteps).toFixed(3)
+                    )
+
                     return {
                         ...column,
                         steps: updatedSteps,
-                        colTotalCV
+                        colTotalCV,
+                        colTotalTimeMin
                     };
                 })
             }
